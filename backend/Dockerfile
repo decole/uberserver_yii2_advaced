@@ -24,7 +24,8 @@ RUN docker-php-source extract \
 RUN apt install mosquitto-dev libmosquitto-dev libmosquitto1 -y
 RUN pecl update-channels
 RUN pecl install Mosquitto-alpha
-RUN echo "extension=mosquitto.so" > /usr/local/etc/php/php.ini
+RUN echo "extension=mosquitto.so" > /usr/local/etc/php/conf.d/30_mosquitto.ini
+
 # #RUN rm -rf /tmp/pear ~/.pearrc
 # RUN echo "extension=mosquitto.so" > /etc/php7/conf.d/30_mosquitto.ini
 
@@ -32,7 +33,7 @@ RUN echo "extension=mosquitto.so" > /usr/local/etc/php/php.ini
 # RUN echo "extension=mosquitto.so" > /usr/local/etc/php/php.ini
 RUN apt-get install -y libfreetype6-dev libjpeg62-turbo-dev libpng-dev \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
-    && docker-php-ext-install gd \аш
+    && docker-php-ext-install gd \
     && :\
     && apt-get install -y libicu-dev \
     && docker-php-ext-install intl \

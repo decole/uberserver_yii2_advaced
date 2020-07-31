@@ -4,6 +4,7 @@ services:
 
   frontend:
     build: frontend
+    restart: always
     ports:
       - 20080:80
     volumes:
@@ -14,6 +15,7 @@ services:
 
   backend:
     build: backend
+    restart: always
     ports:
       - 21080:80
     volumes:
@@ -24,6 +26,7 @@ services:
 
   mysql:
     image: mysql:5.7
+    restart: always
     ports:
       - "3306:3306"
     volumes:
@@ -42,3 +45,9 @@ services:
   #    - POSTGRES_DB=yii2advanced
   #    - POSTGRES_USER=yii2advanced
   #    - POSTGRES_PASSWORD=secret
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - "8080:8080"
