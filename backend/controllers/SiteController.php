@@ -79,7 +79,8 @@ class SiteController extends Controller
             return $this->goBack();
         } else {
             $model->password = '';
-
+            // для авторизации исполбзуется свой шаблон main-login
+            $this->layout = 'main-login';
             return $this->render('login', [
                 'model' => $model,
             ]);
