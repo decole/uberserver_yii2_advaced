@@ -24,43 +24,34 @@
             <?php
             echo \hail812\adminlte3\widgets\Menu::widget([
                 'items' => [
-                    [
-                        'label' => 'Starter Pages',
-                        'icon' => 'tachometer-alt',
-                        'badge' => '<span class="right badge badge-info">2</span>',
-                        'items' => [
-                            ['label' => 'Active Page', 'url' => ['site/index'], 'iconStyle' => 'far'],
-                            ['label' => 'Inactive Page', 'iconStyle' => 'far'],
-                        ]
-                    ],
-                    ['label' => 'Simple Link', 'icon' => 'th', 'badge' => '<span class="right badge badge-danger">New</span>'],
+                    ['label' => 'Настройки', 'url' => ['site/faker'], 'icon' => 'cogs'],
+                    ['label' => 'Автополив', 'url' => ['site/faker'], 'icon' => 'tint'],
+                    ['label' => 'Пожарная система', 'url' => ['site/faker'], 'icon' => 'fire'],
+                    ['label' => 'Охранная система', 'url' => ['site/faker'], 'icon' => 'user-lock'],
+                    ['label' => 'Все даные', 'url' => ['site/faker'], 'icon' => 'folder-open'],
+                    ['label' => 'Пристройка', 'url' => ['site/faker'], 'icon' => 'border-style'],
+                    ['label' => 'Теплица', 'url' => ['site/faker'], 'icon' => 'folder-open'],
+
                     ['label' => 'Yii2 PROVIDED', 'header' => true],
                     ['label' => 'Login', 'url' => ['site/login'], 'icon' => 'sign-in-alt', 'visible' => Yii::$app->user->isGuest],
                     ['label' => 'Gii',  'icon' => 'file-code', 'url' => ['/gii'], 'target' => '_blank'],
                     ['label' => 'Debug', 'icon' => 'bug', 'url' => ['/debug'], 'target' => '_blank'],
-                    ['label' => 'MULTI LEVEL EXAMPLE', 'header' => true],
-                    ['label' => 'Level1'],
+
+                    ['label' => 'CRUD', 'header' => true],
                     [
-                        'label' => 'Level1',
+                        'label' => 'Параметры',
                         'items' => [
-                            ['label' => 'Level2', 'iconStyle' => 'far'],
-                            [
-                                'label' => 'Level2',
-                                'iconStyle' => 'far',
-                                'items' => [
-                                    ['label' => 'Level3', 'iconStyle' => 'far', 'icon' => 'dot-circle'],
-                                    ['label' => 'Level3', 'iconStyle' => 'far', 'icon' => 'dot-circle'],
-                                    ['label' => 'Level3', 'iconStyle' => 'far', 'icon' => 'dot-circle']
-                                ]
-                            ],
-                            ['label' => 'Level2', 'iconStyle' => 'far']
+                            ['label' => 'Сенсоры', 'iconStyle' => 'far'],
+                            ['label' => 'Реле', 'iconStyle' => 'far'],
+                            ['label' => 'Типы устройств', 'iconStyle' => 'far'],
+                            ['label' => 'Место устройств', 'iconStyle' => 'far'],
+                            ['label' => 'Охранные датчики', 'iconStyle' => 'far'],
+                            ['label' => 'Пожарные датчики', 'iconStyle' => 'far'],
+                            ['label' => 'Планировщик', 'iconStyle' => 'far'],
+                            ['label' => 'Вес', 'iconStyle' => 'far'],
+                            ['label' => 'Дефект заданий', 'iconStyle' => 'far'],
                         ]
                     ],
-                    ['label' => 'Level1'],
-                    ['label' => 'LABELS', 'header' => true],
-                    ['label' => 'Important', 'iconStyle' => 'far', 'iconClassAdded' => 'text-danger'],
-                    ['label' => 'Warning', 'iconClass' => 'nav-icon far fa-circle text-warning'],
-                    ['label' => 'Informational', 'iconStyle' => 'far', 'iconClassAdded' => 'text-info'],
                 ],
             ]);
             ?>

@@ -88,7 +88,7 @@ use yii\helpers\Html;
                     <!-- Message End -->
                 </a>
                 <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item">
+                <a href="#" class="dropdown-item">MULTI LEVEL EXAMPLE
                     <!-- Message Start -->
                     <div class="media">
                         <img src="<?=$assetDir?>/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
