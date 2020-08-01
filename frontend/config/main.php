@@ -45,6 +45,13 @@ return [
                 '<controller:\w+>/<action:\w+>/' => '<controller>/<action>',
             ],
         ],
+        'view' => [
+            'theme' => [
+                'pathMap' => [
+                    '@backend/views' => '@vendor/hail812/yii2-adminlte3/src/views'
+                ],
+            ],
+        ],
     ],
     'params' => $params,
 ];
