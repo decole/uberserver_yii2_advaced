@@ -2,7 +2,10 @@
 
 use yii\db\Migration;
 
-class m130524_201442_init extends Migration
+/**
+ * Class m200808_192104_add_sensors_type_table
+ */
+class m200808_192104_add_module_table extends Migration
 {
     public function up()
     {
@@ -12,22 +15,28 @@ class m130524_201442_init extends Migration
             $tableOptions = 'CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE=InnoDB';
         }
 
-        $this->createTable('{{%user}}', [
+        $this->createTable('module', [
             'id' => $this->primaryKey(),
-            'username' => $this->string()->notNull()->unique(),
-            'auth_key' => $this->string(32)->notNull(),
-            'password_hash' => $this->string()->notNull(),
-            'password_reset_token' => $this->string()->unique(),
-            'email' => $this->string()->notNull()->unique(),
-
-            'status' => $this->smallInteger()->notNull()->defaultValue(10),
+            'name' => $this->string()->notNull()->unique(),
+            'type' => $this->integer()->notNull(),
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
         ], $tableOptions);
+
+        $this->createIndex(
+            'idx-module-name',
+            'module',
+            'name'
+        );
     }
 
     public function down()
     {
-        $this->dropTable('{{%user}}');
+        $this->dropIndex(
+            'idx-module-name',
+            'module'
+        );
+
+        $this->dropTable('module');
     }
 }

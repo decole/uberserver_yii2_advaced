@@ -46,8 +46,19 @@ services:
   #    - POSTGRES_USER=yii2advanced
   #    - POSTGRES_PASSWORD=secret
 
-  adminer:
-    image: adminer
-    restart: always
+#  adminer:
+#    image: adminer
+#    restart: always
+#    ports:
+#      - "8080:8080"
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    links:
+      - mysql:db
     ports:
-      - "8080:8080"
+      - 8080:80
+    environment:
+      - MYSQL_ROOT_PASSWORD=verysecret
+    depends_on:
+      - mysql
