@@ -41,10 +41,7 @@ return [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'rules' => [
-                '' => 'site/index',
-                '<controller:\w+>/<action:\w+>/' => '<controller>/<action>',
-            ],
+            'rules' => require_once('rules.php'),
         ],
     ],
     'params' => $params,

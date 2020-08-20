@@ -11,10 +11,11 @@ use Yii;
  * @property int $id
  * @property string $name
  * @property string $topic
- * @property string|null $payload
  * @property string|null $message_info
  * @property string|null $message_ok
  * @property string|null $message_warn
+ * @property int|null $to_condition
+ * @property int|null $from_condition
  * @property int|null $type
  * @property int|null $location
  * @property int $created_at
@@ -37,9 +38,8 @@ class ModuleSensor extends ActiveRecord
     {
         return [
             [['name', 'topic', 'created_at', 'updated_at'], 'required'],
-            [['type', 'location', 'created_at', 'updated_at'], 'integer'],
+            [['type', 'location', 'to_condition', 'from_condition', 'created_at', 'updated_at'], 'integer'],
             [['name', 'topic', 'message_info', 'message_ok', 'message_warn'], 'string', 'max' => 255],
-            [['payload'], 'string', 'max' => 32],
             [['name'], 'unique'],
             [['topic'], 'unique'],
         ];
@@ -52,14 +52,15 @@ class ModuleSensor extends ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'topic' => 'Topic',
-            'payload' => 'Payload',
-            'message_info' => 'Message Info',
-            'message_ok' => 'Message Ok',
-            'message_warn' => 'Message Warn',
-            'type' => 'Type',
-            'location' => 'Location',
+            'name' => 'Название',
+            'topic' => 'Тема',
+            'to_condition' => 'Занчение от',
+            'from_condition' => 'занчение до',
+            'message_info' => 'Текст информации о датчике',
+            'message_ok' => 'Текст успешного выполнения',
+            'message_warn' => 'Текст ошибки',
+            'type' => 'Тип датчика',
+            'location' => 'Место нахождения датчика',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
