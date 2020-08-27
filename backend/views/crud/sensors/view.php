@@ -39,8 +39,18 @@ $this->params['breadcrumbs'][] = $this->title;
             'message_warn',
             'type',
             'location',
-            'created_at',
-            'updated_at',
+            [
+                'label' => 'Создано',
+                'value' => function ($model) {
+                    return Yii::$app->formatter->asDate($model->created_at, 'dd.MM.yyyy H:m:s');
+                }
+            ],
+            [
+                'label' => 'Обновлено',
+                'value' => function ($model) {
+                    return Yii::$app->formatter->asDate($model->updated_at, 'dd.MM.yyyy H:m:s');
+                }
+            ],
         ],
     ]) ?>
 

@@ -26,13 +26,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'message_warn')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'type')->radioList([1 => 'Male', 0 => 'Female']) ?>
+    <?= $form->field($model, 'type')->listBox($model->getListTypes(), ['size' => '1']) ?>
 
-    <?= $form->field($model, 'location')->radioList([1 => 'Male', 0 => 'Female']) ?>
-
-    <?= $form->field($model, 'created_at')->textInput() ?>
-
-    <?= $form->field($model, 'updated_at')->textInput() ?>
+    <?= $form->field($model, 'location')->listBox($model->getListLocations(), ['size' => '1']) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

@@ -4,7 +4,6 @@ namespace common\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\ModuleSensor;
 
 /**
  * ModuleSensorSearch represents the model behind the search form of `common\models\ModuleSensor`.
@@ -17,7 +16,7 @@ class ModuleSensorSearch extends ModuleSensor
     public function rules()
     {
         return [
-            [['id', 'type', 'location', 'to_condition', 'from_condition', 'created_at', 'updated_at'], 'integer'],
+            [['id', 'type', 'location', 'to_condition', 'from_condition'], 'integer'],
             [['name', 'topic', 'message_info', 'message_ok', 'message_warn'], 'safe'],
         ];
     }
@@ -40,7 +39,7 @@ class ModuleSensorSearch extends ModuleSensor
      */
     public function search($params)
     {
-        $query = ModuleSensor::find();
+        $query = ModuleSensor::find()->with('locations', 'types');
 
         // add conditions that should always apply here
 

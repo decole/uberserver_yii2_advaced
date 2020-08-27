@@ -18,30 +18,43 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Create Module Sensor', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+<!--    <?php //echo $this->render('_search', ['model' => $searchModel]); ?>-->
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'name',
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{view}',
+                'buttons' => [
+                    'view' => function ($url, $model, $key) {
+                        return  Html::a($model->name, $url);
+                    },
+                ]
+            ],
             'topic',
             'to_condition',
             'from_condition',
-            //'message_info',
-            //'message_ok',
-            //'message_warn',
-            'type',
-            'location',
-            //'created_at',
-            //'updated_at',
-
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'label' => 'Тип датчика',
+                'value' => function ($model) {
+                    return $model->types->name;
+                }
+            ],
+            [
+                'label' => 'Находится',
+                'value' => function ($model) {
+                    return $model->locations->location;
+                }
+            ],
         ],
     ]); ?>
 
-
+<!--<pre>
+<?php
+//    var_dump($dataProvider);
+//    ?>
+</pre>-->
 </div>

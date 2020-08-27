@@ -2,8 +2,9 @@
 
 namespace common\models;
 
+use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
-use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "module_sensor".
@@ -34,11 +35,26 @@ class ModuleSensor extends ActiveRecord
     /**
      * {@inheritdoc}
      */
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::class,
+                'createdAtAttribute' => 'created_at',
+                'updatedAtAttribute' => 'updated_at',
+                'value' => time(),
+            ],
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function rules()
     {
         return [
-            [['name', 'topic', 'created_at', 'updated_at'], 'required'],
-            [['type', 'location', 'to_condition', 'from_condition', 'created_at', 'updated_at'], 'integer'],
+            [['name', 'topic'], 'required'],
+            [['type', 'location', 'to_condition', 'from_condition'], 'integer'],
             [['name', 'topic', 'message_info', 'message_ok', 'message_warn'], 'string', 'max' => 255],
             [['name'], 'unique'],
             [['topic'], 'unique'],
@@ -61,8 +77,28 @@ class ModuleSensor extends ActiveRecord
             'message_warn' => 'Текст ошибки',
             'type' => 'Тип датчика',
             'location' => 'Место нахождения датчика',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'created_at' => 'Создано',
+            'updated_at' => 'Обновлено',
         ];
+    }
+
+    public function getLocations()
+    {
+        return $this->hasOne(Location::class, ['id' => 'location']);
+    }
+
+    public function getTypes()
+    {
+        return $this->hasOne(ModuleType::class, ['id' => 'type']);
+    }
+
+    public function getListLocations()
+    {
+        return ArrayHelper::map(Location::find()->asArray()->all(), 'id', 'location');
+    }
+
+    public function getListTypes()
+    {
+        return ArrayHelper::map(ModuleType::find()->asArray()->all(), 'id', 'name');
     }
 }

@@ -41,7 +41,7 @@
                     [
                         'label' => 'Параметры',
                         'items' => [
-                            ['label' => 'Сенсоры', 'iconStyle' => 'far'],
+                            ['label' => 'Сенсоры', 'url' => ['module-sensor-crud/index'], 'iconStyle' => 'far'],
                             ['label' => 'Реле', 'iconStyle' => 'far'],
                             ['label' => 'Типы устройств', 'iconStyle' => 'far'],
                             ['label' => 'Место устройств', 'iconStyle' => 'far'],

@@ -6,6 +6,7 @@ use Yii;
 use common\models\ModuleSensor;
 use common\models\ModuleSensorSearch;
 use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -25,14 +26,6 @@ class ModuleSensorCrudController extends Controller
                 'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
-                ],
-            ],
-            TimestampBehavior::class,
-            'timestamp' => [
-                'class' => 'yii\behaviors\TimestampBehavior',
-                'attributes' => [
-                    'createdAtAttribute' => 'created_at',
-                    'updatedAtAttribute' => 'updated_at',
                 ],
             ],
         ];
