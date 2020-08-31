@@ -4,13 +4,13 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel common\models\ModuleSensorSearch */
+/* @var $searchModel common\models\ModuleRelaySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'CRUD Модуль - Сенсор';
+$this->title = 'CRUD Модуль - Реле';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="module-sensor-index">
+<div class="module-relay-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -32,8 +32,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]
             ],
             'topic',
-            'to_condition',
-            'from_condition',
+            'check_topic',
+            'command_on',
+            'command_off',
+            'last_command',
             [
                 'label' => 'Тип датчика',
                 'value' => function ($model) {
@@ -66,5 +68,6 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ],
     ]); ?>
+
 
 </div>

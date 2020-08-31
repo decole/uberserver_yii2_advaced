@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\ModuleSensor */
+/* @var $model common\models\ModuleRelay */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="module-sensor-form">
+<div class="module-relay-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
@@ -16,9 +16,17 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'topic')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'to_condition')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'check_topic')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'from_condition')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'command_on')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'command_off')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'check_command_on')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'check_command_off')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'last_command')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'message_info')->textInput(['maxlength' => true]) ?>
 
@@ -31,8 +39,8 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'location')->listBox($model->getListLocations(), ['size' => '1']) ?>
 
     <div class="form-group">
-        <?= Html::a('Назад', ['module-sensor-crud/index'], ['class' => 'btn btn-primary']) ?>
-        <?= Html::submitButton('Создать', ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Назад', ['module-relay-crud/index'], ['class' => 'btn btn-primary']) ?>
+        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

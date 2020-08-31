@@ -2,8 +2,10 @@
 
 namespace common\models;
 
+use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "module_relay".
@@ -38,14 +40,28 @@ class ModuleRelay extends ActiveRecord
     /**
      * {@inheritdoc}
      */
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::class,
+                'createdAtAttribute' => 'created_at',
+                'updatedAtAttribute' => 'updated_at',
+                'value' => time(),
+            ],
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function rules()
     {
         return [
-            [['name', 'topic', 'command_on', 'command_off', 'created_at', 'updated_at'], 'required'],
-            [['type', 'location', 'created_at', 'updated_at'], 'integer'],
+            [['name', 'topic', 'command_on', 'command_off'], 'required'],
+            [['type', 'location'], 'integer'],
             [['name', 'topic', 'check_topic', 'command_on', 'command_off', 'check_command_on', 'check_command_off', 'last_command', 'message_info', 'message_ok', 'message_warn'], 'string', 'max' => 255],
-            [['name'], 'unique'],
-            [['topic'], 'unique'],
+            [['name', 'topic', 'check_topic'], 'unique'],
         ];
     }
 
@@ -56,21 +72,41 @@ class ModuleRelay extends ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'topic' => 'Topic',
-            'check_topic' => 'Check Topic',
-            'command_on' => 'Command On',
-            'command_off' => 'Command Off',
-            'check_command_on' => 'Check Command On',
-            'check_command_off' => 'Check Command Off',
-            'last_command' => 'Last Command',
-            'message_info' => 'Message Info',
-            'message_ok' => 'Message Ok',
-            'message_warn' => 'Message Warn',
-            'type' => 'Type',
-            'location' => 'Location',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'name' => 'Название',
+            'topic' => 'Тема',
+            'check_topic' => 'Проверочная тема',
+            'command_on' => 'Команда On',
+            'command_off' => 'Команда Off',
+            'check_command_on' => 'Проверочная команда On',
+            'check_command_off' => 'Проверочная команда Off',
+            'last_command' => 'Последняя команда',
+            'message_info' => 'Текст информации о датчике',
+            'message_ok' => 'Текст успешного выполнения',
+            'message_warn' => 'Текст ошибки',
+            'type' => 'Тип датчика',
+            'location' => 'Место нахождения датчика',
+            'created_at' => 'Создано',
+            'updated_at' => 'Обновлено',
         ];
+    }
+
+    public function getLocations()
+    {
+        return $this->hasOne(Location::class, ['id' => 'location']);
+    }
+
+    public function getTypes()
+    {
+        return $this->hasOne(ModuleType::class, ['id' => 'type']);
+    }
+
+    public function getListLocations()
+    {
+        return ArrayHelper::map(Location::find()->asArray()->all(), 'id', 'location');
+    }
+
+    public function getListTypes()
+    {
+        return ArrayHelper::map(ModuleType::find()->asArray()->all(), 'id', 'name');
     }
 }
