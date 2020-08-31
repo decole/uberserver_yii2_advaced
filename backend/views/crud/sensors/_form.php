@@ -31,7 +31,8 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'location')->listBox($model->getListLocations(), ['size' => '1']) ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Назад', ['module-sensor-crud/index'], ['class' => 'btn btn-primary']) ?>
+        <?= Html::submitButton('Создать', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

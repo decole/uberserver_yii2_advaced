@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel common\models\ModuleSensorSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Module Sensors';
+$this->title = 'CRUD Модуль - Сенсор';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="module-sensor-index">
@@ -15,14 +15,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Module Sensor', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Создать модуль', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-
-<!--    <?php //echo $this->render('_search', ['model' => $searchModel]); ?>-->
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             [
@@ -49,12 +46,25 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $model->locations->location;
                 }
             ],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{update} {delete}',
+                'buttons' => [
+                    'update' => function ($url, $model, $key) {
+                        return  Html::a('Обновить', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']);
+                    },
+                    'delete' => function ($url, $model, $key) {
+                        return  Html::a('Удалить', ['delete', 'id' => $model->id], [
+                            'class' => 'btn btn-danger',
+                            'data' => [
+                                'confirm' => 'Удалить модуль?',
+                                'method' => 'post',
+                            ],
+                        ]);
+                    },
+                ]
+            ],
         ],
     ]); ?>
 
-<!--<pre>
-<?php
-//    var_dump($dataProvider);
-//    ?>
-</pre>-->
 </div>
