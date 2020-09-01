@@ -40,7 +40,7 @@ class Location extends ActiveRecord
     {
         return [
             'id' => 'ID',
-            'location' => 'Location',
+            'location' => 'Локация',
         ];
     }
 }

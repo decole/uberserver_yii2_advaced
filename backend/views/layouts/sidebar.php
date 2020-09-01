@@ -50,7 +50,7 @@ use yii\helpers\Url;
                             ['label' => 'Сенсоры', 'url' => ['module-sensor-crud/index'], 'iconStyle' => 'far'],
                             ['label' => 'Реле', 'url' => ['module-relay-crud/index'], 'iconStyle' => 'far'],
                             ['label' => 'Типы устройств', 'iconStyle' => 'far'],
-                            ['label' => 'Место устройств', 'iconStyle' => 'far'],
+                            ['label' => 'Место устройств', 'url' => ['location-crud/index'], 'iconStyle' => 'far'],
                             ['label' => 'Охранные датчики', 'iconStyle' => 'far'],
                             ['label' => 'Пожарные датчики', 'iconStyle' => 'far'],
                             ['label' => 'Планировщик', 'iconStyle' => 'far'],
