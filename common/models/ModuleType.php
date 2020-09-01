@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use Yii;
 
@@ -28,11 +29,25 @@ class ModuleType extends ActiveRecord
     /**
      * {@inheritdoc}
      */
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::class,
+                'createdAtAttribute' => 'created_at',
+                'updatedAtAttribute' => 'updated_at',
+                'value' => time(),
+            ],
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function rules()
     {
         return [
-            [['name', 'created_at', 'updated_at'], 'required'],
-            [['created_at', 'updated_at'], 'integer'],
+            [['name',], 'required'],
             [['name'], 'string', 'max' => 255],
             [['name'], 'unique'],
         ];
@@ -45,19 +60,9 @@ class ModuleType extends ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'name' => 'Название',
+            'created_at' => 'Создано',
+            'updated_at' => 'Обновлено',
         ];
-    }
-
-    /**
-     * Gets query for [[Modules]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getModules()
-    {
-        return $this->hasMany(Module::className(), ['type' => 'id']);
     }
 }
