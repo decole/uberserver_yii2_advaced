@@ -67,7 +67,7 @@ class SecureSystemCrudController extends Controller
         $model = new ModuleSecureSystem();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         }
 
         return $this->render('@backend/views/crud/secure/create', [

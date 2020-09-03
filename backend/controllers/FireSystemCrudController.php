@@ -67,7 +67,7 @@ class FireSystemCrudController extends Controller
         $model = new ModuleFireSystem();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         }
 
         return $this->render('@backend/views/crud/fire_secure/create', [

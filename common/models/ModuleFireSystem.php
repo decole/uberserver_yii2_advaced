@@ -2,9 +2,9 @@
 
 namespace common\models;
 
-use Yii;
+use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
-use yii\db\ActiveRecord;
+use Yii;
 
 /**
  * This is the model class for table "module_fire_system".
@@ -27,7 +27,7 @@ use yii\db\ActiveRecord;
  * @property Location $location0
  * @property ModuleType $type0
  */
-class ModuleFireSystem extends ActiveRecord
+class ModuleFireSystem extends Model
 {
     /**
      * {@inheritdoc}
@@ -40,11 +40,26 @@ class ModuleFireSystem extends ActiveRecord
     /**
      * {@inheritdoc}
      */
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::class,
+                'createdAtAttribute' => 'created_at',
+                'updatedAtAttribute' => 'updated_at',
+                'value' => time(),
+            ],
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function rules()
     {
         return [
-            [['name', 'topic', 'created_at', 'updated_at'], 'required'],
-            [['type', 'location', 'created_at', 'updated_at', 'notifying', 'active'], 'integer'],
+            [['name', 'topic'], 'required'],
+            [['type', 'location', 'notifying', 'active'], 'integer'],
             [['name', 'topic', 'normal_condition', 'alarm_condition', 'message_info', 'message_ok', 'message_warn'], 'string', 'max' => 255],
             [['name'], 'unique'],
             [['topic'], 'unique'],
@@ -60,19 +75,19 @@ class ModuleFireSystem extends ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'topic' => 'Topic',
-            'normal_condition' => 'значение нормы',
-            'alarm_condition' => 'значение сработки',
-            'message_info' => 'Message Info',
-            'message_ok' => 'Message Ok',
-            'message_warn' => 'Message Warn',
-            'type' => 'Type',
-            'location' => 'Location',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
-            'notifying' => 'Notifying',
-            'active' => 'Active',
+            'name' => 'Название',
+            'topic' => 'Тема',
+            'normal_condition' => 'Значение нормы',
+            'alarm_condition' => 'Значение сработки',
+            'message_info' => 'Текст информации о датчике',
+            'message_ok' => 'Текст успешного выполнения',
+            'message_warn' => 'Текст ошибки',
+            'type' => 'Тип датчика',
+            'location' => 'Место нахождения датчика',
+            'created_at' => 'Создано',
+            'updated_at' => 'Обновлено',
+            'notifying' => 'Сообщать о событиях',
+            'active' => 'Активно',
         ];
     }
 
@@ -81,7 +96,7 @@ class ModuleFireSystem extends ActiveRecord
      *
      * @return ActiveQuery
      */
-    public function getLocation0()
+    public function getLocations()
     {
         return $this->hasOne(Location::class, ['id' => 'location']);
     }
@@ -91,7 +106,7 @@ class ModuleFireSystem extends ActiveRecord
      *
      * @return ActiveQuery
      */
-    public function getType0()
+    public function getTypes()
     {
         return $this->hasOne(ModuleType::class, ['id' => 'type']);
     }

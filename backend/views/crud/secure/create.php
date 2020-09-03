@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\ModuleSecureSystem */
 
-$this->title = 'Create Module Secure System';
-$this->params['breadcrumbs'][] = ['label' => 'Module Secure Systems', 'url' => ['index']];
+$this->title = 'Создание Охранного модуля';
+$this->params['breadcrumbs'][] = ['label' => 'CRUD Охранных модулей', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="module-secure-system-create">

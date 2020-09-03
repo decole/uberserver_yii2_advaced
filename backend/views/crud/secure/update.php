@@ -5,10 +5,10 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\ModuleSecureSystem */
 
-$this->title = 'Update Module Secure System: ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Module Secure Systems', 'url' => ['index']];
+$this->title = 'Изменение Охранного модуля: ' . $model->name;
+$this->params['breadcrumbs'][] = ['label' => 'CRUD Охранных модулей', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Изменение';
 ?>
 <div class="module-secure-system-update">
 

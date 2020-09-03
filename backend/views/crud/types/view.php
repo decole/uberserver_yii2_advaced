@@ -35,13 +35,13 @@ YiiAsset::register($this);
             [
                 'label' => 'Создано',
                 'value' => function ($model) {
-                    return Yii::$app->formatter->asDate($model->created_at, 'dd.MM.yyyy H:m:s');
+                    return Yii::$app->formatter->asDate($model->created_at, 'dd.MM.yyyy HH:mm:ss');
                 }
             ],
             [
                 'label' => 'Обновлено',
                 'value' => function ($model) {
-                    return Yii::$app->formatter->asDate($model->updated_at, 'dd.MM.yyyy H:m:s');
+                    return Yii::$app->formatter->asDate($model->updated_at, 'dd.MM.yyyy HH:mm:ss');
                 }
             ],
         ],

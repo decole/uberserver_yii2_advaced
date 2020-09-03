@@ -2,9 +2,9 @@
 
 namespace common\models;
 
-use Yii;
+use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
-use yii\db\ActiveRecord;
+use Yii;
 
 /**
  * This is the model class for table "module_secure_system".
@@ -29,7 +29,7 @@ use yii\db\ActiveRecord;
  * @property Location $location0
  * @property ModuleType $type0
  */
-class ModuleSecureSystem extends ActiveRecord
+class ModuleSecureSystem extends Model
 {
     /**
      * {@inheritdoc}
@@ -42,11 +42,26 @@ class ModuleSecureSystem extends ActiveRecord
     /**
      * {@inheritdoc}
      */
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::class,
+                'createdAtAttribute' => 'created_at',
+                'updatedAtAttribute' => 'updated_at',
+                'value' => time(),
+            ],
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function rules()
     {
         return [
-            [['name', 'topic', 'current_command', 'created_at', 'updated_at'], 'required'],
-            [['trigger', 'type', 'location', 'created_at', 'updated_at', 'notifying', 'active'], 'integer'],
+            [['name', 'topic', 'current_command'], 'required'],
+            [['trigger', 'type', 'location', 'notifying', 'active'], 'integer'],
             [['name', 'topic', 'normal_condition', 'alarm_condition', 'current_command', 'message_info', 'message_ok', 'message_warn'], 'string', 'max' => 255],
             [['name'], 'unique'],
             [['topic'], 'unique'],
@@ -62,21 +77,21 @@ class ModuleSecureSystem extends ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'topic' => 'Topic',
-            'normal_condition' => 'значение нормы',
-            'alarm_condition' => 'значение сработки',
-            'trigger' => 'Trigger',
-            'current_command' => 'Current Command',
-            'message_info' => 'Message Info',
-            'message_ok' => 'Message Ok',
-            'message_warn' => 'Message Warn',
-            'type' => 'Type',
-            'location' => 'Location',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
-            'notifying' => 'Notifying',
-            'active' => 'Active',
+            'name' => 'Название',
+            'topic' => 'Тема',
+            'normal_condition' => 'Значение нормы',
+            'alarm_condition' => 'Значение сработки',
+            'trigger' => 'Взведено',
+            'current_command' => 'Текущая команда',
+            'message_info' => 'Текст информации о датчике',
+            'message_ok' => 'Текст успешного выполнения',
+            'message_warn' => 'Текст ошибки',
+            'type' => 'Тип модуля',
+            'location' => 'Локация',
+            'created_at' => 'Создано',
+            'updated_at' => 'Обновлено',
+            'notifying' => 'Сообщать о событиях',
+            'active' => 'Активно',
         ];
     }
 
@@ -85,7 +100,7 @@ class ModuleSecureSystem extends ActiveRecord
      *
      * @return ActiveQuery
      */
-    public function getLocation0()
+    public function getLocations()
     {
         return $this->hasOne(Location::class, ['id' => 'location']);
     }
@@ -95,7 +110,7 @@ class ModuleSecureSystem extends ActiveRecord
      *
      * @return ActiveQuery
      */
-    public function getType0()
+    public function getTypes()
     {
         return $this->hasOne(ModuleType::class, ['id' => 'type']);
     }

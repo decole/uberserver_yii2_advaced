@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel common\models\ModuleFireSystemSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Module Fire Systems';
+$this->title = 'CRUD Пожарных датчиков';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="module-fire-system-index">
@@ -15,33 +15,58 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Module Fire System', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Создать пожарный датчик', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
             'name',
             'topic',
-            'normal_condition',
-            'alarm_condition',
-            //'message_info',
-            //'message_ok',
-            //'message_warn',
-            //'type',
-            //'location',
-            //'created_at',
-            //'updated_at',
-            //'notifying',
-            //'active',
-
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'label' => 'Тип датчика',
+                'value' => function ($model) {
+                    return $model->types->name;
+                }
+            ],
+            [
+                'label' => 'Находится',
+                'value' => function ($model) {
+                    return $model->locations->location;
+                }
+            ],
+            [
+                'label' => 'Сообщать о событиях',
+                'value' => function ($model) {
+                    return ($model->notifying) ? 'Да' : 'Нет';
+                }
+            ],
+            [
+                'label' => 'Активно',
+                'value' => function ($model) {
+                    return ($model->active) ? 'Да' : 'Нет';
+                }
+            ],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{update} {delete}',
+                'buttons' => [
+                    'update' => function ($url, $model, $key) {
+                        return  Html::a('Изменить', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']);
+                    },
+                    'delete' => function ($url, $model, $key) {
+                        return  Html::a('Удалить', ['delete', 'id' => $model->id], [
+                            'class' => 'btn btn-danger',
+                            'data' => [
+                                'confirm' => 'Удалить модуль?',
+                                'method' => 'post',
+                            ],
+                        ]);
+                    },
+                ]
+            ],
         ],
     ]); ?>
 
