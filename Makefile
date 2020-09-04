@@ -28,23 +28,14 @@ composer-install:
 app:
 	$(compose) exec backend bash
 
+migrate:
+	$(yii) migrate
+
 mysql:
 	$(compose) exec mysql bash
 
-#app-init:
-#	$(app) php init --env=Development --overwrite=All
+app-init:
+	$(app) php init --env=Development --overwrite=All
 
-#migrate: migrate-main migrate-personal migrate-stat
-#	$(call message,"Migrations was successfully applied!")
-
-#tests:
-#	$(app) vendor/bin/codecept run
-
-#tasks: tasks-stop
-#	$(yii) task/run
-
-#tasks-stop:
-#	$(app) ./.dev/scripts/tasks-stop.sh
-
-#install: up composer-install app-init create-databases migrate
-#	$(call message,"The application was successfully installed!")
+tests:
+	$(app) vendor/bin/codecept run
