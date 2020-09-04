@@ -42,3 +42,9 @@ app-init:
 
 tests:
 	$(app) vendor/bin/codecept run
+
+tasks:
+	$(yii) queue/listen 5 -v --color
+
+tasks-stop:
+	$(app) ./tasks-stop.sh
