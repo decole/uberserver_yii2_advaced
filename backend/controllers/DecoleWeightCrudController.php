@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use backend\jobs\WriteJob;
 use Yii;
 use common\models\DecoleWeight;
 use common\models\DecoleWeightSearch;
@@ -35,6 +36,12 @@ class DecoleWeightCrudController extends Controller
      */
     public function actionIndex()
     {
+//        Yii::$app->queue->push(new WriteJob([
+//        Yii::$app->queue->delay(10)->push(new WriteJob([
+//            'url' => 'https://www.yiiframework.com/image/logo.svg',
+//            'file' => Yii::$app->basePath . '/runtime/image.svg',
+//        ]));
+
         $searchModel = new DecoleWeightSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
