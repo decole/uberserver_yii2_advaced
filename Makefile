@@ -31,6 +31,9 @@ app:
 migrate:
 	$(yii) migrate
 
+migrate-down:
+	$(yii) migrate/down
+
 mysql:
 	$(compose) exec mysql bash
 
