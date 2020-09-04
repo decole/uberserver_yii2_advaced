@@ -20,7 +20,7 @@ class m200904_175502_weigh_table extends Migration
 
         $this->createTable('decole_weight', [
             'id' => $this->primaryKey(),
-            'weight' => $this->string()->notNull(),
+            'weight' => $this->decimal(5,2)->notNull(),
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
         ], $tableOptions);
