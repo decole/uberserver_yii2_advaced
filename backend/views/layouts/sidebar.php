@@ -53,7 +53,7 @@ use yii\helpers\Url;
                             ['label' => 'Место устройств', 'url' => ['location-crud/index'], 'iconStyle' => 'far'],
                             ['label' => 'Охранные датчики', 'url' => ['secure-system-crud/index'],  'iconStyle' => 'far'],
                             ['label' => 'Пожарные датчики', 'url' => ['fire-system-crud/index'], 'iconStyle' => 'far'],
-                            ['label' => 'Планировщик', 'iconStyle' => 'far'],
+                            ['label' => 'Планировщик', 'url' => ['schedule/index'], 'iconStyle' => 'far'],
                             ['label' => 'Вес', 'url' => ['decole-weight-crud/index'], 'iconStyle' => 'far'],
 //                            ['label' => 'Дефект заданий', 'iconStyle' => 'far'],
                         ]
