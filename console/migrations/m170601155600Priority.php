@@ -11,7 +11,7 @@ use yii\db\Migration;
  *
  * @author Roman Zhuravlev <zhuravljov@gmail.com>
  */
-class M170601155600Priority extends Migration
+class m170601155600Priority extends Migration
 {
     public $tableName = 'queue';
 

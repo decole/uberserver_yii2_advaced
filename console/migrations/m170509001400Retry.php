@@ -11,7 +11,7 @@ use yii\db\Migration;
  *
  * @author Roman Zhuravlev <zhuravljov@gmail.com>
  */
-class M170509001400Retry extends Migration
+class m170509001400Retry extends Migration
 {
     public $tableName = 'queue';
 
