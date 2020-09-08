@@ -6,7 +6,7 @@ use yii\queue\LogBehavior;
 
 return [
     'bootstrap' => [
-        'queue', // Компонент регистрирует свои консольные команды
+        'queue',
     ],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
@@ -21,9 +21,15 @@ return [
             'as log' => LogBehavior::class,
             'class' => Queue::class,
             'db' => 'db',
+
             'tableName' => 'queue',
             'channel' => 'default',
             'mutex' => MysqlMutex::class,
         ],
+    ],
+    'modules' => [
+        'alice_smart_home' => [
+            'class' => 'common\modules\yandexSmartHome\Module',
+        ]
     ],
 ];
