@@ -30,34 +30,20 @@ use yii\helpers\Url;
             <?php
             echo Menu::widget([
                 'items' => [
-                    ['label' => 'Настройки', 'url' => ['site/faker'], 'icon' => 'cogs'],
-                    ['label' => 'Автополив', 'url' => ['site/faker'], 'icon' => 'tint'],
-                    ['label' => 'Пожарная система', 'url' => ['site/faker'], 'icon' => 'fire'],
-                    ['label' => 'Охранная система', 'url' => ['site/faker'], 'icon' => 'user-lock'],
-                    ['label' => 'Все даные', 'url' => ['site/faker'], 'icon' => 'folder-open'],
-                    ['label' => 'Пристройка', 'url' => ['site/faker'], 'icon' => 'border-style'],
-                    ['label' => 'Теплица', 'url' => ['site/faker'], 'icon' => 'folder-open'],
+                    ['label' => 'Настройки системы', 'header' => true],
+                    ['label' => 'Сенсоры', 'url' => ['module-sensor-crud/index'], 'iconStyle' => 'far'],
+                    ['label' => 'Реле', 'url' => ['module-relay-crud/index'], 'iconStyle' => 'far'],
+                    ['label' => 'Типы устройств', 'url' => ['module-type-crud/index'], 'iconStyle' => 'far'],
+                    ['label' => 'Место устройств', 'url' => ['location-crud/index'], 'iconStyle' => 'far'],
+                    ['label' => 'Охранные датчики', 'url' => ['secure-system-crud/index'],  'iconStyle' => 'far'],
+                    ['label' => 'Пожарные датчики', 'url' => ['fire-system-crud/index'], 'iconStyle' => 'far'],
+                    ['label' => 'Планировщик', 'url' => ['schedule/index'], 'iconStyle' => 'far'],
+                    ['label' => 'Вес', 'url' => ['decole-weight-crud/index'], 'iconStyle' => 'far'],
 
                     ['label' => 'Yii2 PROVIDED', 'header' => true],
                     ['label' => 'Login', 'url' => ['site/login'], 'icon' => 'sign-in-alt', 'visible' => Yii::$app->user->isGuest],
                     ['label' => 'Gii',  'icon' => 'file-code', 'url' => ['/gii'], 'target' => '_blank'],
                     ['label' => 'Debug', 'icon' => 'bug', 'url' => ['/debug'], 'target' => '_blank'],
-
-                    ['label' => 'CRUD', 'header' => true],
-                    [
-                        'label' => 'Параметры',
-                        'items' => [
-                            ['label' => 'Сенсоры', 'url' => ['module-sensor-crud/index'], 'iconStyle' => 'far'],
-                            ['label' => 'Реле', 'url' => ['module-relay-crud/index'], 'iconStyle' => 'far'],
-                            ['label' => 'Типы устройств', 'url' => ['module-type-crud/index'], 'iconStyle' => 'far'],
-                            ['label' => 'Место устройств', 'url' => ['location-crud/index'], 'iconStyle' => 'far'],
-                            ['label' => 'Охранные датчики', 'url' => ['secure-system-crud/index'],  'iconStyle' => 'far'],
-                            ['label' => 'Пожарные датчики', 'url' => ['fire-system-crud/index'], 'iconStyle' => 'far'],
-                            ['label' => 'Планировщик', 'url' => ['schedule/index'], 'iconStyle' => 'far'],
-                            ['label' => 'Вес', 'url' => ['decole-weight-crud/index'], 'iconStyle' => 'far'],
-//                            ['label' => 'Дефект заданий', 'iconStyle' => 'far'],
-                        ]
-                    ],
                 ],
             ]);
             ?>

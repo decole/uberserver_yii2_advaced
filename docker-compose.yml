@@ -56,3 +56,33 @@ services:
       - MYSQL_ROOT_PASSWORD=verysecret
     depends_on:
       - mysql
+
+  redis:
+    image: redis:5.0-alpine
+    restart: always
+    ports:
+      - "6379:6379"
+#    env_file:
+#      - common.env
+    volumes:
+      - .data/redisData:/data
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  redis-admin:
+    image: erikdubbelboer/phpredisadmin
+    restart: always
+    depends_on:
+      - redis
+    ports:
+      - "8083:80"
+    environment:
+      - REDIS_1_HOST=redis
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
