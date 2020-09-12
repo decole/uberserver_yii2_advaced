@@ -32,6 +32,7 @@ class HistoryModuleData extends ActiveRecord
             [
                 'class' => TimestampBehavior::class,
                 'createdAtAttribute' => 'created_at',
+                'updatedAtAttribute' => false,
                 'value' => time(),
             ],
         ];
@@ -43,8 +44,6 @@ class HistoryModuleData extends ActiveRecord
     public function rules()
     {
         return [
-            [['created_at'], 'required'],
-            [['created_at'], 'integer'],
             [['topic', 'payload'], 'string', 'max' => 255],
         ];
     }

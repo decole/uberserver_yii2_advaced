@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Services;
+namespace common\services;
 
+use common\models\HistoryModuleData;
 use common\services\mqtt\DeviceService;
 use Mosquitto\Client;
 use Yii;
@@ -68,15 +69,14 @@ final class MqttService
             } else {
                 $this->isConnect = false;
             }
-
         });
+
         $this->client->onDisconnect(function () {
             $this->isConnect = false;
         });
+
         register_shutdown_function([$this, 'disconnect']);
-
         $this->device = new DeviceService();
-
         $this->cache = Yii::$app->cache;
     }
 
@@ -117,11 +117,13 @@ final class MqttService
             return true;
         }
 
+        echo $message->topic . ' ' . $message->payload . PHP_EOL;
         $this->device->route($message);
     }
 
     /**
      * Sending data to topic on mqtt protocol
+     *
      * @param $topic $data
      * @return mixed
      */
@@ -132,14 +134,13 @@ final class MqttService
     }
 
     /**
-     * Соханение в БД таблице истории сообщений
+     * Save history module payload from DB
      *
      * @param $message
      */
-    private function saveDB($message)
+    public function saveDB($message)
     {
-        /** @var MqttHistory $model */
-        $model = new MqttHistory();
+        $model = new HistoryModuleData();
         $model->topic = $message->topic;
         $model->payload = $message->payload;
         $model->save();

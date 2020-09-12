@@ -2,10 +2,12 @@
 
 namespace common\services\mqtt;
 
+use common\models\ModuleSensor;
 use common\services\mqtt\ValidateDevices\FireSecureValidate;
 use common\services\mqtt\ValidateDevices\RelayValidate;
 use common\services\mqtt\ValidateDevices\SecureValidate;
 use common\services\mqtt\ValidateDevices\SensorValidate;
+use yii\helpers\ArrayHelper;
 
 final class DeviceService
 {
@@ -41,11 +43,10 @@ final class DeviceService
 
     public function __construct()
     {
-        self::refresh();
         $this->sensor     = new SensorValidate($this->sensor_list, $this->sensor_model);
-        $this->relay      = new RelayValidate($this->relay_list, $this->relay_model);
-        $this->secure     = new SecureValidate($this->secure_list, $this->secure_model);
-        $this->fireSecure = new FireSecureValidate($this->fireSecure_list, $this->fireSecure_model);
+//        $this->relay      = new RelayValidate($this->relay_list, $this->relay_model);
+//        $this->secure     = new SecureValidate($this->secure_list, $this->secure_model);
+//        $this->fireSecure = new FireSecureValidate($this->fireSecure_list, $this->fireSecure_model);
     }
 
     /**
@@ -69,9 +70,11 @@ final class DeviceService
 //                }
 //            }
 
-            if (in_array($message->topic, $this->sensor->getTopics())) {
-                return $this->sensor->deviceValidate($message);
-            }
+//            if (in_array($message->topic, $this->sensor->getTopics())) {
+//                return $this->sensor->deviceValidate($message);
+//            }
+            // Todo fix it
+            /*
             if (in_array($message->topic, $this->relay->getTopics())) {
                 return $this->relay->deviceValidate($message);
             }
@@ -81,26 +84,7 @@ final class DeviceService
             if (in_array($message->topic, $this->fireSecure->getTopics())) {
                 return $this->fireSecure->deviceValidate($message);
             }
-    }
-
-    /**
-     * Обновления кэша топиков
-     *
-     * @return void
-     */
-    public function refresh()
-    {
-        Cache::forget($this->sensor_list);
-        Cache::forget($this->sensor_model);
-
-        Cache::forget($this->relay_list);
-        Cache::forget($this->relay_model);
-
-        Cache::forget($this->secure_list);
-        Cache::forget($this->secure_model);
-
-        Cache::forget($this->fireSecure_list);
-        Cache::forget($this->fireSecure_model);
+            */
     }
 
     /**

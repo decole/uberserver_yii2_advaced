@@ -2,6 +2,10 @@
 
 namespace common\services\mqtt\ValidateDevices;
 
+use common\models\ModuleSensor;
+use Yii;
+use yii\helpers\ArrayHelper;
+
 class SensorValidate implements DeviceInterface
 {
     /**
@@ -13,8 +17,11 @@ class SensorValidate implements DeviceInterface
      */
     public $topicModel;
 
+    protected $cache;
+
     public function __construct($topicList, $topicsModel)
     {
+        $this->cache = Yii::$app->cache;
         $this->topicList = $topicList;
         $this->topicModel = $topicsModel;
         $this->createDataset();
@@ -28,12 +35,12 @@ class SensorValidate implements DeviceInterface
      */
     public function getTopics()
     {
-        if (Cache::has($this->topicList)) {
-            return $value = Cache::get($this->topicList);
-        }
-
-        $this->createDataset();
-        return MqttSensor::all()->pluck('topic')->toArray();
+        $this->cache->getOrSet($this->topicList, function () {
+            $model = ModuleSensor::find()
+                ->orderBy(['id'=>SORT_ASC])
+                ->all();
+            return ArrayHelper::getColumn($model, 'topic');
+        });
     }
 
     /**
@@ -42,10 +49,13 @@ class SensorValidate implements DeviceInterface
      */
     public function createDataset()
     {
-        $model = MqttSensor::all();
-        $topics = $model->pluck('topic')->toArray();
-        Cache::put($this->topicModel, $model);
-        Cache::put($this->topicList, $topics);
+        $model = ModuleSensor::find()
+            ->orderBy(['id'=>SORT_ASC])
+            ->all();
+        $topics = ArrayHelper::getColumn($model, 'topic');
+
+        $this->cache->set($this->topicModel, $model);
+        $this->cache->set($this->topicList, $topics);
     }
 
     /**

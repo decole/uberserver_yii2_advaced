@@ -3,6 +3,7 @@
 
 namespace console\controllers;
 
+use common\services\MqttService;
 use Yii;
 use yii\console\Controller;
 
@@ -21,6 +22,10 @@ class MqttController extends Controller
     private $alarmTemper = 43;
     private $periodicTime = 1800; // период произведения анализа в методе process
 
+    public function actionStart() {
+        $service = MqttService::getInstance();
+        $service->listen();
+    }
 
     public function actionIndex() {
         $this->client = new \Mosquitto\Client();
