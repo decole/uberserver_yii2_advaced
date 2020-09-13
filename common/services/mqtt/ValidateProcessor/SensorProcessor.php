@@ -6,7 +6,7 @@ use common\models\ModuleSensor;
 use Yii;
 use yii\helpers\ArrayHelper;
 
-class SensorValidate implements DeviceInterface
+class SensorProcessor implements DeviceInterface
 {
     /**
      * @var string

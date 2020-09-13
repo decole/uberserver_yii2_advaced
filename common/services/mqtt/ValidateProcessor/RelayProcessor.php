@@ -2,7 +2,7 @@
 
 namespace common\services\mqtt\ValidateDevices;
 
-class RelayValidate implements DeviceInterface
+class RelayProcessor implements DeviceInterface
 {
 
     /**

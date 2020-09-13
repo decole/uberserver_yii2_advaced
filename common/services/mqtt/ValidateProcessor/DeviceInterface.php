@@ -5,7 +5,6 @@ namespace common\services\mqtt\ValidateDevices;
 
 interface DeviceInterface
 {
-
     /**
      * Передача массива топиков
      * @return array
@@ -24,5 +23,4 @@ interface DeviceInterface
      * @return mixed
      */
     public function deviceValidate($message);
-
 }

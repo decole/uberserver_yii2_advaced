@@ -4,12 +4,15 @@ namespace common\services;
 
 use common\models\HistoryModuleData;
 use common\services\mqtt\DeviceService;
+use common\traits\instance;
 use Mosquitto\Client;
 use Yii;
 
 final class MqttService
 {
     // https://mosquitto-php.readthedocs.io/en/latest/client.html#Mosquitto\Client::onConnect
+
+    use instance;
 
     /**
      * @var
@@ -37,24 +40,9 @@ final class MqttService
     private $device;
 
     /**
-     * @var array
-     */
-    protected static $instances;
-    /**
      * @var \yii\caching\CacheInterface
      */
     private $cache;
-
-    public static function getInstance(): self
-    {
-        $class = static::class;
-
-        if (!isset(static::$instances[$class])) {
-            static::$instances[$class] = Yii::createObject(static::class);
-        }
-
-        return static::$instances[$class];
-    }
 
     public function __construct()
     {
@@ -76,7 +64,7 @@ final class MqttService
         });
 
         register_shutdown_function([$this, 'disconnect']);
-        $this->device = new DeviceService();
+        $this->device = DeviceService::getInstance();
         $this->cache = Yii::$app->cache;
     }
 

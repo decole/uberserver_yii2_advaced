@@ -2,9 +2,8 @@
 
 namespace common\services\mqtt\ValidateDevices;
 
-class FireSecureValidate implements DeviceInterface
+class SecureProcessor implements DeviceInterface
 {
-
     /**
      * @var string
      */
@@ -24,17 +23,16 @@ class FireSecureValidate implements DeviceInterface
     /**
      * @inheritDoc
      *
-     * fire_secures_list - array current topics
-     * fire_secures      - models serialized in array
+     * secures_list - array current topics
+     * secures      - models serialized in array
      */
     public function getTopics()
     {
         if (Cache::has($this->topicList)) {
             return $value = Cache::get($this->topicList);
         }
-
         $this->createDataset();
-        return MqttFireSecure::all()->pluck('topic')->toArray();
+        return MqttSecure::all()->pluck('topic')->toArray();
     }
 
     /**
@@ -42,12 +40,10 @@ class FireSecureValidate implements DeviceInterface
      */
     public function createDataset()
     {
-        $model = MqttFireSecure::all();
+        $model = MqttSecure::all();
         $topics = $model->pluck('topic')->toArray();
         Cache::put($this->topicModel, $model);
         Cache::put($this->topicList, $topics);
-
-        return $topics;
     }
 
     /**
@@ -55,16 +51,15 @@ class FireSecureValidate implements DeviceInterface
      */
     public function deviceValidate($message)
     {
-        if (!Cache::has($this->topicModel) || is_null(Cache::get($this->topicModel)) ) {
+        if (!Cache::has($this->topicModel) || is_null(Cache::get($this->topicModel))) {
             self::createDataset();
         }
         $model = Cache::get($this->topicModel);
-        if(empty($model)) {
+        if (empty($model)) {
             self::createDataset();
-            $model = MqttFireSecure::all();
+            $model = MqttSecure::all();
             self::process($model, $message);
-        }
-        else {
+        } else {
             self::process($model, $message);
         }
     }
@@ -73,10 +68,16 @@ class FireSecureValidate implements DeviceInterface
     {
         foreach ($model as $value) {
             if ($value['topic'] == $message->topic) {
-                if ($value['alarm_condition'] == $message->payload) {
-                    MqttFireSecure::logChangeTrigger($message->topic,'зафиксирован статус - пожар');
-                    $text = DataService::getTextNotify($value['message_warn'], (string)$message->payload);
-                    DeviceService::SendNotify(new FireSecureNotify($text, $message));
+                if (
+                    (integer)$value['alarm_condition'] == (integer)$message->payload &&
+                    $value['trigger'] == true &&
+                    DeviceService::is_notifying($value)
+                ) {
+                    MqttSecure::logAlarm($value['topic'], 'зафиксировано движение');
+                    if ($value['notifying'] == true) {
+                        $text = DataService::getTextNotify($value['message_warn'], (string)$message->payload);
+                        DeviceService::SendNotify(new SecureNotify($text, $message));
+                    }
                 }
                 break;
             }

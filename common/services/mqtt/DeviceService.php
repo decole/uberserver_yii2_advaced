@@ -2,31 +2,45 @@
 
 namespace common\services\mqtt;
 
-use common\models\ModuleSensor;
-use common\services\mqtt\ValidateDevices\FireSecureValidate;
-use common\services\mqtt\ValidateDevices\RelayValidate;
-use common\services\mqtt\ValidateDevices\SecureValidate;
-use common\services\mqtt\ValidateDevices\SensorValidate;
-use yii\helpers\ArrayHelper;
+use common\services\mqtt\ValidateDevices\FireSecureProcessor;
+use common\services\mqtt\ValidateDevices\RelayProcessor;
+use common\services\mqtt\ValidateDevices\SecureProcessor;
+use common\services\mqtt\ValidateDevices\SensorProcessor;
+use common\traits\instance;
 
 final class DeviceService
 {
+    use instance;
+
     /**
-     * @var SensorValidate
+     * @var array
+     */
+    protected static $instances;
+
+    /**
+     * @var SensorProcessor
      */
     private $sensor;
+
+    /**
+     * @var string
+     */
     protected $sensor_list = 'sensor_list';
+
+    /**
+     * @var string
+     */
     protected $sensor_model = 'sensors';
 
     /**
-     * @var RelayValidate
+     * @var RelayProcessor
      */
     private $relay;
     protected $relay_list = 'relay_list';
     protected $relay_model = 'relays';
 
     /**
-     * @var SecureValidate
+     * @var SecureProcessor
      */
     private $secure;
     protected $secure_list = 'secure_list';
@@ -34,7 +48,7 @@ final class DeviceService
     public static $secure_cache_model = 'secures';
 
     /**
-     * @var FireSecureValidate
+     * @var FireSecureProcessor
      */
     private $fireSecure;
     protected $fireSecure_list = 'fire_secures_list';
@@ -43,10 +57,10 @@ final class DeviceService
 
     public function __construct()
     {
-        $this->sensor     = new SensorValidate($this->sensor_list, $this->sensor_model);
-//        $this->relay      = new RelayValidate($this->relay_list, $this->relay_model);
-//        $this->secure     = new SecureValidate($this->secure_list, $this->secure_model);
-//        $this->fireSecure = new FireSecureValidate($this->fireSecure_list, $this->fireSecure_model);
+        $this->sensor     = new SensorProcessor($this->sensor_list, $this->sensor_model);
+//        $this->relay      = new RelayProcessor($this->relay_list, $this->relay_model);
+//        $this->secure     = new SecureProcessor($this->secure_list, $this->secure_model);
+//        $this->fireSecure = new FireSecureProcessor($this->fireSecure_list, $this->fireSecure_model);
     }
 
     /**
@@ -55,9 +69,22 @@ final class DeviceService
      */
     public function route($message)
     {
-            if ($message->topic === null || $message->payload === null) {
-                return false;
-            }
+        if ($message->topic === null || $message->payload === null) {
+            return false;
+        }
+$i=0;
+        switch ($i) {
+            case 0:
+                echo "i равно 0";
+                break;
+            case 1:
+                echo "i равно 1";
+                break;
+            case 2:
+                echo "i равно 2";
+                break;
+        }
+        
 //            $ar = [
 //                $this->sensor,
 //                $this->relay,
