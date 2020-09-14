@@ -2,6 +2,8 @@
 
 namespace common\forms;
 
+use common\models\ModuleSensor;
+use common\services\mqtt\ValidateProcessor\SensorProcessor;
 use yii\base\Model;
 
 class SensorValidateForm extends Model
@@ -16,11 +18,17 @@ class SensorValidateForm extends Model
      */
     public $payload;
 
-    public function __construct($topic, $payload, array $config = [])
+    /**
+     * @var SensorProcessor
+     */
+    public $processor;
+
+    public function __construct($topic, $payload, $processor, array $config = [])
     {
         parent::__construct($config);
         $this->topic = $topic;
         $this->payload = $payload;
+        $this->processor = $processor;
     }
 
     /**
@@ -47,6 +55,12 @@ class SensorValidateForm extends Model
 
     public function payloadValidator(): void
     {
-        return;
+        /** @var ModuleSensor $model */
+        $model = $this->processor->getSensorModel($this->topic);
+
+        if ($model === null) {
+            $this->addError('topic', 'не найден topic в сенсорах');
+        }
+
     }
 }

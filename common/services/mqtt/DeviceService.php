@@ -67,7 +67,7 @@ final class DeviceService
 
         switch ($message->topic) {
             case $this->sensor->isSensor($message->topic):
-                $this->sensor->validate($message);
+                $this->sensor->deviceValidate($message);
 
                 break;
             default:

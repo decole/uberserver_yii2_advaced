@@ -4,7 +4,6 @@ namespace common\services\mqtt\ValidateProcessor;
 
 use common\forms\SensorValidateForm;
 use common\models\ModuleSensor;
-use SebastianBergmann\CodeCoverage\Report\PHP;
 use yii\helpers\ArrayHelper;
 use Yii;
 
@@ -46,6 +45,24 @@ class SensorProcessor implements DeviceInterface
         });
     }
 
+    public function getSensorModel($topic)
+    {
+        $models = $this->cache->getOrSet($this->topicModel, function () {
+            return ModuleSensor::find()
+                ->orderBy(['id'=>SORT_ASC])
+                ->asArray()
+                ->all();
+        });
+
+        foreach ($models as $model) {
+            if ($model['topic'] == $topic) {
+               return $model;
+            }
+        }
+
+        return null;
+    }
+
     /**
      * @inheritDoc
      * @return void
@@ -66,16 +83,12 @@ class SensorProcessor implements DeviceInterface
      */
     public function deviceValidate($message)
     {
-        if (!Cache::has($this->topicModel) || is_null(Cache::get($this->topicModel))) {
-            self::createDataset();
-        }
-        $model = Cache::get($this->topicModel);
-        if (empty($model)) {
-            self::createDataset();
-            $model = MqttSensor::all();
-            self::process($model, $message);
-        } else {
-            self::process($model, $message);
+        /** @var SensorValidateForm $form */
+        echo $message->topic . PHP_EOL;
+        $form = Yii::createObject(SensorValidateForm::class, [$message->topic, $message->payload, $this]);
+        if ($form->validate()) {
+            // TODO интегрировать process и обработку ошибок
+            return;
         }
     }
 
@@ -99,15 +112,5 @@ class SensorProcessor implements DeviceInterface
     public function isSensor($topic)
     {
         return array_key_exists($topic, $this->getTopics()) ;
-    }
-
-    public function validate($message)
-    {
-        /** @var SensorValidateForm $form */
-        echo $message->topic . PHP_EOL;
-        $form = Yii::createObject(SensorValidateForm::class, [$message->topic,$message->payload]);
-        if ($form->validate()) {
-            return;
-        }
     }
 }
