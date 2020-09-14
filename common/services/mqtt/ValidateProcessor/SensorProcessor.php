@@ -1,10 +1,12 @@
 <?php
 
-namespace common\services\mqtt\ValidateDevices;
+namespace common\services\mqtt\ValidateProcessor;
 
+use common\forms\SensorValidateForm;
 use common\models\ModuleSensor;
-use Yii;
+use SebastianBergmann\CodeCoverage\Report\PHP;
 use yii\helpers\ArrayHelper;
+use Yii;
 
 class SensorProcessor implements DeviceInterface
 {
@@ -35,11 +37,12 @@ class SensorProcessor implements DeviceInterface
      */
     public function getTopics()
     {
-        $this->cache->getOrSet($this->topicList, function () {
+        return $this->cache->getOrSet($this->topicList, function () {
             $model = ModuleSensor::find()
                 ->orderBy(['id'=>SORT_ASC])
                 ->all();
-            return ArrayHelper::getColumn($model, 'topic');
+
+            return ArrayHelper::map($model, 'topic', 'name');
         });
     }
 
@@ -52,7 +55,7 @@ class SensorProcessor implements DeviceInterface
         $model = ModuleSensor::find()
             ->orderBy(['id'=>SORT_ASC])
             ->all();
-        $topics = ArrayHelper::getColumn($model, 'topic');
+        $topics = ArrayHelper::map($model, 'topic', 'name');
 
         $this->cache->set($this->topicModel, $model);
         $this->cache->set($this->topicList, $topics);
@@ -93,4 +96,18 @@ class SensorProcessor implements DeviceInterface
         }
     }
 
+    public function isSensor($topic)
+    {
+        return array_key_exists($topic, $this->getTopics()) ;
+    }
+
+    public function validate($message)
+    {
+        /** @var SensorValidateForm $form */
+        echo $message->topic . PHP_EOL;
+        $form = Yii::createObject(SensorValidateForm::class, [$message->topic,$message->payload]);
+        if ($form->validate()) {
+            return;
+        }
+    }
 }

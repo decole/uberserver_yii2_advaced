@@ -2,20 +2,7 @@
 
 namespace common\forms;
 
-use api\components\Error;
-use backend\models\User;
-use backend\services\AdminService;
-use common\components\exceptions\passwordRecovery\RecoveryPasswordException;
-use common\components\validators\PhoneFilter;
-use common\exceptions\NotUniqueCredentialException;
-use common\helpers\PhoneHelper;
-use common\models\auth\CompanyAuthSettings;
-use common\models\CompanyCredentialsSettingsModel;
-use common\services\auth\CompanyAuthSettingsService;
-use common\services\PasswordRecoveryAdminService;
-use yii\base\InvalidConfigException;
 use yii\base\Model;
-use yii\validators\Validator;
 
 class SensorValidateForm extends Model
 {
@@ -60,6 +47,6 @@ class SensorValidateForm extends Model
 
     public function payloadValidator(): void
     {
-
+        return;
     }
 }

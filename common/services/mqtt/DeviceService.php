@@ -2,10 +2,10 @@
 
 namespace common\services\mqtt;
 
-use common\services\mqtt\ValidateDevices\FireSecureProcessor;
-use common\services\mqtt\ValidateDevices\RelayProcessor;
-use common\services\mqtt\ValidateDevices\SecureProcessor;
-use common\services\mqtt\ValidateDevices\SensorProcessor;
+use common\services\mqtt\ValidateProcessor\SensorProcessor;
+use common\services\mqtt\ValidateProcessor\RelayProcessor;
+use common\services\mqtt\ValidateProcessor\SecureProcessor;
+use common\services\mqtt\ValidateProcessor\FireSecureProcessor;
 use common\traits\instance;
 
 final class DeviceService
@@ -21,15 +21,7 @@ final class DeviceService
      * @var SensorProcessor
      */
     private $sensor;
-
-    /**
-     * @var string
-     */
     protected $sensor_list = 'sensor_list';
-
-    /**
-     * @var string
-     */
     protected $sensor_model = 'sensors';
 
     /**
@@ -72,16 +64,15 @@ final class DeviceService
         if ($message->topic === null || $message->payload === null) {
             return false;
         }
-$i=0;
-        switch ($i) {
-            case 0:
-                echo "i равно 0";
+
+        switch ($message->topic) {
+            case $this->sensor->isSensor($message->topic):
+                $this->sensor->validate($message);
+
                 break;
-            case 1:
-                echo "i равно 1";
-                break;
-            case 2:
-                echo "i равно 2";
+            default:
+                echo '.' . PHP_EOL;
+
                 break;
         }
         

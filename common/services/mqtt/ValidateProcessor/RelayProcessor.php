@@ -1,6 +1,6 @@
 <?php
 
-namespace common\services\mqtt\ValidateDevices;
+namespace common\services\mqtt\ValidateProcessor;
 
 class RelayProcessor implements DeviceInterface
 {

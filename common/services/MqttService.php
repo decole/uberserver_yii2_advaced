@@ -105,7 +105,6 @@ final class MqttService
             return true;
         }
 
-        echo $message->topic . ' ' . $message->payload . PHP_EOL;
         $this->device->route($message);
     }
 
