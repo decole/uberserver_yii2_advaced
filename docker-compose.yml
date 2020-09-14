@@ -51,7 +51,7 @@ services:
     links:
       - mysql:db
     ports:
-      - 8080:80
+      - 8000:80
     environment:
       - MYSQL_ROOT_PASSWORD=verysecret
     depends_on:
