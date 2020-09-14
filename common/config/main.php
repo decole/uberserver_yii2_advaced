@@ -5,6 +5,7 @@ use yii\queue\db\Queue;
 use yii\queue\LogBehavior;
 
 return [
+    'timeZone' => 'Europe/Volgograd',
     'bootstrap' => [
         'queue',
     ],
