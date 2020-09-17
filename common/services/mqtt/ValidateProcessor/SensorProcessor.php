@@ -87,26 +87,15 @@ class SensorProcessor implements DeviceInterface
         echo $message->topic . PHP_EOL;
         $form = Yii::createObject(SensorValidateForm::class, [$message->topic, $message->payload, $this]);
         if ($form->validate()) {
-            // TODO интегрировать process и обработку ошибок
             return;
         }
-    }
 
-    private function process($model, $message)
-    {
-        foreach ($model as $value) {
-            if ($value['topic'] == $message->topic) {
-                if (
-                    ($value['from_condition'] && (integer)$message->payload < (integer)$value['from_condition']) ||
-                    ($value['to_condition'] && (integer)$message->payload > (integer)$value['to_condition']) ||
-                    ($value['type'] == 3 && (integer)$value['to_condition'] !== (integer)$message->payload) // leakage
-                ) {
-                    $text = DataService::getTextNotify($value['message_warn'], (string)$message->payload);
-                    DeviceService::SendNotify(new SensorNotify($text, $message));
-                }
-                break;
-            }
+        $error = '';
+        foreach ($form->getErrors('payload') as $value) {
+            $error .= $value . "\n";
         }
+
+        // TODO add task - send notify to telegram bot
     }
 
     public function isSensor($topic)
