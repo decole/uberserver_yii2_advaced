@@ -53,6 +53,7 @@ class SensorValidateForm extends Model
         ];
     }
 
+    // TODO add notify param and active
     public function payloadValidator(): void
     {
         /** @var ModuleSensor $model */
@@ -71,7 +72,5 @@ class SensorValidateForm extends Model
             $this->addError('payload', $model->name . ' показатели ниже нормы, payload ' . $this->payload
             . ' | from_condition ' . $model->to_condition);
         }
-
-        //TODO сделать верификацию для модулей типа сенсоров протечки
     }
 }

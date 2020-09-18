@@ -2,6 +2,7 @@
 
 namespace common\services\mqtt\ValidateProcessor;
 
+use backend\jobs\TelegramNotifyJob;
 use common\forms\SensorValidateForm;
 use common\models\ModuleSensor;
 use yii\helpers\ArrayHelper;
@@ -95,7 +96,9 @@ class SensorProcessor implements DeviceInterface
             $error .= $value . "\n";
         }
 
-        // TODO add task - send notify to telegram bot
+        Yii::$app->queue->push(new TelegramNotifyJob([
+            'message' => $error,
+        ]));
     }
 
     public function isSensor($topic)
