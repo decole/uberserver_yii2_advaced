@@ -2,6 +2,7 @@
 
 namespace common\services\mqtt;
 
+use common\services\mqtt\ValidateProcessor\LeakageProcessor;
 use common\services\mqtt\ValidateProcessor\SensorProcessor;
 use common\services\mqtt\ValidateProcessor\RelayProcessor;
 use common\services\mqtt\ValidateProcessor\SecureProcessor;
@@ -23,6 +24,10 @@ final class DeviceService
     private $sensor;
     protected $sensor_list = 'sensor_list';
     protected $sensor_model = 'sensors';
+
+    private $leakage;
+    protected $leakage_list = 'leakage_list';
+    protected $leakage_model = 'leakage';
 
     /**
      * @var RelayProcessor
@@ -50,6 +55,7 @@ final class DeviceService
     public function __construct()
     {
         $this->sensor     = new SensorProcessor($this->sensor_list, $this->sensor_model);
+        $this->leakage    = new LeakageProcessor($this->leakage_list, $this->leakage_model);
 //        $this->relay      = new RelayProcessor($this->relay_list, $this->relay_model);
 //        $this->secure     = new SecureProcessor($this->secure_list, $this->secure_model);
 //        $this->fireSecure = new FireSecureProcessor($this->fireSecure_list, $this->fireSecure_model);
@@ -68,6 +74,10 @@ final class DeviceService
         switch ($message->topic) {
             case $this->sensor->isSensor($message->topic):
                 $this->sensor->deviceValidate($message);
+
+                break;
+            case $this->leakage->isSensor($message->topic):
+                $this->leakage->deviceValidate($message);
 
                 break;
             default:

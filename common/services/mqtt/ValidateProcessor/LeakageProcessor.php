@@ -3,13 +3,13 @@
 namespace common\services\mqtt\ValidateProcessor;
 
 use backend\jobs\TelegramNotifyJob;
-use common\forms\SensorValidateForm;
-use common\models\ModuleSensor;
+use common\forms\LeakageValidateForm;
+use common\models\ModuleLeakage;
 use Throwable;
 use yii\helpers\ArrayHelper;
 use Yii;
 
-class SensorProcessor implements DeviceInterface
+class LeakageProcessor implements DeviceInterface
 {
     /**
      * @var string
@@ -39,7 +39,7 @@ class SensorProcessor implements DeviceInterface
     public function getTopics()
     {
         return $this->cache->getOrSet($this->topicList, function () {
-            $model = ModuleSensor::find()
+            $model = ModuleLeakage::find()
                 ->orderBy(['id'=>SORT_ASC])
                 ->all();
 
@@ -50,7 +50,7 @@ class SensorProcessor implements DeviceInterface
     public function getSensorModel($topic)
     {
         $models = $this->cache->getOrSet($this->topicModel, function () {
-            return ModuleSensor::find()
+            return ModuleLeakage::find()
                 ->orderBy(['id'=>SORT_ASC])
                 ->asArray()
                 ->all();
@@ -71,7 +71,7 @@ class SensorProcessor implements DeviceInterface
      */
     public function createDataset()
     {
-        $model = ModuleSensor::find()
+        $model = ModuleLeakage::find()
             ->orderBy(['id'=>SORT_ASC])
             ->all();
         $topics = ArrayHelper::map($model, 'topic', 'name');
@@ -86,9 +86,9 @@ class SensorProcessor implements DeviceInterface
     public function deviceValidate($message)
     {
         try {
-            /** @var SensorValidateForm $form */
+            /** @var LeakageValidateForm $form */
             echo $message->topic . PHP_EOL;
-            $form = Yii::createObject(SensorValidateForm::class, [$message->topic, $message->payload, $this]);
+            $form = Yii::createObject(LeakageValidateForm::class, [$message->topic, $message->payload, $this]);
             if ($form->validate()) {
                 return;
             }
@@ -98,6 +98,7 @@ class SensorProcessor implements DeviceInterface
                 $error .= $value . "\n";
             }
 
+            echo ' ' . $error . PHP_EOL;
             Yii::$app->queue->push(new TelegramNotifyJob([
                 'message' => $error,
             ]));
