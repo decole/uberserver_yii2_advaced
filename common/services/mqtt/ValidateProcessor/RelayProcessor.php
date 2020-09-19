@@ -2,122 +2,70 @@
 
 namespace common\services\mqtt\ValidateProcessor;
 
-class RelayProcessor implements DeviceInterface
+use common\forms\RelayValidateForm;
+use common\models\ModuleRelay;
+use yii\helpers\ArrayHelper;
+
+class RelayProcessor extends BaseProcessor
 {
-
-    /**
-     * @var string
-     */
-    public $topicList;
-    /**
-     * @var string
-     */
-    public $topicModel;
-
     public function __construct($topicList, $topicsModel)
     {
-        $this->topicList = $topicList;
-        $this->topicModel = $topicsModel;
-        $this->createDataset();
+        parent::__construct($topicList, $topicsModel, ModuleRelay::class, RelayValidateForm::class);
     }
 
     /**
-     * @inheritDoc
-     *
-     * relays_list - array current topics
-     * relays      - models serialized in array
+     * @return array|mixed
      */
     public function getTopics()
     {
-        if (Cache::has($this->topicList)) {
-            return $value = Cache::get($this->topicList);
+        return $this->cache->getOrSet($this->topicList, function () {
+            $model = $this->validateModel::find()
+                ->orderBy(['id'=>SORT_ASC])
+                ->all();
+
+            $topics = ArrayHelper::map($model, 'topic', 'name');
+            $checkTopics = ArrayHelper::map($model, 'check_topic', 'name');
+
+            return array_merge($topics, $checkTopics);
+        });
+    }
+
+    /**
+     * @param $topic
+     * @return array|null
+     */
+    public function getSensorModel($topic)
+    {
+        $models = $this->cache->getOrSet($this->topicModel, function () {
+            return $this->validateModel::find()
+                ->orderBy(['id'=>SORT_ASC])
+                ->asArray()
+                ->all();
+        });
+
+        foreach ($models as $model) {
+            if ($model['topic'] == $topic || $model['check_topic'] == $topic) {
+                return $model;
+            }
         }
 
-        $this->createDataset();
-        $model = MqttRelay::all();
-        return array_merge($model->pluck('topic')->toArray(), $model->pluck('check_topic')->toArray());
+        return null;
     }
 
     /**
      * @inheritDoc
-     *
-     * кэшируется модели реле и топики - топики это смесь проверочных топиков и топиков для комманд
-     *
      * @return void
      */
     public function createDataset()
     {
-        $model = MqttRelay::all();
-        $topics = array_merge($model->pluck('topic')->toArray(), $model->pluck('check_topic')->toArray());
-        Cache::put($this->topicModel, $model);
-        Cache::put($this->topicList, $topics);
-    }
+        $models = $this->cache->getOrSet($this->topicModel, function () {
+            return $this->validateModel::find()
+                ->orderBy(['id'=>SORT_ASC])
+                ->asArray()
+                ->all();
+        });
 
-    /**
-     * @inheritDoc
-     */
-    public function deviceValidate($message)
-    {
-        if (!Cache::has($this->topicModel) || is_null(Cache::get($this->topicModel))) {
-            self::createDataset();
-        }
-        $model = Cache::get($this->topicModel);
-        if (empty($model)) {
-            self::createDataset();
-            $model = MqttRelay::all();
-            self::process($model, $message);
-        } else {
-            self::process($model, $message);
-        }
+        $this->cache->set($this->topicModel, $models);
+        $this->cache->set($this->topicList, self::getTopics());
     }
-
-    private function process($model, $message)
-    {
-        foreach ($model as $value) {
-            if ($value['check_topic'] == $message->topic) {
-                if (DeviceService::is_active($value) == false) {
-                    break;
-                }
-                if (
-                    ((string)$message->payload != (string)$value['check_command_on']) &&
-                    ((string)$message->payload != (string)$value['check_command_off'])
-                ) {
-                    self::createDataset();
-                    if (DeviceService::is_notifying($value)) {
-                        $text = DataService::getTextNotify($value['message_warn'], (string)$message->payload);
-                        DeviceService::SendNotify(new RelayNotify($text, $message));
-                    }
-                }
-                break;
-            }
-        }
-        foreach ($model as $value) {
-            if ($value['topic'] == $message->topic) {
-                if (DeviceService::is_active($value) == false) {
-                    MqttRelay::logChangeState($message->topic, 'на деактивированный топик пришла комманда');
-                    $notify = 'на деактивированный топик ' . $message->topic . ' пришла комманда {value}';
-                    DeviceService::SendNotify(new RelayNotify($notify, $message));
-                    break;
-                }
-                $payload = $message->payload;
-                if ($value['command_on'] == $payload || $value['command_off'] == $payload) {
-                    /** @var MqttRelay $relay */
-                    $relay = MqttRelay::where('topic', $message->topic)->first();
-                    $relay->last_command = $payload;
-                    $relay->save();
-                    if ($relay->type == 8) {
-                        if ( $value['command_on'] == $payload ) {
-                            MqttRelay::logChangeState($message->topic, 'включен - прямая команда');
-                        }
-                        if ( $value['command_off'] == $payload ) {
-                            MqttRelay::logChangeState($message->topic, 'выключен - прямая команда');
-                        }
-                    }
-                    self::createDataset();
-                }
-                break;
-            }
-        }
-    }
-
 }

@@ -56,7 +56,7 @@ final class DeviceService
     {
         $this->sensor     = new SensorProcessor($this->sensor_list, $this->sensor_model);
         $this->leakage    = new LeakageProcessor($this->leakage_list, $this->leakage_model);
-//        $this->relay      = new RelayProcessor($this->relay_list, $this->relay_model);
+        $this->relay      = new RelayProcessor($this->relay_list, $this->relay_model);
 //        $this->secure     = new SecureProcessor($this->secure_list, $this->secure_model);
 //        $this->fireSecure = new FireSecureProcessor($this->fireSecure_list, $this->fireSecure_model);
     }
@@ -78,6 +78,10 @@ final class DeviceService
                 break;
             case $this->leakage->isSensor($message->topic):
                 $this->leakage->deviceValidate($message);
+
+                break;
+            case $this->relay->isSensor($message->topic):
+                $this->relay->deviceValidate($message);
 
                 break;
             default:
@@ -115,55 +119,54 @@ final class DeviceService
             */
     }
 
-    /**
-     * Проверка возможности отправки нотификации
-     *
-     * @param $value
-     * @return bool
-     */
-    public static function is_notifying($value)
-    {
-        return $value['notifying'];
-    }
+//    /**
+//     * Проверка возможности отправки нотификации
+//     *
+//     * @param $value
+//     * @return bool
+//     */
+//    public static function is_notifying($value)
+//    {
+//        return $value['notifying'];
+//    }
 
-    /**
-     * Проверка активности топиков из БД
-     *
-     * @param $value
-     * @return bool
-     */
-    public static function is_active($value)
-    {
-        return $value['active'];
-    }
+//    /**
+//     * Проверка активности топиков из БД
+//     *
+//     * @param $value
+//     * @return bool
+//     */
+//    public static function is_active($value)
+//    {
+//        return $value['active'];
+//    }
 
-    /**
-     * Отправка уведомлений
-     *
-     * @param \Illuminate\Notifications\Notification $object
-     */
-    public static function SendNotify(\Illuminate\Notifications\Notification $object)
-    {
-        /** @var SensorNotify $note */
-        $note = $object;
-        $user = User::where('name', 'decole')->first();
-        $is_double = false;
-        foreach ($user->unreadNotifications as $notification) {
-            echo var_export($notification->data['message'], true) . ' - ';
-            echo var_export($note->message, true) . PHP_EOL;
-            if ($notification->data['message'] == $note->message) {
-                $startTime = Carbon::parse($notification->created_at);
-                $finishTime = Carbon::now();
-                if ($finishTime->diffInSeconds($startTime) < 30) {
-                    $is_double = true;
-                }
-                break;
-            }
-        }
-        if (!$is_double) {
-            echo 'sending message, not find double notify'.PHP_EOL;
-            Notification::send($user, $object);
-        }
-    }
-
+//    /**
+//     * Отправка уведомлений
+//     *
+//     * @param \Illuminate\Notifications\Notification $object
+//     */
+//    public static function SendNotify(\Illuminate\Notifications\Notification $object)
+//    {
+//        /** @var SensorNotify $note */
+//        $note = $object;
+//        $user = User::where('name', 'decole')->first();
+//        $is_double = false;
+//        foreach ($user->unreadNotifications as $notification) {
+//            echo var_export($notification->data['message'], true) . ' - ';
+//            echo var_export($note->message, true) . PHP_EOL;
+//            if ($notification->data['message'] == $note->message) {
+//                $startTime = Carbon::parse($notification->created_at);
+//                $finishTime = Carbon::now();
+//                if ($finishTime->diffInSeconds($startTime) < 30) {
+//                    $is_double = true;
+//                }
+//                break;
+//            }
+//        }
+//        if (!$is_double) {
+//            echo 'sending message, not find double notify'.PHP_EOL;
+//            Notification::send($user, $object);
+//        }
+//    }
 }

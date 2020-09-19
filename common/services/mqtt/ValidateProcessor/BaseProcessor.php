@@ -60,6 +60,10 @@ class BaseProcessor implements DeviceInterface
         });
     }
 
+    /**
+     * @param $topic
+     * @return array|null
+     */
     public function getSensorModel($topic)
     {
         $models = $this->cache->getOrSet($this->topicModel, function () {
