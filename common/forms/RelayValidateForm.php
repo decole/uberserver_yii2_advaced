@@ -20,6 +20,9 @@ class RelayValidateForm extends BaseValidateForm
             $this->addError('payload', 'не найден topic в сенсорах'); // TODO посмотреть это
         }
 
+        // TODO сделать проверки:
+        //     - проверочные топики (ответ сравнить с значениями состояний)
+        //     - топики (сравнить команду с командами состояний)
 
 //                if (
 //                    ((string)$message->payload != (string)$value['check_command_on']) &&
