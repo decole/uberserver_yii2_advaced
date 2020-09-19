@@ -5,10 +5,10 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\ModuleLeakage */
 
-$this->title = 'Update Module Leakage: ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Module Leakages', 'url' => ['index']];
+$this->title = 'Изменить Модуль протечки: ' . $model->name;
+$this->params['breadcrumbs'][] = ['label' => 'CRUD Модуль протечки', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Изменение';
 ?>
 <div class="module-leakage-update">
 

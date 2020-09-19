@@ -4,7 +4,6 @@ namespace common\models;
 
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
-use Yii;
 
 /**
  * This is the model class for table "module_secure_system".
@@ -88,10 +87,10 @@ class ModuleSecureSystem extends Model
             'message_warn' => 'Текст ошибки',
             'type' => 'Тип модуля',
             'location' => 'Локация',
+            'notifying' => 'Оповещение',
+            'active' => 'Состояние',
             'created_at' => 'Создано',
             'updated_at' => 'Обновлено',
-            'notifying' => 'Сообщать о событиях',
-            'active' => 'Активно',
         ];
     }
 

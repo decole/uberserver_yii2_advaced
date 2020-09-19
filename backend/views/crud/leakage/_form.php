@@ -26,20 +26,23 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'message_warn')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'type')->textInput() ?>
+    <?= $form->field($model, 'type')->listBox($model->getListTypes(), ['size' => '1']) ?>
 
-    <?= $form->field($model, 'location')->textInput() ?>
+    <?= $form->field($model, 'location')->listBox($model->getListLocations(), ['size' => '1']) ?>
 
-    <?= $form->field($model, 'notifying')->textInput() ?>
+    <?= $form->field($model, 'notifying')->checkbox([
+        'label' => 'Отправлять нотификации',
+        'labelOptions' => ['style' => 'padding-left:20px; font-size: 20px;']
+    ]) ?>
 
-    <?= $form->field($model, 'active')->textInput() ?>
-
-    <?= $form->field($model, 'created_at')->textInput() ?>
-
-    <?= $form->field($model, 'updated_at')->textInput() ?>
+    <?= $form->field($model, 'active')->checkbox([
+        'label' => 'Активный модуль',
+        'labelOptions' => ['style' => 'padding-left:20px; font-size: 20px;']
+    ]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Назад', ['leakage-crud/index'], ['class' => 'btn btn-primary']) ?>
+        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

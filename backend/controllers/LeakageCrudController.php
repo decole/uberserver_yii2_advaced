@@ -21,7 +21,7 @@ class LeakageCrudController extends Controller
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
                 ],
@@ -38,7 +38,7 @@ class LeakageCrudController extends Controller
         $searchModel = new ModuleLeakageSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
+        return $this->render('@backend/views/crud/leakage/index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
@@ -52,7 +52,7 @@ class LeakageCrudController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
+        return $this->render('@backend/views/crud/leakage/view', [
             'model' => $this->findModel($id),
         ]);
     }
@@ -67,10 +67,10 @@ class LeakageCrudController extends Controller
         $model = new ModuleLeakage();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         }
 
-        return $this->render('create', [
+        return $this->render('@backend/views/crud/leakage/create', [
             'model' => $model,
         ]);
     }
@@ -87,10 +87,10 @@ class LeakageCrudController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         }
 
-        return $this->render('update', [
+        return $this->render('@backend/views/crud/leakage/update', [
             'model' => $model,
         ]);
     }

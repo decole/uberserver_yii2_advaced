@@ -4,7 +4,6 @@ namespace common\models;
 
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
-use Yii;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -24,6 +23,8 @@ use yii\helpers\ArrayHelper;
  * @property string|null $message_warn
  * @property int|null $type
  * @property int|null $location
+ * @property int|null $notifying
+ * @property int|null $active
  * @property int $created_at
  * @property int $updated_at
  */
@@ -59,9 +60,11 @@ class ModuleRelay extends ActiveRecord
     {
         return [
             [['name', 'topic', 'command_on', 'command_off'], 'required'],
-            [['type', 'location'], 'integer'],
+            [['type', 'location', 'notifying', 'active'], 'integer'],
             [['name', 'topic', 'check_topic', 'command_on', 'command_off', 'check_command_on', 'check_command_off', 'last_command', 'message_info', 'message_ok', 'message_warn'], 'string', 'max' => 255],
             [['name', 'topic', 'check_topic'], 'unique'],
+            [['location'], 'exist', 'skipOnError' => true, 'targetClass' => Location::class, 'targetAttribute' => ['location' => 'id']],
+            [['type'], 'exist', 'skipOnError' => true, 'targetClass' => ModuleType::class, 'targetAttribute' => ['type' => 'id']],
         ];
     }
 
@@ -85,6 +88,8 @@ class ModuleRelay extends ActiveRecord
             'message_warn' => 'Текст ошибки',
             'type' => 'Тип датчика',
             'location' => 'Место нахождения датчика',
+            'notifying' => 'Оповещение',
+            'active' => 'Состояние',
             'created_at' => 'Создано',
             'updated_at' => 'Обновлено',
         ];

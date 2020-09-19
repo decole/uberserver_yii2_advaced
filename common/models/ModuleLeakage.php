@@ -2,7 +2,10 @@
 
 namespace common\models;
 
-use Yii;
+use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveQuery;
+use yii\db\ActiveRecord;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "module_leakage".
@@ -25,7 +28,7 @@ use Yii;
  * @property Location $location0
  * @property ModuleType $type0
  */
-class ModuleLeakage extends \yii\db\ActiveRecord
+class ModuleLeakage extends ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -38,16 +41,31 @@ class ModuleLeakage extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::class,
+                'createdAtAttribute' => 'created_at',
+                'updatedAtAttribute' => 'updated_at',
+                'value' => time(),
+            ],
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function rules()
     {
         return [
-            [['name', 'topic', 'check_up', 'check_down', 'created_at', 'updated_at'], 'required'],
-            [['type', 'location', 'notifying', 'active', 'created_at', 'updated_at'], 'integer'],
+            [['name', 'topic', 'check_up', 'check_down'], 'required'],
+            [['type', 'location', 'notifying', 'active'], 'integer'],
             [['name', 'topic', 'check_up', 'check_down', 'message_info', 'message_ok', 'message_warn'], 'string', 'max' => 255],
             [['name'], 'unique'],
             [['topic'], 'unique'],
-            [['location'], 'exist', 'skipOnError' => true, 'targetClass' => Location::className(), 'targetAttribute' => ['location' => 'id']],
-            [['type'], 'exist', 'skipOnError' => true, 'targetClass' => ModuleType::className(), 'targetAttribute' => ['type' => 'id']],
+            [['location'], 'exist', 'skipOnError' => true, 'targetClass' => Location::class, 'targetAttribute' => ['location' => 'id']],
+            [['type'], 'exist', 'skipOnError' => true, 'targetClass' => ModuleType::class, 'targetAttribute' => ['type' => 'id']],
         ];
     }
 
@@ -58,39 +76,49 @@ class ModuleLeakage extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'topic' => 'Topic',
-            'check_up' => 'Check Up',
-            'check_down' => 'Check Down',
-            'message_info' => 'Message Info',
-            'message_ok' => 'Message Ok',
-            'message_warn' => 'Message Warn',
-            'type' => 'Type',
-            'location' => 'Location',
-            'notifying' => 'Notifying',
-            'active' => 'Active',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'name' => 'Название',
+            'topic' => 'Тема',
+            'check_up' => 'Сигнал протечки',
+            'check_down' => 'Сигнал нет протечки',
+            'message_info' => 'Текст информации о датчике',
+            'message_ok' => 'Текст успешного выполнения',
+            'message_warn' => 'Текст ошибки',
+            'type' => 'Тип датчика',
+            'location' => 'Место нахождения датчика',
+            'notifying' => 'Оповещение',
+            'active' => 'Состояние',
+            'created_at' => 'Создано',
+            'updated_at' => 'Обновлено',
         ];
     }
 
     /**
      * Gets query for [[Location0]].
      *
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
-    public function getLocation0()
+    public function getLocations()
     {
-        return $this->hasOne(Location::className(), ['id' => 'location']);
+        return $this->hasOne(Location::class, ['id' => 'location']);
     }
 
     /**
      * Gets query for [[Type0]].
      *
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
-    public function getType0()
+    public function getTypes()
     {
-        return $this->hasOne(ModuleType::className(), ['id' => 'type']);
+        return $this->hasOne(ModuleType::class, ['id' => 'type']);
+    }
+
+    public function getListLocations()
+    {
+        return ArrayHelper::map(Location::find()->asArray()->all(), 'id', 'location');
+    }
+
+    public function getListTypes()
+    {
+        return ArrayHelper::map(ModuleType::find()->asArray()->all(), 'id', 'name');
     }
 }

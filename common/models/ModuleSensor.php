@@ -19,6 +19,8 @@ use yii\helpers\ArrayHelper;
  * @property int|null $from_condition
  * @property int|null $type
  * @property int|null $location
+ * @property int|null $notifying
+ * @property int|null $active
  * @property int $created_at
  * @property int $updated_at
  */
@@ -54,10 +56,12 @@ class ModuleSensor extends ActiveRecord
     {
         return [
             [['name', 'topic'], 'required'],
-            [['type', 'location', 'to_condition', 'from_condition'], 'integer'],
+            [['type', 'location', 'to_condition', 'from_condition', 'notifying', 'active'], 'integer'],
             [['name', 'topic', 'message_info', 'message_ok', 'message_warn'], 'string', 'max' => 255],
             [['name'], 'unique'],
             [['topic'], 'unique'],
+            [['location'], 'exist', 'skipOnError' => true, 'targetClass' => Location::class, 'targetAttribute' => ['location' => 'id']],
+            [['type'], 'exist', 'skipOnError' => true, 'targetClass' => ModuleType::class, 'targetAttribute' => ['type' => 'id']],
         ];
     }
 
@@ -70,13 +74,15 @@ class ModuleSensor extends ActiveRecord
             'id' => 'ID',
             'name' => 'Название',
             'topic' => 'Тема',
-            'to_condition' => 'Занчение от',
-            'from_condition' => 'занчение до',
+            'to_condition' => 'Значение от',
+            'from_condition' => 'Значение до',
             'message_info' => 'Текст информации о датчике',
             'message_ok' => 'Текст успешного выполнения',
             'message_warn' => 'Текст ошибки',
             'type' => 'Тип датчика',
             'location' => 'Место нахождения датчика',
+            'notifying' => 'Оповещение',
+            'active' => 'Состояние',
             'created_at' => 'Создано',
             'updated_at' => 'Обновлено',
         ];

@@ -32,6 +32,7 @@ use yii\helpers\Url;
                 'items' => [
                     ['label' => 'Настройки системы', 'header' => true],
                     ['label' => 'Сенсоры', 'url' => ['module-sensor-crud/index'], 'iconStyle' => 'far'],
+                    ['label' => 'Сенсоры Протечки', 'url' => ['leakage-crud/index'], 'iconStyle' => 'far'],
                     ['label' => 'Реле', 'url' => ['module-relay-crud/index'], 'iconStyle' => 'far'],
                     ['label' => 'Типы устройств', 'url' => ['module-type-crud/index'], 'iconStyle' => 'far'],
                     ['label' => 'Место устройств', 'url' => ['location-crud/index'], 'iconStyle' => 'far'],

@@ -53,12 +53,11 @@ class SensorValidateForm extends Model
         ];
     }
 
-    // TODO add notify param and active
     public function payloadValidator(): void
     {
         /** @var ModuleSensor $model */
         $model = $this->processor->getSensorModel($this->topic);
-
+        // TODO add notify param and active
         if ($model === null) {
             $this->addError('topic', 'не найден topic в сенсорах');
         }
