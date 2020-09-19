@@ -27,6 +27,7 @@ return [
                 [
                     'class' => 'yii\log\FileTarget',
                     'levels' => ['error', 'warning'],
+                    'maxLogFiles' => 10,
                 ],
             ],
         ],

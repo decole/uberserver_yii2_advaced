@@ -1,6 +1,5 @@
 <?php
 
-
 namespace console\controllers;
 
 use common\services\MqttService;

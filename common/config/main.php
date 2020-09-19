@@ -8,6 +8,7 @@ return [
     'timeZone' => 'Europe/Volgograd',
     'bootstrap' => [
         'queue',
+        'log'
     ],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',

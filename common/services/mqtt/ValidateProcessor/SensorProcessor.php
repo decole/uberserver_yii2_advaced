@@ -5,6 +5,7 @@ namespace common\services\mqtt\ValidateProcessor;
 use backend\jobs\TelegramNotifyJob;
 use common\forms\SensorValidateForm;
 use common\models\ModuleSensor;
+use Throwable;
 use yii\helpers\ArrayHelper;
 use Yii;
 
@@ -84,21 +85,26 @@ class SensorProcessor implements DeviceInterface
      */
     public function deviceValidate($message)
     {
-        /** @var SensorValidateForm $form */
-        echo $message->topic . PHP_EOL;
-        $form = Yii::createObject(SensorValidateForm::class, [$message->topic, $message->payload, $this]);
-        if ($form->validate()) {
-            return;
+        try {
+            /** @var SensorValidateForm $form */
+            echo $message->topic . PHP_EOL;
+            $form = Yii::createObject(SensorValidateForm::class, [$message->topic, $message->payload, $this]);
+            if ($form->validate()) {
+                return;
+            }
+
+            $error = '';
+            foreach ($form->getErrors('payload') as $value) {
+                $error .= $value . "\n";
+            }
+
+            Yii::$app->queue->push(new TelegramNotifyJob([
+                'message' => $error,
+            ]));
+        } catch (Throwable $e) {
+            Yii::error($e->getMessage());
         }
 
-        $error = '';
-        foreach ($form->getErrors('payload') as $value) {
-            $error .= $value . "\n";
-        }
-
-        Yii::$app->queue->push(new TelegramNotifyJob([
-            'message' => $error,
-        ]));
     }
 
     public function isSensor($topic)
