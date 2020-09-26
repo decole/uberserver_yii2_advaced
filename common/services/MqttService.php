@@ -145,18 +145,23 @@ final class MqttService
      */
     private function saveStatistic($message): void
     {
+        if ($message->topic === null || $message->payload === null) {
+            return;
+        }
+
         if ($message->topic == 'greenhouse/temperature') {
             return;
         }
 
-        $history = Yii::$app->cache->getOrSet('statistic_' . $message->topic, function ($message) {
-            $this->saveDB($message);
-
-            return time() + self::HISTORY_DURATION;
+        $key = 'statistic_' . $message->topic;
+        $history = Yii::$app->cache->getOrSet($key, function () {
+            return time();
         });
 
         if (time() > $history) {
-            Yii::$app->cache->delete('statistic_' . $message->topic);
+            $history += self::HISTORY_DURATION;
+            Yii::$app->cache->set($key, $history);
+            $this->saveDB($message);
         }
     }
 }
