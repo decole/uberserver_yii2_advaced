@@ -88,6 +88,9 @@ class BaseProcessor implements DeviceInterface
      */
     public function createDataset()
     {
+        $this->cache->delete($this->topicModel);
+        $this->cache->delete($this->topicList);
+
         $models = $this->cache->getOrSet($this->topicModel, function () {
             return $this->validateModel::find()
                 ->orderBy(['id'=>SORT_ASC])

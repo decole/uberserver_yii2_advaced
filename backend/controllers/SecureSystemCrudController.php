@@ -2,12 +2,13 @@
 
 namespace backend\controllers;
 
-use Yii;
+use common\services\mqtt\DeviceService;
 use common\models\ModuleSecureSystem;
 use common\models\ModuleSecureSystemSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use Yii;
 
 /**
  * SecureSystemCrudController implements the CRUD actions for ModuleSecureSystem model.
@@ -67,6 +68,7 @@ class SecureSystemCrudController extends Controller
         $model = new ModuleSecureSystem();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            self::updateCache();
             return $this->redirect(['index']);
         }
 
@@ -87,6 +89,8 @@ class SecureSystemCrudController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            self::updateCache();
+
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -105,6 +109,7 @@ class SecureSystemCrudController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
+        self::updateCache();
 
         return $this->redirect(['index']);
     }
@@ -123,5 +128,15 @@ class SecureSystemCrudController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    /**
+     * Обновление кэша для MqttService
+     */
+    private static function updateCache(): void
+    {
+        $service = DeviceService::getInstance();
+        Yii::$app->cache->delete($service->secure_model);
+        Yii::$app->cache->delete($service->secure_list);
     }
 }

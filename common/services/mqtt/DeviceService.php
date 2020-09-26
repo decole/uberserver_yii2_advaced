@@ -22,34 +22,34 @@ final class DeviceService
      * @var SensorProcessor
      */
     private $sensor;
-    protected $sensor_list = 'sensor_list';
-    protected $sensor_model = 'sensors';
+    public $sensor_list = 'sensor_list';
+    public $sensor_model = 'sensors';
 
     private $leakage;
-    protected $leakage_list = 'leakage_list';
-    protected $leakage_model = 'leakage';
+    public $leakage_list = 'leakage_list';
+    public $leakage_model = 'leakage';
 
     /**
      * @var RelayProcessor
      */
     private $relay;
-    protected $relay_list = 'relay_list';
-    protected $relay_model = 'relays';
+    public $relay_list = 'relay_list';
+    public $relay_model = 'relays';
 
     /**
      * @var SecureProcessor
      */
     private $secure;
-    protected $secure_list = 'secure_list';
-    protected $secure_model = 'secures';
+    public $secure_list = 'secure_list';
+    public $secure_model = 'secures';
     public static $secure_cache_model = 'secures';
 
     /**
      * @var FireSecureProcessor
      */
     private $fireSecure;
-    protected $fireSecure_list = 'fire_secures_list';
-    protected $fireSecure_model = 'fire_secures';
+    public $fireSecure_list = 'fire_secures_list';
+    public $fireSecure_model = 'fire_secures';
 
 
     public function __construct()

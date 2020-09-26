@@ -2,12 +2,13 @@
 
 namespace backend\controllers;
 
-use Yii;
+use common\services\mqtt\DeviceService;
 use common\models\ModuleFireSystem;
 use common\models\ModuleFireSystemSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use Yii;
 
 /**
  * FireSystemCrudController implements the CRUD actions for ModuleFireSystem model.
@@ -67,6 +68,8 @@ class FireSystemCrudController extends Controller
         $model = new ModuleFireSystem();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            self::updateCache();
+
             return $this->redirect(['index']);
         }
 
@@ -87,6 +90,8 @@ class FireSystemCrudController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            self::updateCache();
+
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -105,6 +110,7 @@ class FireSystemCrudController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
+        self::updateCache();
 
         return $this->redirect(['index']);
     }
@@ -123,5 +129,15 @@ class FireSystemCrudController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    /**
+     * Обновление кэша для MqttService
+     */
+    private static function updateCache(): void
+    {
+        $service = DeviceService::getInstance();
+        Yii::$app->cache->delete($service->fireSecure_model);
+        Yii::$app->cache->delete($service->fireSecure_list);
     }
 }
