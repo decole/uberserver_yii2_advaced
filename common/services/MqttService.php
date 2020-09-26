@@ -44,6 +44,12 @@ final class MqttService
      */
     private $cache;
 
+    /**
+     * период задержки сохранения исторических данных топика
+     * текущее значение - 30 минут
+     */
+    private const HISTORY_DURATION = 1800;
+
     public function __construct()
     {
         $this->host = Yii::$app->params['MQTT_SERVER_IP'];
@@ -102,8 +108,9 @@ final class MqttService
 
         if ($message->topic == 'greenhouse/temperature') {
             self::saveDB($message);
-            return true;
         }
+
+        $this->saveStatistic($message);
 
         $this->device->route($message);
     }
@@ -133,4 +140,23 @@ final class MqttService
         $model->save();
     }
 
+    /**
+     * @param $message
+     */
+    private function saveStatistic($message): void
+    {
+        if ($message->topic == 'greenhouse/temperature') {
+            return;
+        }
+
+        $history = Yii::$app->cache->getOrSet('statistic_' . $message->topic, function ($message) {
+            $this->saveDB($message);
+
+            return time() + self::HISTORY_DURATION;
+        });
+
+        if (time() > $history) {
+            Yii::$app->cache->delete('statistic_' . $message->topic);
+        }
+    }
 }
