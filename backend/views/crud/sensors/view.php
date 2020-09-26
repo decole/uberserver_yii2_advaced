@@ -63,6 +63,18 @@ YiiAsset::register($this);
                     return Yii::$app->formatter->asDate($model->updated_at, 'dd.MM.yyyy HH:mm:ss');
                 }
             ],
+            [
+                'label' => 'Сообщать о событиях',
+                'value' => function ($model) {
+                    return ($model->notifying) ? 'Да' : 'Нет';
+                }
+            ],
+            [
+                'label' => 'Активно',
+                'value' => function ($model) {
+                    return ($model->active) ? 'Да' : 'Нет';
+                }
+            ],
         ],
     ]) ?>
 

@@ -63,6 +63,7 @@ class ModuleRelay extends ActiveRecord
             [['type', 'location', 'notifying', 'active'], 'integer'],
             [['name', 'topic', 'check_topic', 'command_on', 'command_off', 'check_command_on', 'check_command_off', 'last_command', 'message_info', 'message_ok', 'message_warn'], 'string', 'max' => 255],
             [['name', 'topic', 'check_topic'], 'unique'],
+            [['notifying', 'active'], 'in', 'range' => [0, 1]],
             [['location'], 'exist', 'skipOnError' => true, 'targetClass' => Location::class, 'targetAttribute' => ['location' => 'id']],
             [['type'], 'exist', 'skipOnError' => true, 'targetClass' => ModuleType::class, 'targetAttribute' => ['type' => 'id']],
         ];

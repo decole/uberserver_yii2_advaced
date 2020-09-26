@@ -38,6 +38,16 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'location')->listBox($model->getListLocations(), ['size' => '1']) ?>
 
+    <?= $form->field($model, 'notifying')->checkbox([
+        'label' => 'Отправлять нотификации',
+        'labelOptions' => ['style' => 'padding-left:20px; font-size: 20px;']
+    ]) ?>
+
+    <?= $form->field($model, 'active')->checkbox([
+        'label' => 'Активный модуль',
+        'labelOptions' => ['style' => 'padding-left:20px; font-size: 20px;']
+    ]) ?>
+
     <div class="form-group">
         <?= Html::a('Назад', ['module-relay-crud/index'], ['class' => 'btn btn-primary']) ?>
         <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>

@@ -47,6 +47,18 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             [
+                'label' => 'Сообщать о событиях',
+                'value' => function ($model) {
+                    return ($model->notifying) ? 'Да' : 'Нет';
+                }
+            ],
+            [
+                'label' => 'Активно',
+                'value' => function ($model) {
+                    return ($model->active) ? 'Да' : 'Нет';
+                }
+            ],
+            [
                 'class' => 'yii\grid\ActionColumn',
                 'template' => '{update} {delete}',
                 'buttons' => [

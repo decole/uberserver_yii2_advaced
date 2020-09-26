@@ -60,6 +60,7 @@ class ModuleSensor extends ActiveRecord
             [['name', 'topic', 'message_info', 'message_ok', 'message_warn'], 'string', 'max' => 255],
             [['name'], 'unique'],
             [['topic'], 'unique'],
+            [['notifying', 'active'], 'in', 'range' => [0, 1]],
             [['location'], 'exist', 'skipOnError' => true, 'targetClass' => Location::class, 'targetAttribute' => ['location' => 'id']],
             [['type'], 'exist', 'skipOnError' => true, 'targetClass' => ModuleType::class, 'targetAttribute' => ['type' => 'id']],
         ];
