@@ -2,6 +2,7 @@
 
 namespace console\controllers;
 
+use backend\jobs\EmailNotifyJob;
 use DateTime;
 use yii\console\Controller;
 use Yii;
@@ -27,5 +28,13 @@ class TestController extends Controller
     {
         $date = new DateTime();
         echo $date->format('Y-m-d H:i:s.u') . PHP_EOL;
+    }
+
+    public function actionEmail()
+    {
+        echo 'add job to send email' . PHP_EOL;
+        Yii::$app->queue->push(new EmailNotifyJob([
+            'message' => 'test message from site uberserver.ru',
+        ]));
     }
 }
