@@ -3,7 +3,6 @@
 namespace console\controllers;
 
 use common\services\TelegramService;
-use DateTime;
 use yii\console\Controller;
 use yii\helpers\Console;
 
@@ -39,11 +38,5 @@ class TelegramController extends Controller {
 
         $this->stdout("send message from Decole " . $this->message . PHP_EOL, Console::BOLD);
         exit();
-    }
-
-    public function actionTime()
-    {
-        $date = new DateTime();
-        echo $date->format('Y-m-d H:i:s.u') . PHP_EOL;
     }
 }

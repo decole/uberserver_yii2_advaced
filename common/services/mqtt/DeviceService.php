@@ -89,93 +89,13 @@ final class DeviceService
 
                 break;
             case $this->secure->isSensor($message->topic):
-                echo $message->topic . ' ' . $message->payload . PHP_EOL;
                 $this->secure->deviceValidate($message);
 
                 break;
             default:
-                echo '.' . PHP_EOL;
+                echo '. ' . $message->topic . ' ' . $message->payload . PHP_EOL;
 
                 break;
         }
-        
-//            $ar = [
-//                $this->sensor,
-//                $this->relay,
-//                $this->secure,
-//                $this->fireSecure
-//            ];
-//            foreach ($ar as $value) {
-//                if ( in_array($message->topic, $value->getTopics()) ) {
-//                    break;
-//                }
-//            }
-
-//            if (in_array($message->topic, $this->sensor->getTopics())) {
-//                return $this->sensor->deviceValidate($message);
-//            }
-            // Todo fix it
-            /*
-            if (in_array($message->topic, $this->relay->getTopics())) {
-                return $this->relay->deviceValidate($message);
-            }
-            if (in_array($message->topic, $this->secure->getTopics())) {
-                return $this->secure->deviceValidate($message);
-            }
-            if (in_array($message->topic, $this->fireSecure->getTopics())) {
-                return $this->fireSecure->deviceValidate($message);
-            }
-            */
     }
-
-//    /**
-//     * Проверка возможности отправки нотификации
-//     *
-//     * @param $value
-//     * @return bool
-//     */
-//    public static function is_notifying($value)
-//    {
-//        return $value['notifying'];
-//    }
-
-//    /**
-//     * Проверка активности топиков из БД
-//     *
-//     * @param $value
-//     * @return bool
-//     */
-//    public static function is_active($value)
-//    {
-//        return $value['active'];
-//    }
-
-//    /**
-//     * Отправка уведомлений
-//     *
-//     * @param \Illuminate\Notifications\Notification $object
-//     */
-//    public static function SendNotify(\Illuminate\Notifications\Notification $object)
-//    {
-//        /** @var SensorNotify $note */
-//        $note = $object;
-//        $user = User::where('name', 'decole')->first();
-//        $is_double = false;
-//        foreach ($user->unreadNotifications as $notification) {
-//            echo var_export($notification->data['message'], true) . ' - ';
-//            echo var_export($note->message, true) . PHP_EOL;
-//            if ($notification->data['message'] == $note->message) {
-//                $startTime = Carbon::parse($notification->created_at);
-//                $finishTime = Carbon::now();
-//                if ($finishTime->diffInSeconds($startTime) < 30) {
-//                    $is_double = true;
-//                }
-//                break;
-//            }
-//        }
-//        if (!$is_double) {
-//            echo 'sending message, not find double notify'.PHP_EOL;
-//            Notification::send($user, $object);
-//        }
-//    }
 }

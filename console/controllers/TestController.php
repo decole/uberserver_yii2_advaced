@@ -2,6 +2,7 @@
 
 namespace console\controllers;
 
+use DateTime;
 use yii\console\Controller;
 use Yii;
 
@@ -20,5 +21,11 @@ class TestController extends Controller
             ->setTextBody('это тестовое сообщение. для проверки отправки писем')
             ->setHtmlBody('<b>это тестовое сообщение. для проверки отправки писем</b>')
             ->send();
+    }
+
+    public function actionTime()
+    {
+        $date = new DateTime();
+        echo $date->format('Y-m-d H:i:s.u') . PHP_EOL;
     }
 }

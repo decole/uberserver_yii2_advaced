@@ -2,6 +2,7 @@
 
 namespace common\forms;
 
+use common\models\HistorySecureData;
 use common\models\ModuleSecureSystem;
 
 class SecureValidateForm extends BaseValidateForm
@@ -20,10 +21,19 @@ class SecureValidateForm extends BaseValidateForm
         }
 
         if ($model['trigger'] && (string)$this->payload == (string)$model['alarm_condition']) {
-            // TODO записать событие в лог
+            $this->saveHistory();
+            
             if ($model['notifying']) {
                 $this->addError('payload', self::getTextNotify($model['message_warn'], $this->payload));
             }
         }
+    }
+
+    private function saveHistory()
+    {
+        $fireSecure = new HistorySecureData();
+        $fireSecure->topic = $this->topic;
+        $fireSecure->payload = $this->payload;
+        $fireSecure->save();
     }
 }
