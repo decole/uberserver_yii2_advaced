@@ -57,8 +57,8 @@ final class DeviceService
         $this->sensor     = new SensorProcessor($this->sensor_list, $this->sensor_model);
         $this->leakage    = new LeakageProcessor($this->leakage_list, $this->leakage_model);
         $this->relay      = new RelayProcessor($this->relay_list, $this->relay_model);
-//        $this->secure     = new SecureProcessor($this->secure_list, $this->secure_model);
-//        $this->fireSecure = new FireSecureProcessor($this->fireSecure_list, $this->fireSecure_model);
+        $this->fireSecure = new FireSecureProcessor($this->fireSecure_list, $this->fireSecure_model);
+        $this->secure     = new SecureProcessor($this->secure_list, $this->secure_model);
     }
 
     /**
@@ -82,6 +82,15 @@ final class DeviceService
                 break;
             case $this->relay->isSensor($message->topic):
                 $this->relay->deviceValidate($message);
+
+                break;
+            case $this->fireSecure->isSensor($message->topic):
+                $this->fireSecure->deviceValidate($message);
+
+                break;
+            case $this->secure->isSensor($message->topic):
+                echo $message->topic . ' ' . $message->payload . PHP_EOL;
+                $this->secure->deviceValidate($message);
 
                 break;
             default:

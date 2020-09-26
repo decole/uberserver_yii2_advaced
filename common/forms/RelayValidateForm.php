@@ -11,7 +11,7 @@ class RelayValidateForm extends BaseValidateForm
         /** @var ModuleRelay $model */
         $model = $this->processor->getSensorModel($this->topic);
 
-        if (!$model->active) {
+        if (!$model['active']) {
             return;
         }
 
@@ -20,50 +20,18 @@ class RelayValidateForm extends BaseValidateForm
             $this->addError('payload', 'не найден topic в сенсорах'); // TODO посмотреть это
         }
 
-        // TODO сделать проверки:
-        //     - проверочные топики (ответ сравнить с значениями состояний)
-        //     - топики (сравнить команду с командами состояний)
+        if ($model['notifying'] && ((string)$this->payload != (string)$model['check_command_on']) &&
+            ((string)$this->payload != (string)$model['check_command_off'])
+        ) {
+            $this->addError('payload', 'реле ' . $model['name'] .
+                ' имеет неизвестное проверочное состояние');
+        }
 
-//                if (
-//                    ((string)$message->payload != (string)$value['check_command_on']) &&
-//                    ((string)$message->payload != (string)$value['check_command_off'])
-//                ) {
-//
-//                }
-
-//            if ($value['topic'] == $message->topic) {
-//                if (DeviceService::is_active($value) == false) {
-//                    MqttRelay::logChangeState($message->topic, 'на деактивированный топик пришла комманда');
-//                    $notify = 'на деактивированный топик ' . $message->topic . ' пришла комманда {value}';
-//                    DeviceService::SendNotify(new RelayNotify($notify, $message));
-//                    break;
-//                }
-//                $payload = $message->payload;
-//                if ($value['command_on'] == $payload || $value['command_off'] == $payload) {
-//                    /** @var MqttRelay $relay */
-//                    $relay = MqttRelay::where('topic', $message->topic)->first();
-//                    $relay->last_command = $payload;
-//                    $relay->save();
-//                    if ($relay->type == 8) {
-//                        if ( $value['command_on'] == $payload ) {
-//                            MqttRelay::logChangeState($message->topic, 'включен - прямая команда');
-//                        }
-//                        if ( $value['command_off'] == $payload ) {
-//                            MqttRelay::logChangeState($message->topic, 'выключен - прямая команда');
-//                        }
-//                    }
-//                }
-//                break;
-//            }
-//        }
-
-
-//        if ($model->notifying && (
-//                ($model->from_condition && (integer)$this->payload > (integer)$model->from_condition) ||
-//                ($model->to_condition   && (integer)$this->payload < (integer)$model->to_condition)
-//            )
-//        ) {
-//            $this->addError('payload', self::getTextNotify($model->message_warn, $this->payload));
-//        }
+        if ($model['command_on'] == $this->payload || $model['command_off'] == $this->payload) {
+            $relay = ModuleRelay::findOne($model['id']);
+            $relay->last_command = $this->payload;
+            $relay->save();
+            // TODO логирование команд пользователя
+        }
     }
 }

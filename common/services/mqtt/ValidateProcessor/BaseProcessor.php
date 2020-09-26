@@ -105,7 +105,6 @@ class BaseProcessor implements DeviceInterface
     public function deviceValidate($message)
     {
         try {
-            echo $message->topic . PHP_EOL;
             $form = Yii::createObject($this->validateForm, [$message->topic, $message->payload, $this]);
             if ($form->validate()) {
                 return;

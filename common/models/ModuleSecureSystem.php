@@ -25,8 +25,8 @@ use yii\db\ActiveQuery;
  * @property int|null $notifying
  * @property int|null $active
  *
- * @property Location $location0
- * @property ModuleType $type0
+ * @property Location $locations
+ * @property ModuleType $types
  */
 class ModuleSecureSystem extends Model
 {
