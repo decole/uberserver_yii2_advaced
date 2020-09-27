@@ -58,6 +58,9 @@ class RelayProcessor extends BaseProcessor
      */
     public function createDataset()
     {
+        $this->cache->delete($this->topicModel);
+        $this->cache->delete($this->topicList);
+
         $models = $this->cache->getOrSet($this->topicModel, function () {
             return $this->validateModel::find()
                 ->orderBy(['id'=>SORT_ASC])
@@ -65,7 +68,10 @@ class RelayProcessor extends BaseProcessor
                 ->all();
         });
 
+        $topics = ArrayHelper::map($models, 'topic', 'name');
+        $checkTopics = ArrayHelper::map($models, 'check_topic', 'name');
+
         $this->cache->set($this->topicModel, $models);
-        $this->cache->set($this->topicList, self::getTopics());
+        $this->cache->set($this->topicList, array_merge($topics, $checkTopics));
     }
 }

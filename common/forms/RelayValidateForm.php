@@ -31,7 +31,6 @@ class RelayValidateForm extends BaseValidateForm
             $relay = ModuleRelay::findOne($model['id']);
             $relay->last_command = $this->payload;
             $relay->save();
-            // TODO логирование команд пользователя
         }
     }
 }
