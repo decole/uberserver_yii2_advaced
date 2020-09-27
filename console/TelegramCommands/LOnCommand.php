@@ -10,15 +10,13 @@
 
 namespace Longman\TelegramBot\Commands\UserCommands;
 
-use App\Helpers\MqttHelper;
-use App\Helpers\SmartHomeHelper;
-use App\Helpers\WateringHelper;
-use App\Services\MqttService;
+use common\services\MqttService;
 use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
-use Illuminate\Support\Facades\DB;
 use Longman\TelegramBot\Commands\UserCommand;
+use Longman\TelegramBot\Entities\ServerResponse;
+use Longman\TelegramBot\Exception\TelegramException;
 use Longman\TelegramBot\Request;
 use Longman\TelegramBot\TelegramLog;
 
@@ -61,12 +59,12 @@ class LOnCommand extends UserCommand
         $message      = $this->getMessage();
         $chat_id      = $message->getChat()->getId();
 
-        $mqtt = new MqttService();
-        $mqtt->post('margulis/lamp01', 'on');
+        $service = MqttService::getInstance();
+        $service->post('margulis/lamp01', 'on');
 
         $data = [
             'chat_id' => $chat_id,
-            'text'    => 'Лампа в пристройке ВКЛючена',
+            'text'    => 'Лампа в пристройке включена',
         ];
 
         return Request::sendMessage($data);

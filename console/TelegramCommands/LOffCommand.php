@@ -10,15 +10,13 @@
 
 namespace Longman\TelegramBot\Commands\UserCommands;
 
-use App\Helpers\MqttHelper;
-use App\Helpers\SmartHomeHelper;
-use App\Helpers\WateringHelper;
-use App\Services\MqttService;
+use common\services\MqttService;
 use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
-use Illuminate\Support\Facades\DB;
 use Longman\TelegramBot\Commands\UserCommand;
+use Longman\TelegramBot\Entities\ServerResponse;
+use Longman\TelegramBot\Exception\TelegramException;
 use Longman\TelegramBot\Request;
 use Longman\TelegramBot\TelegramLog;
 
@@ -53,20 +51,20 @@ class LOffCommand extends UserCommand
     /**
      * Command execute method
      *
-     * @return \Longman\TelegramBot\Entities\ServerResponse
-     * @throws \Longman\TelegramBot\Exception\TelegramException
+     * @return ServerResponse
+     * @throws TelegramException
      */
     public function execute()
     {
         $message      = $this->getMessage();
         $chat_id      = $message->getChat()->getId();
 
-        $mqtt = new MqttService();
-        $mqtt->post('margulis/lamp01', 'off');
+        $service = MqttService::getInstance();
+        $service->post('margulis/lamp01', 'off');
 
         $data = [
             'chat_id' => $chat_id,
-            'text'    => 'Лампа в пристройке ВЫКЛючена',
+            'text'    => 'Лампа в пристройке выключена',
         ];
 
         return Request::sendMessage($data);

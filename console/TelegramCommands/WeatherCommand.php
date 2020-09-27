@@ -10,12 +10,13 @@
 
 namespace Longman\TelegramBot\Commands\UserCommands;
 
-use App\Services\WeatherService;
+use common\services\WeatherService;
 use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
-use Illuminate\Support\Facades\DB;
 use Longman\TelegramBot\Commands\UserCommand;
+use Longman\TelegramBot\Entities\ServerResponse;
+use Longman\TelegramBot\Exception\TelegramException;
 use Longman\TelegramBot\Request;
 use Longman\TelegramBot\TelegramLog;
 
@@ -92,8 +93,8 @@ class WeatherCommand extends UserCommand
     /**
      * Command execute method
      *
-     * @return \Longman\TelegramBot\Entities\ServerResponse
-     * @throws \Longman\TelegramBot\Exception\TelegramException
+     * @return ServerResponse
+     * @throws TelegramException
      */
     public function execute()
     {
@@ -101,7 +102,7 @@ class WeatherCommand extends UserCommand
         $chat_id      = $message->getChat()->getId();
 
         $weather = (new WeatherService())->getAcuweather();
-        $text = 'Сейчас '. $weather['temperature'] . '  ' . $weather['spec'] . PHP_EOL;
+        $text = 'Сейчас '. $weather['temperature'] . ' градусов, ' . $weather['spec'] . PHP_EOL;
 
         $data = [
             'chat_id' => $chat_id,
