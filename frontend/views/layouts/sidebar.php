@@ -32,21 +32,24 @@ use yii\helpers\Url;
             <?php
             echo Menu::widget([
                 'items' => [
+                    ['label' => 'Стандартное', 'header' => true],
+
                     ['label' => 'Home', 'url' => ['/site/index']],
                     ['label' => 'About', 'url' => ['/site/about']],
                     ['label' => 'Contact', 'url' => ['/site/contact']],
-//                    ['label' => 'Настройки системы', 'header' => true],
-//                    ['label' => 'Сенсоры', 'url' => ['module-sensor-crud/index'], 'iconStyle' => 'far'],
-//                    ['label' => 'Сенсоры Протечки', 'url' => ['leakage-crud/index'], 'iconStyle' => 'far'],
-//                    ['label' => 'Реле', 'url' => ['module-relay-crud/index'], 'iconStyle' => 'far'],
-//                    ['label' => 'Типы устройств', 'url' => ['module-type-crud/index'], 'iconStyle' => 'far'],
-//                    ['label' => 'Место устройств', 'url' => ['location-crud/index'], 'iconStyle' => 'far'],
-//                    ['label' => 'Охранные датчики', 'url' => ['secure-system-crud/index'],  'iconStyle' => 'far'],
-//                    ['label' => 'Пожарные датчики', 'url' => ['fire-system-crud/index'], 'iconStyle' => 'far'],
-//                    ['label' => 'Планировщик', 'url' => ['schedule/index'], 'iconStyle' => 'far'],
-//                    ['label' => 'Вес', 'url' => ['decole-weight-crud/index'], 'iconStyle' => 'far'],
+
+                    ['label' => 'Портированное', 'header' => true],
+
+                    ['label' => 'Настройки', 'url' => ['#'], 'iconStyle' => 'fas fa-cogs'],
+                    ['label' => 'Автополив', 'url' => ['#'], 'iconStyle' => 'fas fa-tint'],
+                    ['label' => 'Пожарная система', 'url' => ['#'], 'iconStyle' => 'fab fa-free-code-camp'],
+                    ['label' => 'Охранная система', 'url' => ['#'], 'iconStyle' => 'fas fa-user-lock'],
+                    ['label' => 'Все данные', 'url' => ['#'], 'iconStyle' => 'fas fa-folder-open'],
+                    ['label' => 'Пристройка', 'url' => ['#'],  'iconStyle' => 'fas fa-border-style'],
+                    ['label' => 'Теплица', 'url' => ['#'], 'iconStyle' => 'fas fa-folder-open'],
 
                     ['label' => 'Yii2 PROVIDED', 'header' => true],
+
                     ['label' => 'Login', 'url' => ['site/login'], 'icon' => 'sign-in-alt', 'visible' => Yii::$app->user->isGuest],
                     ['label' => 'Gii',  'icon' => 'file-code', 'url' => ['/gii'], 'target' => '_blank'],
                     ['label' => 'Debug', 'icon' => 'bug', 'url' => ['/debug'], 'target' => '_blank'],
