@@ -36,7 +36,7 @@ class SiteController extends Controller
                         'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['logout'],
+                        'actions' => ['logout', 'index'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -74,6 +74,10 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect('site/login');
+        }
+
         return $this->render('index');
     }
 
@@ -93,6 +97,8 @@ class SiteController extends Controller
             return $this->goBack();
         } else {
             $model->password = '';
+            // для авторизации исполбзуется свой шаблон main-login
+            $this->layout = 'main-login';
 
             return $this->render('login', [
                 'model' => $model,
