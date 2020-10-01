@@ -1,5 +1,9 @@
 <?php
 
+use hail812\adminlte3\assets\AdminLteAsset;
+use hail812\adminlte3\assets\PluginAsset;
+use yii\web\View;
+
 /* @var $this View */
 /* @var $content string */
 
@@ -8,10 +12,7 @@ $this->registerCssFile('https://fonts.googleapis.com/css?family=Source+Sans+Pro:
 $this->registerCssFile('https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css');
 PluginAsset::register($this)->add(['fontawesome', 'icheck-bootstrap']);
 
-use hail812\adminlte3\assets\AdminLteAsset;
-use hail812\adminlte3\assets\PluginAsset;
-use yii\web\View; ?>
-<?php $this->beginPage() ?>
+$this->beginPage() ?>
 <!DOCTYPE html>
 <html>
 <head>

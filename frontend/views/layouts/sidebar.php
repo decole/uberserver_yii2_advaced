@@ -45,7 +45,7 @@ use yii\helpers\Url;
                     ['label' => 'Пожарная система', 'url' => ['#'], 'iconStyle' => 'fab fa-free-code-camp'],
                     ['label' => 'Охранная система', 'url' => ['#'], 'iconStyle' => 'fas fa-user-lock'],
                     ['label' => 'Все данные', 'url' => ['#'], 'iconStyle' => 'fas fa-folder-open'],
-                    ['label' => 'Пристройка', 'url' => ['#'],  'iconStyle' => 'fas fa-border-style'],
+                    ['label' => 'Пристройка', 'url' => ['#'], 'iconStyle' => 'fas fa-folder-open'],
                     ['label' => 'Теплица', 'url' => ['#'], 'iconStyle' => 'fas fa-folder-open'],
 
                     ['label' => 'Yii2 PROVIDED', 'header' => true],
