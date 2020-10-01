@@ -17,7 +17,7 @@ use yii\helpers\Url;
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="<?=$assetDir?>/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                <img src="https://www.gravatar.com/avatar/<?=md5(Yii::$app->user->identity->email)?>.jpg" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
                 <a href="#" class="d-block">
@@ -44,7 +44,7 @@ use yii\helpers\Url;
                     ['label' => 'Автополив', 'url' => ['#'], 'iconStyle' => 'fas fa-tint'],
                     ['label' => 'Пожарная система', 'url' => ['#'], 'iconStyle' => 'fab fa-free-code-camp'],
                     ['label' => 'Охранная система', 'url' => ['#'], 'iconStyle' => 'fas fa-user-lock'],
-                    ['label' => 'Все данные', 'url' => ['#'], 'iconStyle' => 'fas fa-folder-open'],
+                    ['label' => 'Все данные', 'url' => ['/site/all-data'], 'iconStyle' => 'fas fa-folder-open'],
                     ['label' => 'Пристройка', 'url' => ['#'], 'iconStyle' => 'fas fa-folder-open'],
                     ['label' => 'Теплица', 'url' => ['#'], 'iconStyle' => 'fas fa-folder-open'],
 

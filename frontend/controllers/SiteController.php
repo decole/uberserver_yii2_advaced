@@ -151,6 +151,11 @@ class SiteController extends Controller
         return $this->render('about');
     }
 
+    public function actionAllData()
+    {
+        return $this->render('all-data');
+    }
+
     /**
      * Signs user up.
      *
