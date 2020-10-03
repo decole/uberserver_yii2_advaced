@@ -2,52 +2,55 @@
 
 /* @var $this yii\web\View */
 
-$this->title = 'My Yii Application';
+$this->title = 'Home - Uberserver.ru';
 ?>
-<div class="site-index">
-
-    <div class="jumbotron">
-        <h1>Congratulations!</h1>
-
-        <p class="lead">You have successfully created your Yii-powered application.</p>
-
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
-    </div>
-
-    <div class="body-content">
-
+<section class="content">
+    <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
+            <section class="">
+                <div class="info-box">
+                    <div class="info-box-content sobies">
+                        <img src="/images/home.svg" alt="home picture">
+                    </div>
+                    <div class="server">
+                        <i class="fas fa-server" data-toggle="tooltip" title="сервернвя стойка с сервером"></i>
+                    </div>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
+                    <div class="water">
+                        <i class="water0 fas fa-caret-square-up" data-toggle="tooltip" title="клапан главный"></i>
+                        <i class="water1 fas fa-caret-square-up" data-toggle="tooltip" title="клапан 1"></i>
+                        <i class="water2 fas fa-caret-square-up" data-toggle="tooltip" title="клапан 2"></i>
+                        <i class="water3 fas fa-caret-square-up" data-toggle="tooltip" title="клапан 3"></i>
+                    </div>
 
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
+                    <i class="fire fire1 fas fa-bullseye" data-toggle="tooltip" title="пожарная система"></i>
+                    <i class="fire fire2 fas fa-bullseye" data-toggle="tooltip" title="пожарная система"></i>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
+                    <i class="temper temper1 fas fa-thermometer-half">12</i>
+                    <i class="temper temper2 fas fa-thermometer-half">12</i>
+                    <i class="temper temper3 fas fa-thermometer-half">12</i>
+                    <i class="temper temper4 fas fa-thermometer-half">12</i>
+                    <i class="temper temper5 fas fa-thermometer-half">12</i>
 
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
-            </div>
+                    <i class="move move1 fas fa-street-view" data-toggle="tooltip" title="датчик движения"></i>
+                    <i class="move move2 fas fa-street-view" data-toggle="tooltip" title="датчик движения"></i>
+                </div>
+            </section>
         </div>
-
+        <style>
+            .sobies {  position: relative; }
+            .server, .water, .fire, .temper, .move { position: absolute; color: #352d2d; }
+            .server {  top: 95px;  left: 145px; }
+            .water {   top: -7px;  left: 100px; }
+            .fire1 {   top: 75px;  left: 145px; }
+            .fire2 {   top: 200px; left: 415px; }
+            .temper1 { top: 180px; left: 418px; }
+            .temper2 { top: 180px; left: 227px; }
+            .temper3 { top: 245px; left: 238px; }
+            .temper4 { top: 75px;  left: 210px; }
+            .temper5 { top: 100px; left: 112px; }
+            .move1 {   top: 76px;  left: 237px; }
+            .move2 {   top: 125px; left: 295px; }
+        </style>
     </div>
-</div>
+</section>

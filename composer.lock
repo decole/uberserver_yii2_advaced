@@ -92,7 +92,7 @@
             "version": "3.5.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/jquery/jquery-dist.git",
+                "url": "git@github.com:jquery/jquery-dist.git",
                 "reference": "4c0e4becb8263bb5b3e6dadc448d8e7305ef8215"
             },
             "dist": {
@@ -3382,7 +3382,6 @@
             "keywords": [
                 "tokenizer"
             ],
-            "abandoned": true,
             "time": "2019-09-17T06:23:10+00:00"
         },
         {

@@ -93,6 +93,7 @@ final class DeviceService
 
                 break;
             default:
+                // вывод топиков, которые не были обработаны валидаторами выше
                 echo '. ' . $message->topic . ' ' . $message->payload . PHP_EOL;
 
                 break;
