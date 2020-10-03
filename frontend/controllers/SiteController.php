@@ -1,9 +1,12 @@
 <?php
 namespace frontend\controllers;
 
+use common\models\ModuleRelay;
+use common\models\ModuleSensor;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
+use yii\base\Exception;
 use yii\base\InvalidArgumentException;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
@@ -120,7 +123,7 @@ class SiteController extends Controller
 
     /**
      * Displays contact page.
-     *
+     * TODO убрать страницу
      * @return mixed
      */
     public function actionContact()
@@ -142,18 +145,18 @@ class SiteController extends Controller
     }
 
     /**
-     * Displays about page.
+     * Страница Все данные
      *
-     * @return mixed
+     * @return string
      */
-    public function actionAbout()
-    {
-        return $this->render('about');
-    }
-
     public function actionAllData()
     {
-        return $this->render('all-data');
+        $sensors = ModuleSensor::find()->asArray()->all();
+        $relays = ModuleRelay::find()->asArray()->all();
+        return $this->render('all-data', [
+            'sensors' => $sensors,
+            'relays' => $relays,
+        ]);
     }
 
     /**
@@ -203,6 +206,7 @@ class SiteController extends Controller
      * @param string $token
      * @return mixed
      * @throws BadRequestHttpException
+     * @throws Exception
      */
     public function actionResetPassword($token)
     {

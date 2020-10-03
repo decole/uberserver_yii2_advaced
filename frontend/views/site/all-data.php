@@ -1,16 +1,31 @@
 <?php
 
+use frontend\components\relay\RelayWidget;
+use frontend\components\sensor\SensorWidget;
+
 /* @var $this yii\web\View */
-
-use yii\helpers\Html;
-
-$this->title = 'All Data';
+$this->title = 'Все данные';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-about">
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>This is the About page. You may modify the following file to customize its content:</p>
-
-    <code><?= __FILE__ ?></code>
-</div>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+<?php
+/** @var array $sensors */
+/** @var array $relays */
+foreach ($sensors as $sensor) {
+    try {
+        echo SensorWidget::widget(['sensor' => $sensor]);
+    } catch (Exception $e) {
+    }
+}
+foreach ($relays as $relay) {
+    try {
+        echo RelayWidget::widget(['relay' => $relay]);
+    } catch (Exception $e) {
+    }
+}
+?>
+        </div>
+    </div>
+</section>
