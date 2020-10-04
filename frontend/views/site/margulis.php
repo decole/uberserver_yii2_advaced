@@ -2,10 +2,17 @@
 
 use frontend\components\relay\RelayWidget;
 use frontend\components\sensor\SensorWidget;
+use yii\web\JqueryAsset;
 
 /* @var $this yii\web\View */
 $this->title = 'Все данные';
 $this->params['breadcrumbs'][] = $this->title;
+
+// добавление логики работы UI для сенсоров
+$this->registerJsFile(
+    '@web/js/sensor.js',
+    ['depends' => [JqueryAsset::class]]
+);
 ?>
 <section class="content">
     <div class="container-fluid">
