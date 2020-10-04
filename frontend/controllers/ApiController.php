@@ -2,8 +2,6 @@
 
 namespace frontend\controllers;
 
-use common\models\ModuleRelay;
-use common\models\ModuleSensor;
 use common\services\MqttService;
 use Yii;
 use yii\web\Controller;
@@ -84,9 +82,10 @@ class ApiController extends Controller
     public function actionMqttControl()
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
-        $command = Yii::$app->request->post();
+        $topic = Yii::$app->request->post('topic');
+        $payload = Yii::$app->request->post('payload');
         $service = MqttService::getInstance();
-        $service->post($command->topic, $command->payload);
+        $service->post($topic, $payload);
 
         return ['succes' => true];
     }
