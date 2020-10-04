@@ -153,7 +153,32 @@ class SiteController extends Controller
     {
         $sensors = ModuleSensor::find()->asArray()->all();
         $relays = ModuleRelay::find()->asArray()->all();
+
         return $this->render('all-data', [
+            'sensors' => $sensors,
+            'relays' => $relays,
+        ]);
+    }
+
+    /**
+     * Страница пристройки
+     *
+     * @return string
+     */
+    public function actionMargulis()
+    {
+        $sensors = ModuleSensor::find()
+            ->where(['topic' => 'margulis/temperature'])
+            ->orWhere(['topic' => 'margulis/humidity'])
+            ->asArray()
+            ->all();
+
+        $relays = ModuleRelay::find()
+            ->where(['topic' => 'margulis/lamp01'])
+            ->asArray()
+            ->all();
+
+        return $this->render('margulis', [
             'sensors' => $sensors,
             'relays' => $relays,
         ]);

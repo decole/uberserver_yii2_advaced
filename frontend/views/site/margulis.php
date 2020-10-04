@@ -9,8 +9,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <section class="content">
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-6 col-md-12 col-xs-12">
+        <div class="row col-lg-6 col-md-12 col-xs-12">
 <?php
 /** @var array $sensors */
 /** @var array $relays */
@@ -19,10 +18,7 @@ foreach ($sensors as $sensor) {
         echo SensorWidget::widget(['sensor' => $sensor]);
     } catch (Exception $e) {
     }
-}?>
-            </div>
-            <div class="col-lg-6 col-md-12 col-xs-12">
-<?php
+}
 foreach ($relays as $relay) {
     try {
         echo RelayWidget::widget(['relay' => $relay]);
@@ -30,7 +26,6 @@ foreach ($relays as $relay) {
     }
 }
 ?>
-            </div>
         </div>
     </div>
 </section>
