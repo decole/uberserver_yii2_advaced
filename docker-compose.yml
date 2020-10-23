@@ -1,28 +1,41 @@
 version: '3.2'
 
 services:
-
-  frontend:
-    build: frontend
-    restart: always
+  nginx:
+    image: nginx:latest
     ports:
-      - 20080:80
+      - "80:80"
+      - "443:443"
     volumes:
-      # Re-use local composer cache via host-volume
-      - ~/.composer-docker/cache:/root/.composer/cache:delegated
-      # Mount source-code for development
-      - ./:/app
+      - ./images/nginx:/etc/nginx/conf.d
+      - ./www:/var/www
+      - ./logs:/var/log/nginx
 
-  backend:
-    build: backend
-    restart: always
-    ports:
-      - 21080:80
+  php:
+    build: ./images/php
     volumes:
-      # Re-use local composer cache via host-volume
-      - ~/.composer-docker/cache:/root/.composer/cache:delegated
-      # Mount source-code for development
-      - ./:/app
+      - ./www:/var/www
+#  frontend:
+#    build: frontend
+#    restart: always
+#    ports:
+#      - 20080:80
+#    volumes:
+#      # Re-use local composer cache via host-volume
+#      - ~/.composer-docker/cache:/root/.composer/cache:delegated
+#      # Mount source-code for development
+#      - ./:/app
+#
+#  backend:
+#    build: backend
+#    restart: always
+#    ports:
+#      - 21080:80
+#    volumes:
+#      # Re-use local composer cache via host-volume
+#      - ~/.composer-docker/cache:/root/.composer/cache:delegated
+#      # Mount source-code for development
+#      - ./:/app
 
   mysql:
     image: mysql:5.7

@@ -1,0 +1,899 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="410ca632-3da6-4583-9842-b3907a52aac1" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/images/nginx/project.conf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/php/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/.bowerrc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/LICENSE.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/Makefile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/assets/AppAsset.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/codeception.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/config/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/config/bootstrap.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/config/main.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/config/params.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/config/rules.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/config/test.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/controllers/DecoleWeightCrudController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/controllers/FireSystemCrudController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/controllers/LeakageCrudController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/controllers/LocationCrudController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/controllers/ModuleRelayCrudController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/controllers/ModuleSensorCrudController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/controllers/ModuleTypeCrudController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/controllers/ScheduleController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/controllers/SecureSystemCrudController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/controllers/SiteController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/jobs/EmailNotifyJob.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/jobs/TelegramNotifyJob.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/jobs/WriteJob.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/models/.gitkeep" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/runtime/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/tests/_bootstrap.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/tests/_data/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/tests/_data/login_data.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/tests/_output/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/tests/_support/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/tests/_support/FunctionalTester.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/tests/_support/UnitTester.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/tests/functional.suite.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/tests/functional/LoginCest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/tests/functional/_bootstrap.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/tests/unit.suite.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/tests/unit/_bootstrap.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/crud/fire_secure/_form.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/crud/fire_secure/_search.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/crud/fire_secure/create.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/crud/fire_secure/index.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/crud/fire_secure/update.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/crud/fire_secure/view.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/crud/leakage/_form.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/crud/leakage/_search.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/crud/leakage/create.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/crud/leakage/index.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/crud/leakage/update.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/crud/leakage/view.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/crud/locations/_form.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/crud/locations/_search.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/crud/locations/create.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/crud/locations/index.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/crud/locations/update.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/crud/locations/view.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/crud/relays/_form.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/crud/relays/_search.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/crud/relays/create.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/crud/relays/index.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/crud/relays/update.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/crud/relays/view.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/crud/scheduler/_form.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/crud/scheduler/_search.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/crud/scheduler/create.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/crud/scheduler/index.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/crud/scheduler/update.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/crud/scheduler/view.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/crud/secure/_form.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/crud/secure/_search.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/crud/secure/create.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/crud/secure/index.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/crud/secure/update.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/crud/secure/view.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/crud/sensors/_form.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/crud/sensors/_search.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/crud/sensors/create.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/crud/sensors/index.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/crud/sensors/update.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/crud/sensors/view.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/crud/types/_form.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/crud/types/_search.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/crud/types/create.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/crud/types/index.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/crud/types/update.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/crud/types/view.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/crud/weight/_form.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/crud/weight/_search.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/crud/weight/create.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/crud/weight/index.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/crud/weight/update.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/crud/weight/view.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/layouts/content.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/layouts/control-sidebar.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/layouts/footer.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/layouts/main-login.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/layouts/main.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/layouts/navbar.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/layouts/sidebar.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/site/error.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/site/index.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/views/site/login.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/web/.htaccess" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/web/assets/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/web/css/site.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/web/favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/backend/web/favicon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/codeception.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/codeception.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/config/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/config/bootstrap.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/config/main.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/config/params.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/config/test.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/events/Event.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/fixtures/UserFixture.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/forms/BaseValidateForm.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/forms/FireSecureValidateForm.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/forms/LeakageValidateForm.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/forms/RelayValidateForm.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/forms/SecureValidateForm.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/forms/SensorValidateForm.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/mail/emailVerify-html.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/mail/emailVerify-text.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/mail/layouts/html.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/mail/layouts/text.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/mail/passwordResetToken-html.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/mail/passwordResetToken-text.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/models/DecoleWeight.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/models/DecoleWeightSearch.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/models/HistoryFireSecureData.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/models/HistoryModuleData.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/models/HistorySecureData.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/models/Location.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/models/LocationSearch.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/models/LoginForm.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/models/Model.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/models/ModuleFireSystem.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/models/ModuleFireSystemSearch.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/models/ModuleLeakage.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/models/ModuleLeakageSearch.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/models/ModuleRelay.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/models/ModuleRelaySearch.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/models/ModuleSecureSystem.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/models/ModuleSecureSystemSearch.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/models/ModuleSensor.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/models/ModuleSensorSearch.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/models/ModuleType.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/models/ModuleTypeSearch.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/models/Schedule.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/models/ScheduleSearch.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/models/User.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/modules/yandexSmartHome/Module.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/modules/yandexSmartHome/commands/AliceController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/modules/yandexSmartHome/controllers/MainController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/modules/yandexSmartHome/views/main/index.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/services/MqttService.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/services/TelegramService.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/services/WeatherService.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/services/mqtt/DeviceService.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/services/mqtt/ValidateProcessor/BaseProcessor.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/services/mqtt/ValidateProcessor/DeviceInterface.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/services/mqtt/ValidateProcessor/FireSecureProcessor.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/services/mqtt/ValidateProcessor/LeakageProcessor.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/services/mqtt/ValidateProcessor/RelayProcessor.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/services/mqtt/ValidateProcessor/SecureProcessor.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/services/mqtt/ValidateProcessor/SensorProcessor.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/tests/_bootstrap.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/tests/_data/user.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/tests/_output/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/tests/_support/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/tests/_support/UnitTester.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/tests/unit.suite.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/tests/unit/models/LoginFormTest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/traits/instance.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/common/widgets/Alert.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/composer.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/composer.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/console/TelegramCommands/CallbackqueryCommand.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/console/TelegramCommands/DateCommand.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/console/TelegramCommands/GenericCommand.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/console/TelegramCommands/HelpCommand.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/console/TelegramCommands/LOffCommand.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/console/TelegramCommands/LOnCommand.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/console/TelegramCommands/StartCommand.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/console/TelegramCommands/WeatherCommand.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/console/TelegramCommands/WhoamiCommand.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/console/config/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/console/config/bootstrap.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/console/config/main.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/console/config/params.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/console/config/test.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/console/controllers/.gitkeep" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/console/controllers/MqttController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/console/controllers/ScheduleController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/console/controllers/TelegramController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/console/controllers/TestController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/console/migrations/m130524_201442_init.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/console/migrations/m161119140200Queue.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/console/migrations/m170307170300Later.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/console/migrations/m170509001400Retry.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/console/migrations/m170601155600Priority.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/console/migrations/m190124_110200_add_verification_token_column_to_user_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/console/migrations/m200808_192104_add_module_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/console/migrations/m200808_192137_add_module_type_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/console/migrations/m200813_170715_add_location_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/console/migrations/m200813_191851_add_module_sensor_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/console/migrations/m200820_190748_delete_table_module.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/console/migrations/m200820_190839_create_table_module_relay.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/console/migrations/m200820_195827_module_sensor_modify.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/console/migrations/m200901_193405_fire_system_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/console/migrations/m200901_193418_secure_system_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/console/migrations/m200904_175502_weigh_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/console/migrations/m200904_235905_shedule.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/console/migrations/m200905_200636_foreign_key_adds.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/console/migrations/m200910_043310_mqtt_history_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/console/migrations/m200918_183135_sensor_leakage_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/console/migrations/m200919_181732_fix_notify_in_sensrs_and_another.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/console/migrations/m200926_161411_history_secure_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/console/migrations/m200926_161420_history_fire_secure_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/console/models/.gitkeep" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/console/runtime/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/docker-compose.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/environments/dev/backend/config/codeception-local.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/environments/dev/backend/config/main-local.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/environments/dev/backend/config/params-local.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/environments/dev/backend/config/test-local.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/environments/dev/backend/web/index-test.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/environments/dev/backend/web/index.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/environments/dev/backend/web/robots.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/environments/dev/common/config/codeception-local.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/environments/dev/common/config/main-local.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/environments/dev/common/config/params-local.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/environments/dev/common/config/test-local.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/environments/dev/console/config/main-local.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/environments/dev/console/config/params-local.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/environments/dev/console/config/test-local.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/environments/dev/frontend/config/codeception-local.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/environments/dev/frontend/config/main-local.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/environments/dev/frontend/config/params-local.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/environments/dev/frontend/config/test-local.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/environments/dev/frontend/web/index-test.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/environments/dev/frontend/web/index.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/environments/dev/frontend/web/robots.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/environments/dev/yii" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/environments/dev/yii_test" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/environments/dev/yii_test.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/environments/index.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/environments/prod/backend/config/main-local.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/environments/prod/backend/config/params-local.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/environments/prod/backend/web/index.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/environments/prod/backend/web/robots.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/environments/prod/common/config/main-local.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/environments/prod/common/config/params-local.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/environments/prod/console/config/main-local.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/environments/prod/console/config/params-local.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/environments/prod/frontend/config/main-local.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/environments/prod/frontend/config/params-local.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/environments/prod/frontend/web/index.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/environments/prod/frontend/web/robots.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/environments/prod/yii" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/assets/AppAsset.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/codeception.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/components/relay/RelayWidget.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/components/relay/render.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/components/sensor/SensorWidget.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/components/sensor/render.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/config/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/config/bootstrap.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/config/main.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/config/params.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/config/test.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/controllers/ApiController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/controllers/SiteController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/models/ContactForm.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/models/PasswordResetRequestForm.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/models/ResendVerificationEmailForm.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/models/ResetPasswordForm.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/models/SignupForm.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/models/VerifyEmailForm.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/runtime/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/tests/_bootstrap.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/tests/_data/login_data.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/tests/_data/user.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/tests/_output/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/tests/_support/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/tests/_support/FunctionalTester.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/tests/_support/UnitTester.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/tests/acceptance.suite.yml.example" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/tests/acceptance/HomeCest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/tests/acceptance/_bootstrap.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/tests/functional.suite.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/tests/functional/AboutCest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/tests/functional/ContactCest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/tests/functional/HomeCest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/tests/functional/LoginCest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/tests/functional/ResendVerificationEmailCest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/tests/functional/SignupCest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/tests/functional/VerifyEmailCest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/tests/functional/_bootstrap.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/tests/unit.suite.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/tests/unit/_bootstrap.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/tests/unit/models/ContactFormTest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/tests/unit/models/PasswordResetRequestFormTest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/tests/unit/models/ResendVerificationEmailFormTest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/tests/unit/models/ResetPasswordFormTest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/tests/unit/models/SignupFormTest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/tests/unit/models/VerifyEmailFormTest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/views/layouts/content.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/views/layouts/control-sidebar.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/views/layouts/footer.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/views/layouts/main-login.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/views/layouts/main.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/views/layouts/navbar.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/views/layouts/sidebar.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/views/site/all-data.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/views/site/contact.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/views/site/error.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/views/site/index.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/views/site/login.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/views/site/margulis.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/views/site/requestPasswordResetToken.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/views/site/resendVerificationEmail.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/views/site/resetPassword.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/views/site/signup.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/web/.htaccess" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/web/assets/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/web/css/site.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/web/favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/web/favicon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/web/images/gismeteo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/web/images/home.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/web/js/fire_secure.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/web/js/relay.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/web/js/secure.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/frontend/web/js/sensor.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/init" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/init.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/logs/access.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/logs/error.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/requirements.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/tasks-stop.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/vagrant/config/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/vagrant/config/vagrant-local.example.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/vagrant/nginx/app.conf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/vagrant/nginx/log/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/vagrant/provision/always-as-root.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/vagrant/provision/common.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/vagrant/provision/once-as-root.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/vagrant/provision/once-as-vagrant.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/vagrant/provision/provision.awk" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/project/yii.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.bowerrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LICENSE.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Vagrantfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/assets/AppAsset.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/codeception.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/config/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/config/bootstrap.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/config/main.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/config/params.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/config/rules.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/config/test.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/controllers/DecoleWeightCrudController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/controllers/FireSystemCrudController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/controllers/LeakageCrudController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/controllers/LocationCrudController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/controllers/ModuleRelayCrudController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/controllers/ModuleSensorCrudController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/controllers/ModuleTypeCrudController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/controllers/ScheduleController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/controllers/SecureSystemCrudController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/controllers/SiteController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/jobs/EmailNotifyJob.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/jobs/TelegramNotifyJob.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/jobs/WriteJob.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/models/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/runtime/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/tests/_bootstrap.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/tests/_data/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/tests/_data/login_data.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/tests/_output/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/tests/_support/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/tests/_support/FunctionalTester.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/tests/_support/UnitTester.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/tests/functional.suite.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/tests/functional/LoginCest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/tests/functional/_bootstrap.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/tests/unit.suite.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/tests/unit/_bootstrap.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/crud/fire_secure/_form.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/crud/fire_secure/_search.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/crud/fire_secure/create.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/crud/fire_secure/index.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/crud/fire_secure/update.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/crud/fire_secure/view.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/crud/leakage/_form.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/crud/leakage/_search.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/crud/leakage/create.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/crud/leakage/index.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/crud/leakage/update.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/crud/leakage/view.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/crud/locations/_form.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/crud/locations/_search.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/crud/locations/create.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/crud/locations/index.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/crud/locations/update.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/crud/locations/view.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/crud/relays/_form.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/crud/relays/_search.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/crud/relays/create.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/crud/relays/index.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/crud/relays/update.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/crud/relays/view.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/crud/scheduler/_form.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/crud/scheduler/_search.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/crud/scheduler/create.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/crud/scheduler/index.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/crud/scheduler/update.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/crud/scheduler/view.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/crud/secure/_form.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/crud/secure/_search.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/crud/secure/create.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/crud/secure/index.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/crud/secure/update.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/crud/secure/view.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/crud/sensors/_form.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/crud/sensors/_search.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/crud/sensors/create.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/crud/sensors/index.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/crud/sensors/update.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/crud/sensors/view.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/crud/types/_form.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/crud/types/_search.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/crud/types/create.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/crud/types/index.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/crud/types/update.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/crud/types/view.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/crud/weight/_form.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/crud/weight/_search.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/crud/weight/create.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/crud/weight/index.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/crud/weight/update.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/crud/weight/view.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/layouts/content.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/layouts/control-sidebar.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/layouts/footer.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/layouts/main-login.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/layouts/main.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/layouts/navbar.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/layouts/sidebar.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/site/error.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/site/index.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/views/site/login.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/web/.htaccess" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/web/assets/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/web/css/site.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/web/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/web/favicon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/codeception.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/codeception.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/config/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/config/bootstrap.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/config/main.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/config/params.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/config/test.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/events/Event.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/fixtures/UserFixture.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/forms/BaseValidateForm.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/forms/FireSecureValidateForm.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/forms/LeakageValidateForm.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/forms/RelayValidateForm.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/forms/SecureValidateForm.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/forms/SensorValidateForm.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/mail/emailVerify-html.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/mail/emailVerify-text.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/mail/layouts/html.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/mail/layouts/text.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/mail/passwordResetToken-html.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/mail/passwordResetToken-text.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/models/DecoleWeight.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/models/DecoleWeightSearch.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/models/HistoryFireSecureData.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/models/HistoryModuleData.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/models/HistorySecureData.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/models/Location.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/models/LocationSearch.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/models/LoginForm.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/models/Model.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/models/ModuleFireSystem.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/models/ModuleFireSystemSearch.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/models/ModuleLeakage.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/models/ModuleLeakageSearch.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/models/ModuleRelay.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/models/ModuleRelaySearch.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/models/ModuleSecureSystem.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/models/ModuleSecureSystemSearch.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/models/ModuleSensor.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/models/ModuleSensorSearch.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/models/ModuleType.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/models/ModuleTypeSearch.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/models/Schedule.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/models/ScheduleSearch.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/models/User.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/modules/yandexSmartHome/Module.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/modules/yandexSmartHome/commands/AliceController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/modules/yandexSmartHome/controllers/MainController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/modules/yandexSmartHome/views/main/index.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/services/MqttService.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/services/TelegramService.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/services/WeatherService.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/services/mqtt/DeviceService.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/services/mqtt/ValidateProcessor/BaseProcessor.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/services/mqtt/ValidateProcessor/DeviceInterface.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/services/mqtt/ValidateProcessor/FireSecureProcessor.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/services/mqtt/ValidateProcessor/LeakageProcessor.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/services/mqtt/ValidateProcessor/RelayProcessor.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/services/mqtt/ValidateProcessor/SecureProcessor.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/services/mqtt/ValidateProcessor/SensorProcessor.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/tests/_bootstrap.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/tests/_data/user.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/tests/_output/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/tests/_support/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/tests/_support/UnitTester.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/tests/unit.suite.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/tests/unit/models/LoginFormTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/traits/instance.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/widgets/Alert.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/console/TelegramCommands/CallbackqueryCommand.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/console/TelegramCommands/DateCommand.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/console/TelegramCommands/GenericCommand.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/console/TelegramCommands/HelpCommand.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/console/TelegramCommands/LOffCommand.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/console/TelegramCommands/LOnCommand.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/console/TelegramCommands/StartCommand.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/console/TelegramCommands/WeatherCommand.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/console/TelegramCommands/WhoamiCommand.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/console/config/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/console/config/bootstrap.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/console/config/main.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/console/config/params.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/console/config/test.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/console/controllers/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/console/controllers/MqttController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/console/controllers/ScheduleController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/console/controllers/TelegramController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/console/controllers/TestController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/console/migrations/m130524_201442_init.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/console/migrations/m161119140200Queue.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/console/migrations/m170307170300Later.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/console/migrations/m170509001400Retry.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/console/migrations/m170601155600Priority.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/console/migrations/m190124_110200_add_verification_token_column_to_user_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/console/migrations/m200808_192104_add_module_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/console/migrations/m200808_192137_add_module_type_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/console/migrations/m200813_170715_add_location_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/console/migrations/m200813_191851_add_module_sensor_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/console/migrations/m200820_190748_delete_table_module.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/console/migrations/m200820_190839_create_table_module_relay.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/console/migrations/m200820_195827_module_sensor_modify.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/console/migrations/m200901_193405_fire_system_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/console/migrations/m200901_193418_secure_system_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/console/migrations/m200904_175502_weigh_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/console/migrations/m200904_235905_shedule.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/console/migrations/m200905_200636_foreign_key_adds.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/console/migrations/m200910_043310_mqtt_history_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/console/migrations/m200918_183135_sensor_leakage_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/console/migrations/m200919_181732_fix_notify_in_sensrs_and_another.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/console/migrations/m200926_161411_history_secure_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/console/migrations/m200926_161420_history_fire_secure_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/console/models/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/console/runtime/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/environments/dev/backend/config/codeception-local.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environments/dev/backend/config/main-local.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environments/dev/backend/config/params-local.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environments/dev/backend/config/test-local.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environments/dev/backend/web/index-test.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environments/dev/backend/web/index.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environments/dev/backend/web/robots.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environments/dev/common/config/codeception-local.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environments/dev/common/config/main-local.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environments/dev/common/config/params-local.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environments/dev/common/config/test-local.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environments/dev/console/config/main-local.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environments/dev/console/config/params-local.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environments/dev/console/config/test-local.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environments/dev/frontend/config/codeception-local.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environments/dev/frontend/config/main-local.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environments/dev/frontend/config/params-local.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environments/dev/frontend/config/test-local.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environments/dev/frontend/web/index-test.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environments/dev/frontend/web/index.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environments/dev/frontend/web/robots.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environments/dev/yii" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environments/dev/yii_test" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environments/dev/yii_test.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environments/index.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environments/prod/backend/config/main-local.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environments/prod/backend/config/params-local.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environments/prod/backend/web/index.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environments/prod/backend/web/robots.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environments/prod/common/config/main-local.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environments/prod/common/config/params-local.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environments/prod/console/config/main-local.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environments/prod/console/config/params-local.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environments/prod/frontend/config/main-local.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environments/prod/frontend/config/params-local.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environments/prod/frontend/web/index.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environments/prod/frontend/web/robots.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/environments/prod/yii" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/assets/AppAsset.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/codeception.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/components/relay/RelayWidget.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/components/relay/render.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/components/sensor/SensorWidget.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/components/sensor/render.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/config/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/config/bootstrap.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/config/main.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/config/params.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/config/test.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/controllers/ApiController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/controllers/SiteController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/models/ContactForm.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/models/PasswordResetRequestForm.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/models/ResendVerificationEmailForm.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/models/ResetPasswordForm.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/models/SignupForm.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/models/VerifyEmailForm.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/runtime/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/tests/_bootstrap.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/tests/_data/login_data.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/tests/_data/user.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/tests/_output/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/tests/_support/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/tests/_support/FunctionalTester.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/tests/_support/UnitTester.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/tests/acceptance.suite.yml.example" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/tests/acceptance/HomeCest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/tests/acceptance/_bootstrap.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/tests/functional.suite.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/tests/functional/AboutCest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/tests/functional/ContactCest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/tests/functional/HomeCest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/tests/functional/LoginCest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/tests/functional/ResendVerificationEmailCest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/tests/functional/SignupCest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/tests/functional/VerifyEmailCest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/tests/functional/_bootstrap.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/tests/unit.suite.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/tests/unit/_bootstrap.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/tests/unit/models/ContactFormTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/tests/unit/models/PasswordResetRequestFormTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/tests/unit/models/ResendVerificationEmailFormTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/tests/unit/models/ResetPasswordFormTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/tests/unit/models/SignupFormTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/tests/unit/models/VerifyEmailFormTest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/views/layouts/content.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/views/layouts/control-sidebar.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/views/layouts/footer.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/views/layouts/main-login.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/views/layouts/main.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/views/layouts/navbar.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/views/layouts/sidebar.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/views/site/all-data.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/views/site/contact.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/views/site/error.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/views/site/index.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/views/site/login.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/views/site/margulis.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/views/site/requestPasswordResetToken.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/views/site/resendVerificationEmail.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/views/site/resetPassword.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/views/site/signup.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/web/.htaccess" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/web/assets/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/web/css/site.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/web/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/web/favicon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/web/images/gismeteo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/web/images/home.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/web/js/fire_secure.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/web/js/relay.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/web/js/secure.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/web/js/sensor.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/init" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/init.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tasks-stop.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vagrant/config/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vagrant/config/vagrant-local.example.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vagrant/nginx/app.conf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vagrant/nginx/log/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vagrant/provision/always-as-root.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vagrant/provision/common.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vagrant/provision/once-as-root.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vagrant/provision/once-as-vagrant.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/yii.bat" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
+    <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
+    <execution>
+      <executable />
+    </execution>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration">
+    <include_path>
+      <path value="$PROJECT_DIR$/vendor/composer" />
+      <path value="$PROJECT_DIR$/vendor/psr/event-dispatcher" />
+      <path value="$PROJECT_DIR$/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/vendor/psr/container" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/vendor/cebe/markdown" />
+      <path value="$PROJECT_DIR$/vendor/opis/closure" />
+      <path value="$PROJECT_DIR$/vendor/behat/gherkin" />
+      <path value="$PROJECT_DIR$/vendor/ezyang/htmlpurifier" />
+      <path value="$PROJECT_DIR$/vendor/egulias/email-validator" />
+      <path value="$PROJECT_DIR$/vendor/hail812/yii2-adminlte3" />
+      <path value="$PROJECT_DIR$/vendor/longman/telegram-bot" />
+      <path value="$PROJECT_DIR$/vendor/myclabs/deep-copy" />
+      <path value="$PROJECT_DIR$/vendor/phar-io/version" />
+      <path value="$PROJECT_DIR$/vendor/phar-io/manifest" />
+      <path value="$PROJECT_DIR$/vendor/phpspec/prophecy" />
+      <path value="$PROJECT_DIR$/vendor/phpspec/php-diff" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-code-coverage" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-timer" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-token-stream" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-text-template" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-file-iterator" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/phpunit" />
+      <path value="$PROJECT_DIR$/vendor/symfony/process" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-grapheme" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-idn" />
+      <path value="$PROJECT_DIR$/vendor/symfony/service-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/browser-kit" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php73" />
+      <path value="$PROJECT_DIR$/vendor/symfony/finder" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php72" />
+      <path value="$PROJECT_DIR$/vendor/symfony/deprecation-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php80" />
+      <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/yaml" />
+      <path value="$PROJECT_DIR$/vendor/symfony/string" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-ctype" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php70" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-normalizer" />
+      <path value="$PROJECT_DIR$/vendor/symfony/css-selector" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-iconv" />
+      <path value="$PROJECT_DIR$/vendor/symfony/dom-crawler" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/vendor/symfony/console" />
+      <path value="$PROJECT_DIR$/vendor/theseer/tokenizer" />
+      <path value="$PROJECT_DIR$/vendor/yiisoft/yii2-debug" />
+      <path value="$PROJECT_DIR$/vendor/yiisoft/yii2" />
+      <path value="$PROJECT_DIR$/vendor/yiisoft/yii2-redis" />
+      <path value="$PROJECT_DIR$/vendor/yiisoft/yii2-faker" />
+      <path value="$PROJECT_DIR$/vendor/yiisoft/yii2-bootstrap4" />
+      <path value="$PROJECT_DIR$/vendor/yiisoft/yii2-bootstrap" />
+      <path value="$PROJECT_DIR$/vendor/yiisoft/yii2-queue" />
+      <path value="$PROJECT_DIR$/vendor/yiisoft/yii2-composer" />
+      <path value="$PROJECT_DIR$/vendor/yiisoft/yii2-gii" />
+      <path value="$PROJECT_DIR$/vendor/yiisoft/yii2-swiftmailer" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/lexer" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/instantiator" />
+      <path value="$PROJECT_DIR$/vendor/npm-asset/bootstrap" />
+      <path value="$PROJECT_DIR$/vendor/paragonie/random_compat" />
+      <path value="$PROJECT_DIR$/vendor/ralouphie/getallheaders" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/global-state" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/object-enumerator" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/comparator" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/recursion-context" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/code-unit-reverse-lookup" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/version" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/type" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/environment" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/object-reflector" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/exporter" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/diff" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/resource-operations" />
+      <path value="$PROJECT_DIR$/vendor/webmozart/assert" />
+      <path value="$PROJECT_DIR$/vendor/fzaninotto/faker" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/promises" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/psr7" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/guzzle" />
+      <path value="$PROJECT_DIR$/vendor/bower-asset/jquery" />
+      <path value="$PROJECT_DIR$/vendor/bower-asset/yii2-pjax" />
+      <path value="$PROJECT_DIR$/vendor/bower-asset/inputmask" />
+      <path value="$PROJECT_DIR$/vendor/bower-asset/bootstrap" />
+      <path value="$PROJECT_DIR$/vendor/bower-asset/punycode" />
+      <path value="$PROJECT_DIR$/vendor/codeception/phpunit-wrapper" />
+      <path value="$PROJECT_DIR$/vendor/codeception/lib-innerbrowser" />
+      <path value="$PROJECT_DIR$/vendor/codeception/module-yii2" />
+      <path value="$PROJECT_DIR$/vendor/codeception/module-filesystem" />
+      <path value="$PROJECT_DIR$/vendor/codeception/stub" />
+      <path value="$PROJECT_DIR$/vendor/codeception/lib-asserts" />
+      <path value="$PROJECT_DIR$/vendor/codeception/module-asserts" />
+      <path value="$PROJECT_DIR$/vendor/codeception/verify" />
+      <path value="$PROJECT_DIR$/vendor/codeception/codeception" />
+      <path value="$PROJECT_DIR$/vendor/swiftmailer/swiftmailer" />
+      <path value="$PROJECT_DIR$/vendor/almasaeed2010/adminlte" />
+      <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-docblock" />
+      <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-common" />
+      <path value="$PROJECT_DIR$/vendor/phpdocumentor/type-resolver" />
+    </include_path>
+  </component>
+  <component name="ProjectId" id="1ie6heLRW5lUaQ5fcd1XIE2RXoa" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/www" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="codeception.yml" type="CodeceptionConfigurationType" factoryName="Codeception">
+      <PhpTestRunnerSettings scope="ConfigurationFile" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="410ca632-3da6-4583-9842-b3907a52aac1" name="Default Changelist" comment="" />
+      <created>1602255830775</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1602255830775</updated>
+      <workItem from="1602255838256" duration="1275000" />
+      <workItem from="1603483208016" duration="8549000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="281" y="27" width="793" height="741" key="CommitChangelistDialog2" timestamp="1603492279973">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state x="281" y="27" width="793" height="741" key="CommitChangelistDialog2/0.27.1366.741@0.27.1366.741" timestamp="1603492279973" />
+    <state x="299" y="112" width="758" height="578" key="RollbackChangesDialog" timestamp="1603485098614">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state x="299" y="112" width="758" height="578" key="RollbackChangesDialog/0.27.1366.741@0.27.1366.741" timestamp="1603485098614" />
+    <state x="187" y="31" width="992" height="737" key="SettingsEditor" timestamp="1603483862662">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state x="187" y="31" width="992" height="737" key="SettingsEditor/0.27.1366.741@0.27.1366.741" timestamp="1603483862662" />
+    <state x="362" y="225" key="com.intellij.ide.util.TipDialog" timestamp="1602255839601">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state x="362" y="225" key="com.intellij.ide.util.TipDialog/0.27.1366.741@0.27.1366.741" timestamp="1602255839601" />
+    <state x="346" y="191" width="664" height="419" key="git4idea.merge.GitPullDialog" timestamp="1603483727399">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state x="346" y="191" width="664" height="419" key="git4idea.merge.GitPullDialog/0.27.1366.741@0.27.1366.741" timestamp="1603483727399" />
+    <state x="408" y="238" width="540" height="326" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1603485304057">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state x="408" y="238" width="540" height="326" key="vcs.readOnlyHandler.ReadOnlyStatusDialog/0.27.1366.741@0.27.1366.741" timestamp="1603485304057" />
+  </component>
+</project>

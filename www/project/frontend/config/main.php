@@ -43,7 +43,7 @@ return [
             'rules' => [
                 '' => 'site/index',
                 'alice/' => 'alice_smart_home/main/index',
-                '<controller:\w+>/<action:\w+>/' => '<controller>/<action>',
+                '<action:\w+>/' => '<controller>/<action>',
             ],
         ],
         'view' => [
