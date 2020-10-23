@@ -185,6 +185,30 @@ class SiteController extends Controller
     }
 
     /**
+     * Страница охранной системы
+     *
+     * @return string
+     */
+    public function actionSecure()
+    {
+        $sensors = ModuleSensor::find()
+            ->where(['topic' => 'margulis/temperature'])
+            ->orWhere(['topic' => 'margulis/humidity'])
+            ->asArray()
+            ->all();
+
+        $relays = ModuleRelay::find()
+            ->where(['topic' => 'margulis/lamp01'])
+            ->asArray()
+            ->all();
+
+        return $this->render('margulis', [
+            'sensors' => $sensors,
+            'relays' => $relays,
+        ]);
+    }
+
+    /**
      * Signs user up.
      *
      * @return mixed

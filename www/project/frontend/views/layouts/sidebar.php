@@ -35,7 +35,6 @@ use yii\helpers\Url;
                     ['label' => 'Стандартное', 'header' => true],
 
                     ['label' => 'Home', 'url' => ['/site/index']],
-                    ['label' => 'About', 'url' => ['/site/about']],
                     ['label' => 'Contact', 'url' => ['/site/contact']],
 
                     ['label' => 'Портированное', 'header' => true],
@@ -43,7 +42,7 @@ use yii\helpers\Url;
                     ['label' => 'Настройки', 'url' => ['#'], 'iconStyle' => 'fas fa-cogs'],
                     ['label' => 'Автополив', 'url' => ['#'], 'iconStyle' => 'fas fa-tint'],
                     ['label' => 'Пожарная система', 'url' => ['#'], 'iconStyle' => 'fab fa-free-code-camp'],
-                    ['label' => 'Охранная система', 'url' => ['#'], 'iconStyle' => 'fas fa-user-lock'],
+                    ['label' => 'Охранная система', 'url' => ['/site/secure'], 'iconStyle' => 'fas fa-user-lock'],
                     ['label' => 'Все данные', 'url' => ['/site/all-data'], 'iconStyle' => 'fas fa-folder-open'],
                     ['label' => 'Пристройка', 'url' => ['/site/margulis'], 'iconStyle' => 'fas fa-folder-open'],
                     ['label' => 'Теплица', 'url' => ['#'], 'iconStyle' => 'fas fa-folder-open'],
