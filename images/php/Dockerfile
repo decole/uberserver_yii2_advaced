@@ -92,7 +92,7 @@ RUN apt-get install -y libfreetype6-dev libjpeg62-turbo-dev libpng-dev \
 # ADD php.ini /usr/local/etc/php/conf.d/40-custom.ini
 
 # Workdir for php
-WORKDIR /var/www
+WORKDIR /var/www/project
 
 # Run container
 # The main purpose of a CMD is to provide defaults for an executing container. These defaults can include an executable,

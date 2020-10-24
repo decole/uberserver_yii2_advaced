@@ -3,7 +3,7 @@ root = $(dir $(realpath $(lastword $(MAKEFILE_LIST))))
 compose = docker-compose
 
 app = $(compose) exec -T php
-yii = $(app) php project/yii
+yii = $(app) php yii
 
 up:
 	$(compose) up -d --remove-orphans
@@ -38,10 +38,10 @@ mysql:
 	$(compose) exec mysql bash
 
 app-init:
-	$(app) php project/init --env=Development --overwrite=All
+	$(app) php init --env=Development --overwrite=All
 
 tests:
-	$(app) project/vendor/bin/codecept run
+	$(app) vendor/bin/codecept run
 
 tasks:
 	$(yii) queue/listen 5 -v --color
