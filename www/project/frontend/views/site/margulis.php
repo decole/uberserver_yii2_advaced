@@ -5,12 +5,16 @@ use frontend\components\sensor\SensorWidget;
 use yii\web\JqueryAsset;
 
 /* @var $this yii\web\View */
-$this->title = 'Все данные';
+$this->title = 'Пристройка';
 $this->params['breadcrumbs'][] = $this->title;
 
 // добавление логики работы UI для сенсоров
 $this->registerJsFile(
     '@web/js/sensor.js',
+    ['depends' => [JqueryAsset::class]]
+);
+$this->registerJsFile(
+    '@web/js/relay.js',
     ['depends' => [JqueryAsset::class]]
 );
 ?>

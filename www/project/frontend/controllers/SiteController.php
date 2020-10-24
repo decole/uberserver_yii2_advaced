@@ -191,21 +191,7 @@ class SiteController extends Controller
      */
     public function actionSecure()
     {
-        $sensors = ModuleSensor::find()
-            ->where(['topic' => 'margulis/temperature'])
-            ->orWhere(['topic' => 'margulis/humidity'])
-            ->asArray()
-            ->all();
-
-        $relays = ModuleRelay::find()
-            ->where(['topic' => 'margulis/lamp01'])
-            ->asArray()
-            ->all();
-
-        return $this->render('margulis', [
-            'sensors' => $sensors,
-            'relays' => $relays,
-        ]);
+        return $this->render('secure');
     }
 
     /**
