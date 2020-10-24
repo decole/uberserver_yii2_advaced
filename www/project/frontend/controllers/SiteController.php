@@ -195,6 +195,16 @@ class SiteController extends Controller
     }
 
     /**
+     * Страница пожарной системы
+     *
+     * @return string
+     */
+    public function actionFireSecure()
+    {
+        return $this->render('fire-secure');
+    }
+
+    /**
      * Signs user up.
      *
      * @return mixed
