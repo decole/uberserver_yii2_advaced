@@ -5,6 +5,9 @@ compose = docker-compose
 app = $(compose) exec -T php
 yii = $(app) php yii
 
+pull:
+	$(compose) pull
+
 up:
 	$(compose) up -d --remove-orphans
 
