@@ -2,6 +2,8 @@
 
 namespace frontend\controllers;
 
+use common\models\ModuleSecureSystem;
+use common\services\mqtt\DeviceService;
 use common\services\MqttService;
 use Yii;
 use yii\web\Controller;
@@ -25,12 +27,12 @@ class ApiController extends Controller
                 'only' => ['login'],
                 'rules' => [
                     [
-                        'actions' => ['mqtt-control'],
-                        'allow' => true,
-                        'roles' => ['?'],
-                    ],
-                    [
-                        'actions' => ['mqtt'],
+                        'actions' => [
+                            'mqtt-control',
+                            'mqtt',
+                            'secure-state',
+                            'secure-command',
+                        ],
                         'allow' => true,
                         'roles' => ['?'],
                     ],
@@ -40,6 +42,7 @@ class ApiController extends Controller
                 'class' => VerbFilter::class,
                 'actions' => [
                     'mqtt-control' => ['post'],
+//                    'secure-command' => ['post'],
                 ],
             ],
         ];
@@ -73,8 +76,9 @@ class ApiController extends Controller
         if ($topic) {
             return ['payload' => Yii::$app->cache->get($topic)];
         }
+
         if ($topics) {
-            return $topics;
+            return $topics; // TODO доработать метод
         }
 
         return ['not allowed'];
@@ -89,5 +93,53 @@ class ApiController extends Controller
         $service->post($topic, $payload);
 
         return ['succes' => true];
+    }
+
+    public function actionSecureState()
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $topic  = Yii::$app->request->get('topic');
+        $trigger = $this->getTrigger($topic);
+
+        return [
+            'state' => Yii::$app->cache->get($topic),
+            'trigger' => (bool)$trigger,
+        ];
+    }
+
+    public function actionSecureCommand()
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $topic  = Yii::$app->request->post('topic');
+        $payload  = Yii::$app->request->post('trigger');
+        $model = ModuleSecureSystem::findOne(['topic' => $topic]);
+
+        if ($model) {
+            $payload == 'on' ? $trigger = true : $trigger = false;
+            $model->trigger = $trigger;
+
+            if ($model->update(false)) {
+                $service = DeviceService::getInstance();
+                Yii::$app->cache->delete($service->secure_model);
+                Yii::$app->cache->delete($service->secure_list);
+
+                return [
+                    'success' => 'Команда  передана успешно',
+                ];
+            }
+
+            return [
+                'error' => 'Датчик не может сохранить свое новое состояние!',
+            ];
+        }
+
+        return [
+            'error' => 'Не могу передать команду датчику!',
+        ];
+    }
+
+    public function getTrigger($topic)
+    {
+        return (int)ModuleSecureSystem::findOne(['topic' => $topic])->trigger;
     }
 }

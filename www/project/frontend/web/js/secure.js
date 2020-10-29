@@ -7,7 +7,7 @@ $(document).ready(function() {
             let stateOff = '<i class="fas fa-male"></i>';
             $this.map(function (key, value) {
                 let topic = $(value).data('secstate-topic');
-                $.get("/api/secure/state?topic="+topic, function (data) {
+                $.get("/api/secure-state?topic="+topic, function (data) {
                     if (data['trigger'] === true) {
                         $(value).find('.secure-trigger-on').removeClass('active').addClass('active');
                         $(value).find('.secure-trigger-off').removeClass('active');
@@ -51,14 +51,14 @@ $(document).ready(function() {
         $this.map(function (key, value) {
             $(value).find('.secure-trigger-on').on('click', function () {
                 let $this = $(this).parent();
-                $.post("/api/secure/post", { topic: $this.data('secstate-topic'), trigger: "on" })
+                $.post("/api/secure-command", { topic: $this.data('secstate-topic'), trigger: "on" })
                     .done(function(data) {
                         $(value).parent().parent().find('.secure-sensor-state-text').html('Запрос обрабатывается');
                     });
             });
             $(value).find('.secure-trigger-off').on('click', function () {
                 let $this = $(this).parent();
-                $.post("/api/secure/post", { topic: $this.data('secstate-topic'), trigger: "off" })
+                $.post("/api/secure-command", { topic: $this.data('secstate-topic'), trigger: "off" })
                     .done(function(data) {
                         $(value).parent().parent().find('.secure-sensor-state-text').html('Запрос обрабатывается');
                     });
