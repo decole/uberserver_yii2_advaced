@@ -91,6 +91,10 @@ RUN apt-get install -y libfreetype6-dev libjpeg62-turbo-dev libpng-dev \
 # Add custom php.ini
 # ADD php.ini /usr/local/etc/php/conf.d/40-custom.ini
 
+# Copy app
+RUN mkdir /var/www/project
+COPY www/project/ /var/www/project/
+
 # Workdir for php
 WORKDIR /var/www/project
 

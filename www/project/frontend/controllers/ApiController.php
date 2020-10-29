@@ -69,6 +69,7 @@ class ApiController extends Controller
         Yii::$app->response->format = Response::FORMAT_JSON;
         $topic  = Yii::$app->request->get('topic');
         $topics = Yii::$app->request->get('topics');
+
         if ($topic) {
             return ['payload' => Yii::$app->cache->get($topic)];
         }

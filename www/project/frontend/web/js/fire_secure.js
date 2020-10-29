@@ -5,7 +5,7 @@ $(document).ready(function() {
             let $this = $(".fire-sensor-control[data-secstate-topic]");
             $this.map(function (key, value) {
                 let topic = $(value).data('secstate-topic');
-                $.get("/api/mqtt/get?topic="+topic, function (data) {
+                $.get("/api/mqtt?topic="+topic, function (data) {
                     if (data['payload'] == 0) {
                         $this.find('.btn-outline-success').addClass('active').show();
                         $this.find('.btn-outline-danger').removeClass('active').hide();

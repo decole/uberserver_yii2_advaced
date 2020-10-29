@@ -8,7 +8,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 // добавление логики работы UI для сенсоров
 $this->registerJsFile(
-    '@web/js/sensor.js',
+    '@web/js/fire_secure.js',
     ['depends' => [JqueryAsset::class]]
 );
 ?>
