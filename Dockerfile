@@ -23,7 +23,6 @@ RUN wget https://phar.phpunit.de/phpunit-6.5.phar && \
         chmod +x phpunit-6.5.phar && \
         mv phpunit-6.5.phar /usr/local/bin/phpunit
 
-
 # Install codecept
 RUN wget http://codeception.com/codecept.phar && \
         chmod +x codecept.phar && \
@@ -52,11 +51,6 @@ RUN pecl update-channels
 RUN pecl install Mosquitto-alpha
 RUN echo "extension=mosquitto.so" > /usr/local/etc/php/conf.d/30_mosquitto.ini
 
-# #RUN rm -rf /tmp/pear ~/.pearrc
-# RUN echo "extension=mosquitto.so" > /etc/php7/conf.d/30_mosquitto.ini
-
-# RUN echo "expose_php=0" > /usr/local/etc/php/php.ini
-# RUN echo "extension=mosquitto.so" > /usr/local/etc/php/php.ini
 RUN apt-get install -y libfreetype6-dev libjpeg62-turbo-dev libpng-dev \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install gd \
@@ -83,17 +77,15 @@ RUN apt-get install -y libfreetype6-dev libjpeg62-turbo-dev libpng-dev \
     && docker-php-ext-install bcmath \
     && docker-php-ext-install calendar \
     && docker-php-ext-install sockets
-    # \
-#    && apt-get install -y libmemcached-dev zlib1g-dev \
-#    && pecl install memcached \
-#    && docker-php-ext-enable memcached
-
-# Add custom php.ini
-# ADD php.ini /usr/local/etc/php/conf.d/40-custom.ini
 
 # Copy app
 RUN mkdir /var/www/project
 COPY www/project/ /var/www/project/
+
+# Clear
+RUN rm -rf /var/lib/apt/lists/* \
+    && rm -rf /var/cache/apk/* \
+    && docker-php-source delete
 
 # Workdir for php
 WORKDIR /var/www/project
