@@ -1,65 +1,67 @@
 #Uberserver.ru on Yii2
 ---------------------
-как поставить:
- - `docker-compose up -d`
+Как поставить:
+ - `sudo docker-compose up -d --build`
  
- Запуск первый раз:
- - `docker-compose run backend bash`
- - `composer install`
- - `php init` -> 0 = Development / 1 = Production
- - `yii migrate` yes
+ 
+Запуск первый раз:
+ - `make app-init`
+ - `make composer-install`
+ - `make migrate`
+ 
 
-запуск: 
+Запуск: 
 `make up`
 
 
-миграции запутить:
+Миграции запутить:
 `make migrate`
 
 
-стоп окружение:
-`stop`
+Создать миграцию:
+`make migrate-create <text-migrate-name>`
 
 
-потушить окружение
-`down`
+Потушить окружение:
+`make stop`
 
 
-рестартануть окружение
-`restart`
+Рестартануть окружение
+`make restart`
 
 
 composer install
-`composer-install`
+`make composer-install`
 
 
-залезть во внутрь контейнера с приложением
-`app`
+Залезть во внутрь контейнера с приложением
+`make app`
 
 
-запуск миграции
-`migrate`
+Запуск миграции
+`make migrate`
 
 
-отмена 1й миграции
-`migrate-down`
+Отмена 1й миграции
+`make migrate-down`
 
 
-залезть в контейнер с БД
-`mysql`
+Залезть в контейнер с БД
+`make mysql`
 
 
-инициирование проекта
-`app-init`
+Инициирование проекта
+`make app-init`
+`make app-init-prod`
 
 
-запуск тестов
-`tests`
+Запуск тестов
+`make tests`
 
 
-pfgecr таск
-`tasks`
+Запуск тасок
+`make tasks`
 
 
-таски остановить
-`tasks-stop`
+Запуск парсера mqtt
+`make mqtt`
