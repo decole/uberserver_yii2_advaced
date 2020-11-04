@@ -1,7 +1,6 @@
 message = @echo "\n----------------------------------------\n$(1)\n----------------------------------------\n"
 
 ARGS := $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
-#$(eval $(ARGS):;@:)
 
 root = $(dir $(realpath $(lastword $(MAKEFILE_LIST))))
 compose = docker-compose
@@ -11,6 +10,9 @@ yii = $(app) php yii
 
 pull:
 	$(compose) pull
+
+prod-up:
+	$(compose) up -d -f .prod/docker-compose.yml --remove-orphans
 
 up:
 	$(compose) up -d --remove-orphans

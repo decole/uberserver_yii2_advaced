@@ -1,50 +1,61 @@
-version: '3.2'
+version: '3.8'
 
 services:
   nginx:
     image: nginx:latest
+    restart: always
     ports:
-      - "80:80"
-      - "443:443"
+      - "82:80"
+      - "444:443"
     volumes:
       - ~/.composer-docker/cache:/root/.composer/cache:delegated
       - ./images/nginx:/etc/nginx/conf.d
       - ./www:/var/www
       - ./.dev/logs:/var/log/nginx
+    networks:
+      - overlay
 
   php:
-    build: .
+    image: 13123123/uberserver:latest
+    restart: always
     volumes:
       - ~/.composer-docker/cache:/root/.composer/cache:delegated
-      - ./www:/var/www
+    networks:
+      - overlay
 
   php-worker:
-    build: .
+    image: 13123123/uberserver:latest
+    restart: always
     volumes:
       - ~/.composer-docker/cache:/root/.composer/cache:delegated
-      - ./www:/var/www
     command: php yii mqtt/start
     depends_on:
       - php
       - mysql
       - redis
+    networks:
+      - overlay
 
   mysql:
     image: mysql:5.7
+    restart: always
     ports:
       - "3306:3306"
     volumes:
       - ~/.composer-docker/cache:/root/.composer/cache:delegated
-      - ./.dev/db:/var/lib/mysql
-      - ./.dev/backups:/var/backups
+      - mysqlData:/var/lib/mysql
+      - ./.data/backups:/var/backups
     environment:
       - MYSQL_ROOT_PASSWORD=verysecret
       - MYSQL_DATABASE=yii2advanced
       - MYSQL_USER=yii2advanced
       - MYSQL_PASSWORD=secret
+    networks:
+      - overlay
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:5.0
+    restart: always
     links:
       - mysql:db
     ports:
@@ -55,21 +66,28 @@ services:
       - MYSQL_ROOT_PASSWORD=verysecret
     depends_on:
       - mysql
+    networks:
+      - overlay
 
   redis:
     image: redis:5.0-alpine
+    restart: always
     ports:
       - "6379:6379"
     volumes:
+      - redisData:/data
       - ~/.composer-docker/cache:/root/.composer/cache:delegated
     logging:
       driver: "json-file"
       options:
         max-size: "10m"
         max-file: "3"
+    networks:
+      - overlay
 
   redis-admin:
     image: erikdubbelboer/phpredisadmin
+    restart: always
     depends_on:
       - redis
     ports:
@@ -83,3 +101,12 @@ services:
       options:
         max-size: "10m"
         max-file: "3"
+    networks:
+      - overlay
+
+volumes:
+  mysqlData:
+  redisData:
+
+networks:
+  overlay:
