@@ -12,7 +12,10 @@ pull:
 	$(compose) pull
 
 prod-up:
-	$(compose) up -d -f .prod/docker-compose.yml --remove-orphans
+	$(compose) -f docker-compose-prod.yml up -d --remove-orphans
+
+prod-stop:
+	$(compose) -f docker-compose-prod.yml stop
 
 up:
 	$(compose) up -d --remove-orphans

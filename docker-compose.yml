@@ -4,8 +4,8 @@ services:
   nginx:
     image: nginx:latest
     ports:
-      - "80:80"
-      - "443:443"
+      - "82:80"
+      - "444:443"
     volumes:
       - ~/.composer-docker/cache:/root/.composer/cache:delegated
       - ./images/nginx:/etc/nginx/conf.d
