@@ -18,6 +18,17 @@ services:
       - ~/.composer-docker/cache:/root/.composer/cache:delegated
       - ./www:/var/www
 
+  php-worker:
+    build: .
+    volumes:
+      - ~/.composer-docker/cache:/root/.composer/cache:delegated
+      - ./www:/var/www
+    command: php yii mqtt/start
+    depends_on:
+      - php
+      - mysql
+      - redis
+
   mysql:
     image: mysql:5.7
     restart: always

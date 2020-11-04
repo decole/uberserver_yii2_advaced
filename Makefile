@@ -1,4 +1,8 @@
 message = @echo "\n----------------------------------------\n$(1)\n----------------------------------------\n"
+
+ARGS := $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
+#$(eval $(ARGS):;@:)
+
 root = $(dir $(realpath $(lastword $(MAKEFILE_LIST))))
 compose = docker-compose
 
@@ -34,6 +38,16 @@ app:
 migrate:
 	$(yii) migrate
 
+migrate-create:
+ifeq ("$(ARGS)", "")
+	@echo "Missing argument with name migration\n"
+	@echo "Example: make migrate-create create_some_table"
+else
+	$(call message,"Executing create migration on database")
+	$(yii) migrate/create $(ARGS)
+	$(call message,"Done!")
+endif
+
 migrate-down:
 	$(yii) migrate/down
 
@@ -42,6 +56,9 @@ mysql:
 
 app-init:
 	$(app) php init --env=Development --overwrite=All
+
+app-init-prod:
+	$(app) php init --env=Production --overwrite=All
 
 tests:
 	$(app) vendor/bin/codecept run
