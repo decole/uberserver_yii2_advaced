@@ -36,8 +36,11 @@ return [
         ],
     ],
     'modules' => [
-        'alice_smart_home' => [
+        'alice-smart-home' => [
             'class' => 'common\modules\yandexSmartHome\Module',
-        ]
+        ],
+        'alice-skill' => [
+            'class' => 'common\modules\yandexSkill\Module',
+        ],
     ],
 ];

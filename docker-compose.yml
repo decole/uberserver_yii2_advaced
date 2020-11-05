@@ -11,6 +11,8 @@ services:
       - ./images/nginx:/etc/nginx/conf.d
       - ./www:/var/www
       - ./.dev/logs:/var/log/nginx
+    depends_on:
+      - php
 
   php:
     build: .

@@ -1,7 +1,7 @@
 <?php
 return [
     '' => 'site/index',
-    'alice/' => 'alice_smart_home/main/admin',
+    'alice/' => 'alice-smart-home/main/admin',
     '<controller:\w+>/<action:\w+>/' => '<controller>/<action>',
 
 ];

@@ -42,7 +42,8 @@ return [
             'showScriptName' => false,
             'rules' => [
                 '' => 'site/index',
-                'alice/' => 'alice_smart_home/main/index',
+                'api/alice' => 'alice-skill/main/index',
+                'alice/' => 'alice-smart-home/main/index',
                 '<action:\w+>/' => '<controller>/<action>',
             ],
         ],
