@@ -2,6 +2,8 @@
 
 namespace common\models;
 
+use common\services\mqtt\DeviceService;
+use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
 
@@ -113,5 +115,24 @@ class ModuleSecureSystem extends Model
     public function getTypes()
     {
         return $this->hasOne(ModuleType::class, ['id' => 'type']);
+    }
+
+    public function afterSave($insert, $changedAttributes)
+    {
+        parent::afterSave($insert, $changedAttributes);
+        self::updateCache();
+    }
+
+    public function afterDelete()
+    {
+        parent::afterDelete();
+        self::updateCache();
+    }
+
+    private static function updateCache(): void
+    {
+        $service = DeviceService::getInstance();
+        Yii::$app->cache->delete($service->secure_model);
+        Yii::$app->cache->delete($service->secure_list);
     }
 }

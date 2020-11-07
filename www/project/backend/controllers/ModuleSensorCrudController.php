@@ -2,13 +2,12 @@
 
 namespace backend\controllers;
 
-use common\services\mqtt\DeviceService;
 use common\models\ModuleSensor;
 use common\models\ModuleSensorSearch;
+use Yii;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
-use Yii;
 
 /**
  * ModuleSensorCRUDController implements the CRUD actions for ModuleSensor model.
@@ -68,8 +67,6 @@ class ModuleSensorCrudController extends Controller
         $model = new ModuleSensor();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            self::updateCache();
-
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -90,8 +87,6 @@ class ModuleSensorCrudController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            self::updateCache();
-
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -110,7 +105,6 @@ class ModuleSensorCrudController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-        self::updateCache();
 
         return $this->redirect(['index']);
     }
@@ -129,15 +123,5 @@ class ModuleSensorCrudController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
-    }
-
-    /**
-     * Обновление кэша для MqttService
-     */
-    private static function updateCache(): void
-    {
-        $service = DeviceService::getInstance();
-        Yii::$app->cache->delete($service->sensor_model);
-        Yii::$app->cache->delete($service->sensor_list);
     }
 }

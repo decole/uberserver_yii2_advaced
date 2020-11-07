@@ -30,7 +30,7 @@ class WeatherDialog implements AliceInterface
     public function verb($message)
     {
         $weather    = (new WeatherService())->getAcuweather();
-        $temp       = $weather['temperature'];
+        $temp       = (int)$weather['temperature'];
         $spec       = $weather['spec'];
         $this->text = 'Температура: ' . $temp . ' градусов, ' . $spec;
     }

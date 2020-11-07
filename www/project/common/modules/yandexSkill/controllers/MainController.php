@@ -64,7 +64,7 @@ class MainController extends Controller
         $this->skill_id = null;
         $this->user_id = null;
         $this->new = false;
-        $this->end_session = true;
+        $this->end_session = false;
         $this->validUser  = false;
         $this->isAdmin = false;
     }

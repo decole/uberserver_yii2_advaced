@@ -2,9 +2,6 @@
 
 namespace common\modules\yandexSkill\dialogs;
 
-//use App\Schedule;
-//use DateTime;
-
 class DiagnosticDialog implements AliceInterface
 {
     public function __construct()
@@ -19,6 +16,7 @@ class DiagnosticDialog implements AliceInterface
     public function process($message)
     {
         // TODO сделать самодиагностику
+        //      применить систему тасок. пока не реализовано
 //        /** @var Schedule $model */
 //        $model = Schedule::find(12);
 //        $lastRunDate = new DateTime('NOW');
@@ -30,6 +28,5 @@ class DiagnosticDialog implements AliceInterface
 
     public function verb($message)
     {
-        // TODO: Implement verb() method.
     }
 }

@@ -2,9 +2,10 @@
 
 namespace common\models;
 
+use common\services\mqtt\DeviceService;
+use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
-use Yii;
 
 /**
  * This is the model class for table "module_type".
@@ -13,8 +14,6 @@ use Yii;
  * @property string $name
  * @property int $created_at
  * @property int $updated_at
- *
- * @property Module[] $modules
  */
 class ModuleType extends ActiveRecord
 {
@@ -64,5 +63,37 @@ class ModuleType extends ActiveRecord
             'created_at' => 'Создано',
             'updated_at' => 'Обновлено',
         ];
+    }
+
+    public function afterSave($insert, $changedAttributes)
+    {
+        parent::afterSave($insert, $changedAttributes);
+        self::updateCache();
+    }
+
+    public function afterDelete()
+    {
+        parent::afterDelete();
+        self::updateCache();
+    }
+
+    private static function updateCache(): void
+    {
+        $service = DeviceService::getInstance();
+
+        Yii::$app->cache->delete($service->sensor_model);
+        Yii::$app->cache->delete($service->sensor_list);
+
+        Yii::$app->cache->delete($service->relay_model);
+        Yii::$app->cache->delete($service->relay_list);
+
+        Yii::$app->cache->delete($service->leakage_model);
+        Yii::$app->cache->delete($service->leakage_list);
+
+        Yii::$app->cache->delete($service->secure_model);
+        Yii::$app->cache->delete($service->secure_list);
+
+        Yii::$app->cache->delete($service->fireSecure_model);
+        Yii::$app->cache->delete($service->fireSecure_list);
     }
 }

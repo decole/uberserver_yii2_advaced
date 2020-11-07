@@ -1,5 +1,5 @@
 <?php
-namespace common\modules\yandexSmartHome\commands;
+namespace common\modules\yandexSkill\commands;
 
 use yii\console\Controller;
 

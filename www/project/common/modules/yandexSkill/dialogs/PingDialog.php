@@ -20,6 +20,5 @@ class PingDialog implements AliceInterface
 
      public function verb($message)
     {
-        // TODO: Implement verb() method.
     }
 }

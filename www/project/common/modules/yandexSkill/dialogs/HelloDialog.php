@@ -15,7 +15,7 @@ class HelloDialog implements AliceInterface
 
     public function process($message)
     {
-        return 'Привет, это частный навык';
+        return 'Привет, это частный навык Умного дома';
     }
 
     public function verb($message)

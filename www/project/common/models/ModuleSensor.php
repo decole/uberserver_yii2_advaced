@@ -2,6 +2,8 @@
 
 namespace common\models;
 
+use common\services\mqtt\DeviceService;
+use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\helpers\ArrayHelper;
@@ -107,5 +109,24 @@ class ModuleSensor extends ActiveRecord
     public function getListTypes()
     {
         return ArrayHelper::map(ModuleType::find()->asArray()->all(), 'id', 'name');
+    }
+
+    public function afterSave($insert, $changedAttributes)
+    {
+        parent::afterSave($insert, $changedAttributes);
+        self::updateCache();
+    }
+
+    public function afterDelete()
+    {
+        parent::afterDelete();
+        self::updateCache();
+    }
+
+    private static function updateCache(): void
+    {
+        $service = DeviceService::getInstance();
+        Yii::$app->cache->delete($service->sensor_model);
+        Yii::$app->cache->delete($service->sensor_list);
     }
 }

@@ -3,12 +3,12 @@
 namespace backend\controllers;
 
 //use backend\jobs\WriteJob;
-use Yii;
 use common\models\DecoleWeight;
 use common\models\DecoleWeightSearch;
+use Yii;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * DecoleWeightCrudController implements the CRUD actions for DecoleWeight model.
@@ -41,13 +41,6 @@ class DecoleWeightCrudController extends Controller
 //            'url' => 'https://www.yiiframework.com/image/logo.svg',
 //            'file' => Yii::$app->basePath . '/runtime/image.svg',
 //        ]));
-
-//        $module = Yii::$app->getModule('telegram');
-////        echo '<pre>';
-////        var_dump($module);
-////        echo '</pre>';
-////        exit();
-//        $strapy = $module->params['strapy'];
 
         $searchModel = new DecoleWeightSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);

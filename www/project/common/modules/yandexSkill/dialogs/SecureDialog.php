@@ -2,8 +2,7 @@
 
 namespace common\modules\yandexSkill\dialogs;
 
-//use App\MqttSecure;
-//use App\Services\DeviceService;
+use common\models\ModuleSecureSystem;
 
 class SecureDialog implements AliceInterface
 {
@@ -60,13 +59,8 @@ class SecureDialog implements AliceInterface
 
     private function changeStateTrigger($topic, bool $state)
     {
-        // TODO make logic
-//        $model = MqttSecure::where('topic', $topic)->first();
-//        $model->trigger = $state;
-//        if ( $model->save() ) {
-//            (new DeviceService)->refresh();
-//            $model::logChangeTrigger($model->topic, $model->trigger);
-//        }
+        $model = ModuleSecureSystem::find()->where(['topic' => $topic])->limit(1)->one();
+        $model->trigger = (int)$state;
+        $model->save();
     }
-
 }

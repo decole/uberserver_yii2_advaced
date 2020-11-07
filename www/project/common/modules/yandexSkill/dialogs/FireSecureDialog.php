@@ -2,7 +2,8 @@
 
 namespace common\modules\yandexSkill\dialogs;
 
-//use common\services\MqttService;
+use common\models\ModuleFireSystem;
+use Yii;
 
 class FireSecureDialog implements AliceInterface
 {
@@ -17,15 +18,19 @@ class FireSecureDialog implements AliceInterface
 
     public function process($message)
     {
-        // TODO make logic
-//        $status = MqttService::getCacheMqtt('home/firesensor/fire_state');
-        $status = 0;
-        $status = ($status === '0') ? 'норма' : 'пожар';
+        $state = 0;
+        $topics = ModuleFireSystem::find()->asArray()->all();
+
+        foreach ($topics as $topic) {
+            $state += (int)Yii::$app->cache->get($topic['topic']);
+        }
+
+        $status = ((int)$state === 0) ? 'норма' : 'пожар';
+
         return 'Система пожарной безопасности в статусе - ' . $status;
     }
 
     public function verb($message)
     {
-        // TODO: Implement verb() method.
     }
 }

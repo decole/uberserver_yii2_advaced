@@ -21,12 +21,10 @@ class StatusDialog implements AliceInterface
 
     public function process($message)
     {
-        // TODO make code
         return 'Общий статус - пока неизвестен. Не разработан алгоритм диагностики.';
     }
 
     public function verb($message)
     {
-        // TODO: Implement verb() method.
     }
 }

@@ -2,13 +2,12 @@
 
 namespace backend\controllers;
 
-use common\services\mqtt\DeviceService;
-use Yii;
 use common\models\Location;
 use common\models\LocationSearch;
+use Yii;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * LocationCrudController implements the CRUD actions for Location model.
@@ -68,8 +67,6 @@ class LocationCrudController extends Controller
         $model = new Location();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            self::updateCache();
-
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -90,8 +87,6 @@ class LocationCrudController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            self::updateCache();
-
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -110,7 +105,6 @@ class LocationCrudController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-        self::updateCache();
 
         return $this->redirect(['index']);
     }
@@ -129,28 +123,5 @@ class LocationCrudController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
-    }
-
-    /**
-     * Обновление кэша для MqttService
-     */
-    private static function updateCache(): void
-    {
-        $service = DeviceService::getInstance();
-
-        Yii::$app->cache->delete($service->sensor_model);
-        Yii::$app->cache->delete($service->sensor_list);
-
-        Yii::$app->cache->delete($service->relay_model);
-        Yii::$app->cache->delete($service->relay_list);
-
-        Yii::$app->cache->delete($service->leakage_model);
-        Yii::$app->cache->delete($service->leakage_list);
-
-        Yii::$app->cache->delete($service->secure_model);
-        Yii::$app->cache->delete($service->secure_list);
-
-        Yii::$app->cache->delete($service->fireSecure_model);
-        Yii::$app->cache->delete($service->fireSecure_list);
     }
 }

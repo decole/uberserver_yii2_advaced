@@ -2,13 +2,12 @@
 
 namespace backend\controllers;
 
-use common\services\mqtt\DeviceService;
 use common\models\ModuleRelay;
 use common\models\ModuleRelaySearch;
+use Yii;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
-use Yii;
 
 /**
  * ModuleRelayCrudController implements the CRUD actions for ModuleRelay model.
@@ -68,8 +67,6 @@ class ModuleRelayCrudController extends Controller
         $model = new ModuleRelay();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            self::updateCache();
-
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -90,8 +87,6 @@ class ModuleRelayCrudController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            self::updateCache();
-
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -110,7 +105,6 @@ class ModuleRelayCrudController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-        self::updateCache();
 
         return $this->redirect(['index']);
     }
@@ -129,15 +123,5 @@ class ModuleRelayCrudController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
-    }
-
-    /**
-     * Обновление кэша для MqttService
-     */
-    private static function updateCache(): void
-    {
-        $service = DeviceService::getInstance();
-        Yii::$app->cache->delete($service->relay_model);
-        Yii::$app->cache->delete($service->relay_list);
     }
 }

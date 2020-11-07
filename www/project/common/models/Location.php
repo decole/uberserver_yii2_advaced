@@ -2,8 +2,9 @@
 
 namespace common\models;
 
-use yii\db\ActiveRecord;
+use common\services\mqtt\DeviceService;
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "location".
@@ -42,5 +43,37 @@ class Location extends ActiveRecord
             'id' => 'ID',
             'location' => 'Локация',
         ];
+    }
+
+    public function afterSave($insert, $changedAttributes)
+    {
+        parent::afterSave($insert, $changedAttributes);
+        self::updateCache();
+    }
+
+    public function afterDelete()
+    {
+        parent::afterDelete();
+        self::updateCache();
+    }
+
+    private static function updateCache(): void
+    {
+        $service = DeviceService::getInstance();
+
+        Yii::$app->cache->delete($service->sensor_model);
+        Yii::$app->cache->delete($service->sensor_list);
+
+        Yii::$app->cache->delete($service->relay_model);
+        Yii::$app->cache->delete($service->relay_list);
+
+        Yii::$app->cache->delete($service->leakage_model);
+        Yii::$app->cache->delete($service->leakage_list);
+
+        Yii::$app->cache->delete($service->secure_model);
+        Yii::$app->cache->delete($service->secure_list);
+
+        Yii::$app->cache->delete($service->fireSecure_model);
+        Yii::$app->cache->delete($service->fireSecure_list);
     }
 }
