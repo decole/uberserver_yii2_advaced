@@ -11,21 +11,11 @@
 namespace Longman\TelegramBot\Commands\UserCommands;
 
 use common\services\MqttService;
-use Exception;
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\RequestException;
 use Longman\TelegramBot\Commands\UserCommand;
 use Longman\TelegramBot\Entities\ServerResponse;
 use Longman\TelegramBot\Exception\TelegramException;
 use Longman\TelegramBot\Request;
-use Longman\TelegramBot\TelegramLog;
 
-/**
- * User "/weather" command
- *
- * Get weather info for any place.
- * This command requires an API key to be set via command config.
- */
 class LOffCommand extends UserCommand
 {
     /**
@@ -59,8 +49,9 @@ class LOffCommand extends UserCommand
         $message      = $this->getMessage();
         $chat_id      = $message->getChat()->getId();
 
-        $service = MqttService::getInstance();
+        $service = new MqttService; //::getInstance();
         $service->post('margulis/lamp01', 'off');
+        $service->disconnect();
 
         $data = [
             'chat_id' => $chat_id,

@@ -118,12 +118,14 @@ final class MqttService
     /**
      * Sending data to topic on mqtt protocol
      *
-     * @param $topic $data
+     * @param $topic
+     * @param $data
      * @return mixed
      */
     public function post($topic, $data)
     {
         $this->client->publish($topic, $data, 1, 0);
+
         return $data;
     }
 
