@@ -2,20 +2,40 @@
 
 namespace common\modules\yandexSmartHome\controllers;
 
+use common\modules\yandexSmartHome\actions\DeviceAction;
+use common\modules\yandexSmartHome\actions\DeviceQueryAction;
+use common\modules\yandexSmartHome\actions\DeviceQueryActorAction;
+use common\modules\yandexSmartHome\actions\IndexAction;
+use common\modules\yandexSmartHome\actions\UnlinkAction;
 use yii\web\Controller;
 
-/**
- * Default controller for the `yandex_smart_home` module
- */
 class MainController extends Controller
 {
-    /**
-     * Renders the index view for the module
-     * @return string
-     */
-    public function actionIndex()
+    public function __construct($id, $module, $config = [])
     {
-        return $this->render('index');
+        $this->enableCsrfValidation = false;
+        parent::__construct($id, $module, $config);
+    }
+
+    public function actions(): array
+    {
+        return [
+            'index' => [
+                'class' => IndexAction::class,
+            ],
+            'unlink' => [
+                'class' => UnlinkAction::class,
+            ],
+            'devices' => [
+                'class' => DeviceAction::class,
+            ],
+            'devices-query' => [
+                'class' => DeviceQueryAction::class,
+            ],
+            'devices-action' => [
+                'class' => DeviceQueryActorAction::class,
+            ],
+        ];
     }
 
     public function actionAdmin()

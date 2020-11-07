@@ -40,12 +40,7 @@ return [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'rules' => [
-                '' => 'site/index',
-                'api/alice' => 'alice-skill/main/index',
-                'alice/' => 'alice-smart-home/main/index',
-                '<action:\w+>/' => '<controller>/<action>',
-            ],
+            'rules' => require_once('rules.php'),
         ],
         'view' => [
             'theme' => [
