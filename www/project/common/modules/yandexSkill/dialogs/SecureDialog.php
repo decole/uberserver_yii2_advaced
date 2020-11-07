@@ -2,7 +2,7 @@
 
 namespace common\modules\yandexSkill\dialogs;
 
-use common\models\ModuleSecureSystem;
+use common\services\SecureService;
 
 class SecureDialog implements AliceInterface
 {
@@ -59,8 +59,8 @@ class SecureDialog implements AliceInterface
 
     private function changeStateTrigger($topic, bool $state)
     {
-        $model = ModuleSecureSystem::find()->where(['topic' => $topic])->limit(1)->one();
-        $model->trigger = (int)$state;
-        $model->save();
+        $service = SecureService::getInstance();
+        $payload = ((bool)$state) ? 'on' : 'off';
+        $service->triggerChange($topic, $payload);
     }
 }

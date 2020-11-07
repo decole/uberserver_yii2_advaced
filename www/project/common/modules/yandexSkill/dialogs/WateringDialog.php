@@ -45,13 +45,15 @@ class WateringDialog implements AliceInterface
 
     private function turnOn()
     {
-        (new MqttService())->post('water/major', '1');
+        $service = MqttService::getInstance();
+        $service->post('water/major', '1');
         $this->text = 'Шланг включен';
     }
 
     private function turnOff()
     {
-        (new MqttService())->post('water/major', '0');
+        $service = MqttService::getInstance();
+        $service->post('water/major', '0');
         $this->text = 'Шланг выключен';
     }
 }

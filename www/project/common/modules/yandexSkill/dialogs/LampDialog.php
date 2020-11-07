@@ -45,13 +45,15 @@ class LampDialog implements AliceInterface
 
     private function turnOn()
     {
-        (new MqttService())->post('margulis/lamp01', 'on');
+        $service = MqttService::getInstance();
+        $service->post('margulis/lamp01', 'on');
         $this->text = 'Лампа включена';
     }
 
     private function turnOff()
     {
-        (new MqttService())->post('margulis/lamp01', 'off');
+        $service = MqttService::getInstance();
+        $service->post('margulis/lamp01', 'off');
         $this->text = 'Лампа выключена';
     }
 }

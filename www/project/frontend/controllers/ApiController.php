@@ -3,12 +3,12 @@
 namespace frontend\controllers;
 
 use common\models\ModuleSecureSystem;
-use common\services\mqtt\DeviceService;
 use common\services\MqttService;
+use common\services\SecureService;
 use Yii;
-use yii\web\Controller;
-use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
+use yii\web\Controller;
 use yii\web\Response;
 
 /**
@@ -112,24 +112,12 @@ class ApiController extends Controller
         Yii::$app->response->format = Response::FORMAT_JSON;
         $topic  = Yii::$app->request->post('topic');
         $payload  = Yii::$app->request->post('trigger');
-        $model = ModuleSecureSystem::findOne(['topic' => $topic]);
 
-        if ($model) {
-            $payload == 'on' ? $trigger = true : $trigger = false;
-            $model->trigger = $trigger;
+        $service = SecureService::getInstance();
 
-            if ($model->update(false)) {
-                $service = DeviceService::getInstance();
-                Yii::$app->cache->delete($service->secure_model);
-                Yii::$app->cache->delete($service->secure_list);
-
-                return [
-                    'success' => 'Команда  передана успешно',
-                ];
-            }
-
+        if ($service->triggerChange($topic, $payload)) {
             return [
-                'error' => 'Датчик не может сохранить свое новое состояние!',
+                'success' => 'Команда  передана успешно',
             ];
         }
 
