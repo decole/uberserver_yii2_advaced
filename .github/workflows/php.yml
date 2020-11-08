@@ -33,7 +33,7 @@ jobs:
       run: cd www/project && composer install --prefer-dist --no-progress --no-suggest
 
     - name: Init App
-      run: make init
+      run: make app-init
 
     - name: Codeception Action
       working-directory: www/project
