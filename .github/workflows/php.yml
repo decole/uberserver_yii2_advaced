@@ -37,6 +37,10 @@ jobs:
 
     # - name: Run test suite
     #   run: composer run-script test
+    - name: Init App
+      working-directory: www/project
+      run: php init --env=Development --overwrite=All
+
     - name: Codeception Action
       working-directory: www/project
       # You may pin to the exact commit or the version.
