@@ -25,8 +25,5 @@ class WeatherController extends Controller
         $model->temperature = $temp;
         $model->spec        = $weather_spec;
         $model->save();
-        echo 'ok' . PHP_EOL;
-
-        exit();
     }
 }
