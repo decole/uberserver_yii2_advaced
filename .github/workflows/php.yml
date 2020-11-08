@@ -33,11 +33,8 @@ jobs:
       run: cd www/project && composer install --prefer-dist --no-progress --no-suggest
 
     - name: Init App
-      run: make app-init
-
-    - name: Codeception Action
       working-directory: www/project
-      run: make test
+      run: php init --env=Development --overwrite=All
 
 #     - name: Codeception Action
 #       working-directory: www/project
