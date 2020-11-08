@@ -119,9 +119,7 @@ class ScheduleController extends Controller
     protected function _runCommand($single) {
         if( !$single->next_run || $single->next_run == null ) {
             $this->log('Next run date for command not found. Skipping.');
-            sleep(1);
-            return true;
-//            return false;
+            return false;
         }
         $nextRunDate = new DateTime( $single->next_run );
         $currentDate = new DateTime('NOW');
@@ -150,10 +148,7 @@ class ScheduleController extends Controller
             return true;
         } else {
             $this->log('Next run date for command is after current date. Skipping.');
-//            return false;
-            sleep(1);
-            return true;
-
+            return false;
         }
     }
 
