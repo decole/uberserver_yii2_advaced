@@ -32,20 +32,18 @@ jobs:
       if: steps.composer-cache.outputs.cache-hit != 'true'
       run: cd www/project && composer install --prefer-dist --no-progress --no-suggest
 
-    # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
-    # Docs: https://getcomposer.org/doc/articles/scripts.md
-
-    # - name: Run test suite
-    #   run: composer run-script test
     - name: Init App
-      working-directory: www/project
-      run: php init --env=Development --overwrite=All
+      run: make init
 
     - name: Codeception Action
       working-directory: www/project
-      # You may pin to the exact commit or the version.
-      # uses: joelwmale/codeception-action@104032c6a73aa7f1ad17dc81a9eebf7d122d76b6
-      run: vendor/bin/codecept run
+      run: make test
+
+#     - name: Codeception Action
+#       working-directory: www/project
+#       # You may pin to the exact commit or the version.
+#       # uses: joelwmale/codeception-action@104032c6a73aa7f1ad17dc81a9eebf7d122d76b6
+#       run: vendor/bin/codecept run
     
 
 
