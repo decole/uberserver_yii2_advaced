@@ -1,4 +1,4 @@
-version: '3.2'
+version: "3.2"
 
 services:
   nginx:
@@ -27,7 +27,7 @@ services:
     build: 13123123/uberserver:latest
     volumes:
       - ./images/worker/supervisor/config:/etc/supervisor/conf.d
-      - ./.dev/logs:/var/log/supervisor
+#      - ./.dev/logs:/var/log/supervisor
       - ./www:/var/www
     command: /usr/bin/supervisord
     depends_on:
