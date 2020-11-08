@@ -15,7 +15,7 @@ services:
       - php
 
   php:
-    build: .
+    build: 13123123/uberserver:latest
     volumes:
       - ~/.composer-docker/cache:/root/.composer/cache:delegated
       - ./www:/var/www
@@ -23,29 +23,8 @@ services:
       - mysql
       - redis
 
-#  php-worker:
-#    build: .
-#    volumes:
-#      - ~/.composer-docker/cache:/root/.composer/cache:delegated
-#      - ./www:/var/www
-#    command: php yii mqtt/start
-#    depends_on:
-#      - php
-#      - mysql
-#      - redis
-
-#  telegram-bot:
-#    image: 13123123/uberserver:latest
-#    volumes:
-#      - ~/.composer-docker/cache:/root/.composer/cache:delegated
-#      - ./www:/var/www
-#    command: php yii telegram/bot
-#    depends_on:
-#      - php
-#      - mysql
-
   supervisor:
-    build: .
+    build: 13123123/uberserver:latest
     volumes:
       - ./images/worker/supervisor/config:/etc/supervisor/conf.d
       - ./.dev/logs:/var/log/supervisor
