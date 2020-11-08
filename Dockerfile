@@ -78,6 +78,13 @@ RUN apt-get install -y libfreetype6-dev libjpeg62-turbo-dev libpng-dev \
     && docker-php-ext-install calendar \
     && docker-php-ext-install sockets
 
+# install supervisor
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends \
+    supervisor
+COPY images/worker/supervisor/supervisord.conf /etc/supervisor
+
+
 # Copy app
 RUN mkdir /var/www/project
 COPY www/project/ /var/www/project/

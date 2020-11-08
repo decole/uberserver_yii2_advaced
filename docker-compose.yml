@@ -23,26 +23,38 @@ services:
       - mysql
       - redis
 
-  php-worker:
+#  php-worker:
+#    build: .
+#    volumes:
+#      - ~/.composer-docker/cache:/root/.composer/cache:delegated
+#      - ./www:/var/www
+#    command: php yii mqtt/start
+#    depends_on:
+#      - php
+#      - mysql
+#      - redis
+
+#  telegram-bot:
+#    image: 13123123/uberserver:latest
+#    volumes:
+#      - ~/.composer-docker/cache:/root/.composer/cache:delegated
+#      - ./www:/var/www
+#    command: php yii telegram/bot
+#    depends_on:
+#      - php
+#      - mysql
+
+  supervisor:
     build: .
     volumes:
-      - ~/.composer-docker/cache:/root/.composer/cache:delegated
+      - ./images/worker/supervisor/config:/etc/supervisor/conf.d
+      - ./.dev/logs:/var/log/supervisor
       - ./www:/var/www
-    command: php yii mqtt/start
+    command: /usr/bin/supervisord
     depends_on:
       - php
       - mysql
       - redis
-
-  telegram-bot:
-    image: 13123123/uberserver:latest
-    volumes:
-      - ~/.composer-docker/cache:/root/.composer/cache:delegated
-      - ./www:/var/www
-    command: php yii telegram/bot
-    depends_on:
-      - php
-      - mysql
 
   mysql:
     image: mysql:5.7
