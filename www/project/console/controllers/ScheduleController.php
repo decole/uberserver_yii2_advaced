@@ -6,15 +6,15 @@
  */
 namespace console\controllers;
 
+use common\models\Schedule;
 use DateTime;
+use Yii;
+use yii\base\ErrorException;
+use yii\console\Application as ConsoleApplication;
 use yii\console\Controller;
 use yii\console\Exception;
-use yii\helpers\Console;
 use yii\console\Request;
-use yii\console\Application as ConsoleApplication;
-use yii\base\ErrorException;
-use common\models\Schedule;
-use Yii;
+use yii\helpers\Console;
 
 /**
  * Manages and runs scheduled tasks.
@@ -119,7 +119,9 @@ class ScheduleController extends Controller
     protected function _runCommand($single) {
         if( !$single->next_run || $single->next_run == null ) {
             $this->log('Next run date for command not found. Skipping.');
-            return false;
+            sleep(1);
+            return true;
+//            return false;
         }
         $nextRunDate = new DateTime( $single->next_run );
         $currentDate = new DateTime('NOW');
@@ -148,7 +150,10 @@ class ScheduleController extends Controller
             return true;
         } else {
             $this->log('Next run date for command is after current date. Skipping.');
-            return false;
+//            return false;
+            sleep(1);
+            return true;
+
         }
     }
 

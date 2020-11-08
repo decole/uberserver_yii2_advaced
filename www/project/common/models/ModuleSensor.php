@@ -28,17 +28,11 @@ use yii\helpers\ArrayHelper;
  */
 class ModuleSensor extends ActiveRecord
 {
-    /**
-     * {@inheritdoc}
-     */
     public static function tableName()
     {
         return 'module_sensor';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function behaviors()
     {
         return [
@@ -51,9 +45,6 @@ class ModuleSensor extends ActiveRecord
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function rules()
     {
         return [

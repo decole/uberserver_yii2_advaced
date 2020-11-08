@@ -3,6 +3,7 @@
 namespace console\controllers;
 
 use backend\jobs\EmailNotifyJob;
+use backend\jobs\TelegramNotifyJob;
 use DateTime;
 use Yii;
 use yii\console\Controller;
@@ -61,6 +62,14 @@ class TestController extends Controller
     {
         echo 'add job to send email' . PHP_EOL;
         Yii::$app->queue->push(new EmailNotifyJob([
+            'message' => 'test message from site uberserver.ru',
+        ]));
+    }
+
+    public function actionTelegram()
+    {
+        echo 'add job to send telegram message' . PHP_EOL;
+        Yii::$app->queue->push(new TelegramNotifyJob([
             'message' => 'test message from site uberserver.ru',
         ]));
     }

@@ -49,7 +49,7 @@ class LOffCommand extends UserCommand
         $message      = $this->getMessage();
         $chat_id      = $message->getChat()->getId();
 
-        $service = new MqttService; //::getInstance();
+        $service = new MqttService;
         $service->post('margulis/lamp01', 'off');
         $service->disconnect();
 
