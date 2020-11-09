@@ -15,17 +15,11 @@ use yii\db\ActiveRecord;
  */
 class DecoleWeight extends ActiveRecord
 {
-    /**
-     * {@inheritdoc}
-     */
     public static function tableName()
     {
         return 'decole_weight';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function rules()
     {
         return [
@@ -34,9 +28,6 @@ class DecoleWeight extends ActiveRecord
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function behaviors()
     {
         return [
@@ -49,9 +40,6 @@ class DecoleWeight extends ActiveRecord
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function attributeLabels()
     {
         return [

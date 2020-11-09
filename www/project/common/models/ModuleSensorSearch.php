@@ -21,9 +21,6 @@ class ModuleSensorSearch extends ModuleSensor
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function scenarios()
     {
         // bypass scenarios() implementation in the parent class

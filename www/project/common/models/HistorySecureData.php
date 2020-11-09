@@ -15,17 +15,11 @@ use yii\db\ActiveRecord;
  */
 class HistorySecureData extends ActiveRecord
 {
-    /**
-     * {@inheritdoc}
-     */
     public static function tableName()
     {
         return 'history_secure_data';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function rules()
     {
         return [
@@ -35,9 +29,6 @@ class HistorySecureData extends ActiveRecord
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function behaviors()
     {
         return [
@@ -50,9 +41,6 @@ class HistorySecureData extends ActiveRecord
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function attributeLabels()
     {
         return [

@@ -4,10 +4,10 @@ namespace common\models;
 
 use DateInterval;
 use DateTime;
-use phpDocumentor\Reflection\Types\Self_;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\db\Expression;
+
 /**
  * This is the model class for table "shedule".
  *
@@ -21,17 +21,11 @@ use yii\db\Expression;
  */
 class Schedule extends ActiveRecord
 {
-    /**
-     * {@inheritdoc}
-     */
     public static function tableName()
     {
         return 'shedule';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function behaviors()
     {
         return [
@@ -44,9 +38,6 @@ class Schedule extends ActiveRecord
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function rules()
     {
         return [
@@ -57,9 +48,6 @@ class Schedule extends ActiveRecord
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function attributeLabels()
     {
         return [
@@ -73,17 +61,11 @@ class Schedule extends ActiveRecord
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function begin() {
         $this->next_run = null;
         return $this->save();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function end() {
         $lastRunDate = new DateTime('NOW');
         $this->last_run = $lastRunDate->format('Y-m-d H:i:s');
@@ -95,9 +77,6 @@ class Schedule extends ActiveRecord
         return $this->save();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public static function add($command, $interval = null, $nextRun = null) {
         $model = new self;
         $model->command = $command;

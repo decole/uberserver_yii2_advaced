@@ -30,17 +30,11 @@ use yii\db\ActiveQuery;
  */
 class ModuleFireSystem extends Model
 {
-    /**
-     * {@inheritdoc}
-     */
     public static function tableName()
     {
         return 'module_fire_system';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function behaviors()
     {
         return [
@@ -53,9 +47,6 @@ class ModuleFireSystem extends Model
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function rules()
     {
         return [
@@ -70,9 +61,6 @@ class ModuleFireSystem extends Model
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function attributeLabels()
     {
         return [

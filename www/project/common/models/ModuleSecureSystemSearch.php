@@ -4,16 +4,12 @@ namespace common\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\ModuleSecureSystem;
 
 /**
  * ModuleSecureSystemSearch represents the model behind the search form of `common\models\ModuleSecureSystem`.
  */
 class ModuleSecureSystemSearch extends ModuleSecureSystem
 {
-    /**
-     * {@inheritdoc}
-     */
     public function rules()
     {
         return [

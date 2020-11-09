@@ -32,17 +32,11 @@ use yii\helpers\ArrayHelper;
  */
 class ModuleLeakage extends ActiveRecord
 {
-    /**
-     * {@inheritdoc}
-     */
     public static function tableName()
     {
         return 'module_leakage';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function behaviors()
     {
         return [
@@ -55,9 +49,6 @@ class ModuleLeakage extends ActiveRecord
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function rules()
     {
         return [
@@ -72,9 +63,6 @@ class ModuleLeakage extends ActiveRecord
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function attributeLabels()
     {
         return [

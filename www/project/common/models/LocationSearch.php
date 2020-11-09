@@ -4,16 +4,12 @@ namespace common\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Location;
 
 /**
  * LocationSearch represents the model behind the search form of `common\models\Location`.
  */
 class LocationSearch extends Location
 {
-    /**
-     * {@inheritdoc}
-     */
     public function rules()
     {
         return [
@@ -22,9 +18,6 @@ class LocationSearch extends Location
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function scenarios()
     {
         // bypass scenarios() implementation in the parent class

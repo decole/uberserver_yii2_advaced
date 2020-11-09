@@ -32,17 +32,11 @@ use yii\db\ActiveQuery;
  */
 class ModuleSecureSystem extends Model
 {
-    /**
-     * {@inheritdoc}
-     */
     public static function tableName()
     {
         return 'module_secure_system';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function behaviors()
     {
         return [
@@ -55,9 +49,6 @@ class ModuleSecureSystem extends Model
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function rules()
     {
         return [
@@ -72,9 +63,6 @@ class ModuleSecureSystem extends Model
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function attributeLabels()
     {
         return [
