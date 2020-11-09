@@ -15,5 +15,6 @@ jobs:
 #         key: ${{ secrets.KEY }}
         password: ${{ secrets.PASSWORD }}
         port: ${{ secrets.PORT }}
-        script: whoami
-        
+        script: |
+          date
+          ls -la
