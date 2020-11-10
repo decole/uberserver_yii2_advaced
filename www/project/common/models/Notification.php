@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models;
+namespace common\models;
 
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
@@ -38,7 +38,6 @@ class Notification extends ActiveRecord
     {
         return [
             [['read_at', 'created_at', 'updated_at'], 'integer'],
-//            [['created_at', 'updated_at'], 'required'],
             [['type'], 'string', 'max' => 100],
             [['data'], 'string', 'max' => 1000],
         ];
@@ -48,11 +47,11 @@ class Notification extends ActiveRecord
     {
         return [
             'id' => 'ID',
-            'type' => 'Type',
-            'data' => 'Data',
-            'read_at' => 'Read At',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'type' => 'Тиа',
+            'data' => 'Событие',
+            'read_at' => 'Прочтено в',
+            'created_at' => 'Создано в',
+            'updated_at' => 'Обновлено в',
         ];
     }
 }

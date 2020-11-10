@@ -147,7 +147,7 @@ use yii\helpers\Html;
                     <span class="float-right text-muted text-sm">2 days</span>
                 </a>
                 <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+                <?= Html::a('See All Notifications', ['notify'], ['data-method' => 'post', 'class' => 'dropdown-item dropdown-footer']) ?>
             </div>
         </li>
         <li class="nav-item">

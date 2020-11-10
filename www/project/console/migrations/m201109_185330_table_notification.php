@@ -20,7 +20,7 @@ class m201109_185330_table_notification extends Migration
             'id' => $this->primaryKey(),
             'type' => $this->string(100),
             'data' => $this->string(1000),
-            'read_at' => $this->integer(),
+            'read_at' => $this->integer()->null(),
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
         ], $tableOptions);

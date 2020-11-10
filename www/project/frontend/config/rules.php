@@ -1,6 +1,7 @@
 <?php
 return [
     '' => 'site/index',
+    'notify' => 'site/notify',
 
     'api/alice' => 'alice-skill/main/index',
 

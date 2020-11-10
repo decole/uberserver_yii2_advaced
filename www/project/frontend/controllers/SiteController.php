@@ -1,22 +1,24 @@
 <?php
 namespace frontend\controllers;
 
+use common\models\LoginForm;
 use common\models\ModuleRelay;
 use common\models\ModuleSensor;
+use common\models\Notification;
+use frontend\models\ContactForm;
+use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResendVerificationEmailForm;
+use frontend\models\ResetPasswordForm;
+use frontend\models\SignupForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
 use yii\base\Exception;
 use yii\base\InvalidArgumentException;
+use yii\data\ActiveDataProvider;
+use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
-use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
-use common\models\LoginForm;
-use frontend\models\PasswordResetRequestForm;
-use frontend\models\ResetPasswordForm;
-use frontend\models\SignupForm;
-use frontend\models\ContactForm;
 
 /**
  * Site controller
@@ -70,11 +72,6 @@ class SiteController extends Controller
         ];
     }
 
-    /**
-     * Displays homepage.
-     *
-     * @return mixed
-     */
     public function actionIndex()
     {
         if (Yii::$app->user->isGuest) {
@@ -84,11 +81,43 @@ class SiteController extends Controller
         return $this->render('index');
     }
 
-    /**
-     * Logs in a user.
-     *
-     * @return mixed
-     */
+    public function actionNotify()
+    {
+        $refresh = false;
+
+        if (Yii::$app->request->post()['clear'] === 'all') {
+            $time = time();
+            $refresh = true;
+            Notification::updateAll(['read_at' => $time], ['read_at' => null]);
+
+            $this->redirect('notify');
+        }
+
+        $query = Notification::find()->where(['read_at' => null]);
+        $provider = new ActiveDataProvider([
+            'query' => $query,
+            'pagination' => [
+                'pageSize' => 10,
+            ],
+            'sort' => [
+                'defaultOrder' => [
+                    'created_at' => SORT_DESC,
+                ]
+            ],
+        ]);
+
+        return $this->render('notify', [
+            'models' => $query->all(),
+            'dataProvider' => $provider,
+            'refreshed' => $refresh,
+        ]);
+    }
+
+    public function actionGreenhouse()
+    {
+        return 'lol';
+    }
+
     public function actionLogin()
     {
         if (!Yii::$app->user->isGuest) {
@@ -109,11 +138,6 @@ class SiteController extends Controller
         }
     }
 
-    /**
-     * Logs out the current user.
-     *
-     * @return mixed
-     */
     public function actionLogout()
     {
         Yii::$app->user->logout();
@@ -144,11 +168,6 @@ class SiteController extends Controller
         }
     }
 
-    /**
-     * Страница Все данные
-     *
-     * @return string
-     */
     public function actionAllData()
     {
         $sensors = ModuleSensor::find()->asArray()->all();
@@ -160,11 +179,6 @@ class SiteController extends Controller
         ]);
     }
 
-    /**
-     * Страница пристройки
-     *
-     * @return string
-     */
     public function actionMargulis()
     {
         $sensors = ModuleSensor::find()
@@ -184,21 +198,11 @@ class SiteController extends Controller
         ]);
     }
 
-    /**
-     * Страница охранной системы
-     *
-     * @return string
-     */
     public function actionSecure()
     {
         return $this->render('secure');
     }
 
-    /**
-     * Страница пожарной системы
-     *
-     * @return string
-     */
     public function actionFireSecure()
     {
         return $this->render('fire-secure');
