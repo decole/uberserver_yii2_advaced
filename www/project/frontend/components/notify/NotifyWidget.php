@@ -19,23 +19,51 @@ class NotifyWidget extends Widget
         parent::init();
 
         // TODO если нужна будет кастомизация, можно реализовать
-        if (empty($param)) {
-            $this->params = 'messages';
+        if (empty($this->params)) {
+            $this->params = ['messages', 'requests', 'reports'];
         }
     }
 
     public function run()
     {
-        $notify = (int)Notification::find()->where(['read_at' => null])->count();
-        $requests = (int)0;
-        $reports = (int)0;
-        $count = $notify + $requests + $reports;
-
         return $this->render('@frontend/components/notify/render', [
-            'count'    => $count,
-            'messages' => $notify,
-            'requests' => $requests,
-            'reports'  => $reports,
+            'data' => self::process(),
         ]);
+    }
+
+    protected function check($parameter)
+    {
+        return in_array($parameter, $this->params);
+    }
+
+    protected function process()
+    {
+        $count = 0;
+        $result = [];
+
+        foreach ($this->params as $param) {
+            if (self::check($param)) {
+                $result[$param] = self::extractData($param);
+                $count += $result[$param];
+                $result['count'] = $count;
+            }
+        }
+
+        return $result;
+    }
+
+    protected function extractData($param)
+    {
+        switch ($param) {
+            case $param = 'messages':
+                return (int)Notification::find()->where(['read_at' => null])->count();
+
+                break;
+            case $param = 'reports':
+            case $param = 'requests':
+            default:
+                return 0;
+                break;
+        }
     }
 }

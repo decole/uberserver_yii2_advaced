@@ -69,7 +69,7 @@ use yii\helpers\Url;
     <ul class="navbar-nav ml-auto">
         <!-- Notifications Dropdown Menu -->
         <li class="nav-item dropdown">
-            <?php echo NotifyWidget::widget(['params' => ['messages']]); ?>
+            <?=NotifyWidget::widget(['params' => ['messages']])?>
         </li>
 
         <li class="nav-item">
@@ -78,7 +78,7 @@ use yii\helpers\Url;
         <li class="nav-item dropdown user-menu">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                 <img src="https://www.gravatar.com/avatar/<?=md5(Yii::$app->user->identity->email)?>.jpg" class="user-image img-circle elevation-2" alt="User Image">
-                <span class="d-none d-md-inline"><?=Yii::$app->user->identity->username;?></span>
+                <span class="d-none d-md-inline"><?=Yii::$app->user->identity->username?></span>
             </a>
             <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <!-- User image -->
