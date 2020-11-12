@@ -3,6 +3,7 @@
 namespace console\controllers;
 
 use backend\jobs\EmailNotifyJob;
+use backend\jobs\FailJob;
 use backend\jobs\TelegramNotifyJob;
 use DateTime;
 use Yii;
@@ -71,6 +72,19 @@ class TestController extends Controller
         echo 'add job to send telegram message' . PHP_EOL;
         Yii::$app->queue->push(new TelegramNotifyJob([
             'message' => 'test message from site uberserver.ru',
+        ]));
+    }
+
+    public function actionFail()
+    {
+        echo 'fail';
+        exit();
+    }
+
+    public function actionAddFailJob()
+    {
+        Yii::$app->queue->push(new FailJob([
+            'type' => 'test message from site uberserver.ru',
         ]));
     }
 }
