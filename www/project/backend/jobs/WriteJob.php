@@ -2,16 +2,18 @@
 
 namespace backend\jobs;
 
-use yii\base\BaseObject;
-use yii\queue\JobInterface;
-
-class WriteJob extends BaseObject implements JobInterface
+class WriteJob extends BaseJob
 {
     public $url;
     public $file;
 
-    public function execute($queue)
+    public function run()
     {
         file_put_contents($this->file, file_get_contents($this->url));
+    }
+
+    public function getName()
+    {
+        return 'WriteJob';
     }
 }

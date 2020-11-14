@@ -34,6 +34,9 @@ return [
             'port' => 6379,
             'database' => 0,
         ],
+        'eventManager' => [
+            'class' => 'common\components\EventManager',
+        ],
     ],
     'modules' => [
         'alice-smart-home' => [

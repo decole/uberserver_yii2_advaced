@@ -7,6 +7,7 @@ use backend\jobs\FailJob;
 use backend\jobs\TelegramNotifyJob;
 use DateTime;
 use Yii;
+use yii\base\Security;
 use yii\console\Controller;
 
 /**
@@ -75,16 +76,17 @@ class TestController extends Controller
         ]));
     }
 
-    public function actionFail()
-    {
-        echo 'fail';
-        exit();
-    }
-
     public function actionAddFailJob()
     {
         Yii::$app->queue->push(new FailJob([
             'type' => 'test message from site uberserver.ru',
         ]));
+    }
+
+    public function actionGenpas($pass = 'qwerty123')
+    {
+        $secure = new Security();
+        echo 'password: ' . $pass . PHP_EOL;
+        echo $secure->generatePasswordHash($pass) . PHP_EOL;
     }
 }

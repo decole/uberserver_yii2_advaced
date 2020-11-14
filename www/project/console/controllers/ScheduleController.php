@@ -111,7 +111,7 @@ class ScheduleController extends Controller
         if( $successCount > 0 ) {
             $this->log("Successfully ran $successCount commands.");
         } else {
-            $this->warning("No commands executed.");
+            $this->log("No commands executed.");
         }
         return Controller::EXIT_CODE_NORMAL;
     }

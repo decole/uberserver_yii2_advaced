@@ -3,22 +3,24 @@
 namespace backend\jobs;
 
 use common\services\TelegramService;
-use yii\base\BaseObject;
-use yii\queue\JobInterface;
+use Longman\TelegramBot\Exception\TelegramException;
 
-class TelegramNotifyJob extends BaseObject implements JobInterface
+class TelegramNotifyJob extends BaseJob
 {
     public $message;
 
     /**
-     * @param \yii\queue\Queue $queue
-     * @return mixed|void
-     * @throws \Longman\TelegramBot\Exception\TelegramException
+     * @return void
+     * @throws TelegramException
      */
-    public function execute($queue)
+    public function run()
     {
-        /** @var TelegramService $service */
         $service = TelegramService::getInstance();
         $service->sendDecole($this->message);
+    }
+
+    public function getName()
+    {
+        return 'TelegramNotifyJob';
     }
 }

@@ -2,22 +2,16 @@
 
 namespace backend\jobs;
 
-use Longman\TelegramBot\Exception\TelegramException;
 use Yii;
-use yii\base\BaseObject;
-use yii\queue\JobInterface;
-use yii\queue\Queue;
 
-class EmailNotifyJob extends BaseObject implements JobInterface
+class EmailNotifyJob extends BaseJob
 {
     public $message;
 
     /**
-     * @param Queue $queue
-     * @return mixed|void
-     * @throws TelegramException
+     * @return void
      */
-    public function execute($queue)
+    public function run()
     {
         Yii::$app->mailer->compose()
             ->setFrom(Yii::$app->params['supportEmail'])
@@ -26,5 +20,10 @@ class EmailNotifyJob extends BaseObject implements JobInterface
             ->setTextBody($this->message)
             ->setHtmlBody('<b>'. $this->message . '</b>')
             ->send();
+    }
+
+    public function getName()
+    {
+        return 'EmailNotifyJob';
     }
 }

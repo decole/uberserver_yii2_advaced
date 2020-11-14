@@ -17,6 +17,8 @@ use yii\db\ActiveRecord;
  */
 class Notification extends ActiveRecord
 {
+    const FIELD_DATA_LIMIT = 1000;
+
     public static function tableName()
     {
         return 'notification';
@@ -39,7 +41,7 @@ class Notification extends ActiveRecord
         return [
             [['read_at', 'created_at', 'updated_at'], 'integer'],
             [['type'], 'string', 'max' => 100],
-            [['data'], 'string', 'max' => 1000],
+            [['data'], 'string', 'max' => self::FIELD_DATA_LIMIT],
         ];
     }
 
