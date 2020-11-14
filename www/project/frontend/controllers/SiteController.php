@@ -107,7 +107,6 @@ class SiteController extends Controller
         ]);
 
         return $this->render('notify', [
-            'models' => $query->all(),
             'dataProvider' => $provider,
             'refreshed' => $refresh,
         ]);
@@ -116,6 +115,11 @@ class SiteController extends Controller
     public function actionGreenhouse()
     {
         return 'lol';
+    }
+
+    public function actionTestIcons()
+    {
+        return $this->render('icons');
     }
 
     public function actionLogin()
