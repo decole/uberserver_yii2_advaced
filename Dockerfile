@@ -1,7 +1,16 @@
-# Main image
-FROM php:7.2-fpm
-# Author
+FROM php:7.4-fpm
+
 MAINTAINER decole <decole@rambler.ru>
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        apt-transport-https \
+        wget \
+        ssh \
+        git \
+        nano \
+        locales \
+        unzip
 
 # Update and install modules for php and other
 RUN apt-get update && apt-get install -y \
@@ -14,9 +23,6 @@ RUN apt-get update && apt-get install -y \
 
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
-# Install git
-RUN apt-get install -y git
 
 # Install phpunit
 RUN wget https://phar.phpunit.de/phpunit-6.5.phar && \
@@ -70,20 +76,28 @@ RUN apt-get install -y libfreetype6-dev libjpeg62-turbo-dev libpng-dev \
     && :\
     && docker-php-ext-install zip \
     && docker-php-ext-install pcntl \
-    && docker-php-ext-install pdo_mysql \
     && docker-php-ext-install mysqli \
+    && docker-php-ext-install pgsql \
+    && docker-php-ext-install pdo_mysql \
+    && docker-php-ext-install pdo_pgsql \
     && docker-php-ext-install mbstring \
     && docker-php-ext-install exif \
     && docker-php-ext-install bcmath \
     && docker-php-ext-install calendar \
+    && docker-php-ext-install xml \
+    && docker-php-ext-install xmlwriter \
+    && docker-php-ext-install simplexml \
+    && docker-php-ext-install json \
+    && docker-php-ext-install iconv \
+    && docker-php-ext-install fileinfo \
+    && docker-php-ext-install dom \
     && docker-php-ext-install sockets
 
-# install supervisor
+# Install supervisor
 RUN apt-get update \
  && apt-get install -y --no-install-recommends \
     supervisor
 COPY images/worker/supervisor/supervisord.conf /etc/supervisor
-
 
 # Copy app
 RUN mkdir /var/www/project
@@ -98,6 +112,4 @@ RUN rm -rf /var/lib/apt/lists/* \
 WORKDIR /var/www/project
 
 # Run container
-# The main purpose of a CMD is to provide defaults for an executing container. These defaults can include an executable,
-# or they can omit the executable, in which case you must specify an ENTRYPOINT instruction as well.
 CMD ["php-fpm"]

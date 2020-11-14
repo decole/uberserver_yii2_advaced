@@ -47,7 +47,7 @@ services:
       - redis
 
   mysql:
-    image: mysql:5.7
+    image: mysql:5.7.32
     ports:
       - "3306:3306"
     volumes:
@@ -61,7 +61,7 @@ services:
       - MYSQL_PASSWORD=secret
 
   phpmyadmin:
-    image: phpmyadmin/phpmyadmin:5.0
+    image: phpmyadmin/phpmyadmin:5.0.2
     links:
       - mysql:db
     ports:
@@ -74,7 +74,7 @@ services:
       - mysql
 
   redis:
-    image: redis:5.0-alpine
+    image: redis:5.0.9-alpine
     ports:
       - "6379:6379"
     volumes:
@@ -86,7 +86,7 @@ services:
         max-file: "3"
 
   redis-admin:
-    image: erikdubbelboer/phpredisadmin
+    image: erikdubbelboer/phpredisadmin:v1.13.1
     depends_on:
       - redis
     ports:
