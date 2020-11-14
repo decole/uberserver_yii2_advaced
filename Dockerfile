@@ -2,6 +2,7 @@ FROM php:7.4-fpm
 
 MAINTAINER decole <decole@rambler.ru>
 
+# Tools
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         apt-transport-https \
@@ -10,29 +11,36 @@ RUN apt-get update \
         git \
         nano \
         locales \
+        zip \
         unzip
 
-# Update and install modules for php and other
-RUN apt-get update && apt-get install -y \
+# Install dependency
+RUN buildDeps=" \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
         libpng-dev \
-    && apt-get install -y wget zip unzip \
-    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
-    && docker-php-ext-install -j$(nproc) gd pdo pdo_mysql
+        libicu-dev \
+        libmcrypt-dev \
+        libxml2-dev \
+        libxslt1-dev \
+        libssl-dev \
+        libmagick++-dev \
+        librabbitmq-dev \
+        libonig-dev \
+        libpq-dev \
+        libmemcached-dev \
+        libssh2-1-dev \
+        libzip-dev \
+    " \
+    && apt-get install -y --no-install-recommends $buildDeps
 
-# Install composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
-# Install phpunit
-RUN wget https://phar.phpunit.de/phpunit-6.5.phar && \
-        chmod +x phpunit-6.5.phar && \
-        mv phpunit-6.5.phar /usr/local/bin/phpunit
-
-# Install codecept
-RUN wget http://codeception.com/codecept.phar && \
-        chmod +x codecept.phar && \
-        mv codecept.phar /usr/local/bin/codecept
+# Composer
+RUN curl -sS "https://getcomposer.org/installer" | php \
+    && mv composer.phar /usr/local/bin/composer \
+    && composer global require "codeception/codeception=*" "codeception/specify=*" "codeception/verify=*" \
+    && composer global dumpautoload --optimize \
+    && composer clear-cache
+ENV PATH="${PATH}:/root/.composer/vendor/bin"
 
 # php-redis
 ENV PHPREDIS_VERSION 4.2.0
@@ -58,7 +66,6 @@ RUN pecl install Mosquitto-alpha
 RUN echo "extension=mosquitto.so" > /usr/local/etc/php/conf.d/30_mosquitto.ini
 
 RUN apt-get install -y libfreetype6-dev libjpeg62-turbo-dev libpng-dev \
-    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install gd \
     && :\
     && apt-get install -y libicu-dev \
@@ -69,17 +76,15 @@ RUN apt-get install -y libfreetype6-dev libjpeg62-turbo-dev libpng-dev \
     && docker-php-ext-install soap \
     && docker-php-ext-install xsl \
     && docker-php-ext-install xmlrpc \
-    && docker-php-ext-install wddx \
     && :\
     && apt-get install -y libbz2-dev \
     && docker-php-ext-install bz2 \
     && :\
-    && docker-php-ext-install zip \
     && docker-php-ext-install pcntl \
     && docker-php-ext-install mysqli \
-    && docker-php-ext-install pgsql \
     && docker-php-ext-install pdo_mysql \
     && docker-php-ext-install pdo_pgsql \
+    && docker-php-ext-install pgsql \
     && docker-php-ext-install mbstring \
     && docker-php-ext-install exif \
     && docker-php-ext-install bcmath \
@@ -91,7 +96,10 @@ RUN apt-get install -y libfreetype6-dev libjpeg62-turbo-dev libpng-dev \
     && docker-php-ext-install iconv \
     && docker-php-ext-install fileinfo \
     && docker-php-ext-install dom \
-    && docker-php-ext-install sockets
+    && docker-php-ext-install sockets\
+    && docker-php-ext-configure zip \
+            --with-zip \
+    && docker-php-ext-install zip
 
 # Install supervisor
 RUN apt-get update \
@@ -106,7 +114,8 @@ COPY www/project/ /var/www/project/
 # Clear
 RUN rm -rf /var/lib/apt/lists/* \
     && rm -rf /var/cache/apk/* \
-    && docker-php-source delete
+    && docker-php-source delete \
+    && apt-get purge -y $buildDeps
 
 # Workdir for php
 WORKDIR /var/www/project

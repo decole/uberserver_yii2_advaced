@@ -2,7 +2,7 @@ version: "3.2"
 
 services:
   nginx:
-    image: nginx:latest
+    image: nginx:1.17.10
     ports:
       - "82:80"
       - "444:443"
