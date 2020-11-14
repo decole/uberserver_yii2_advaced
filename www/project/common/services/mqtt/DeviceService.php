@@ -2,11 +2,11 @@
 
 namespace common\services\mqtt;
 
+use common\services\mqtt\ValidateProcessor\FireSecureProcessor;
 use common\services\mqtt\ValidateProcessor\LeakageProcessor;
-use common\services\mqtt\ValidateProcessor\SensorProcessor;
 use common\services\mqtt\ValidateProcessor\RelayProcessor;
 use common\services\mqtt\ValidateProcessor\SecureProcessor;
-use common\services\mqtt\ValidateProcessor\FireSecureProcessor;
+use common\services\mqtt\ValidateProcessor\SensorProcessor;
 use common\traits\instance;
 
 final class DeviceService
@@ -94,7 +94,7 @@ final class DeviceService
                 break;
             default:
                 // вывод топиков, которые не были обработаны валидаторами выше
-                echo '. ' . $message->topic . ' ' . $message->payload . PHP_EOL;
+//                echo '. ' . $message->topic . ' ' . $message->payload . PHP_EOL;
 
                 break;
         }

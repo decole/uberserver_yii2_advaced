@@ -4,8 +4,8 @@ namespace common\services\mqtt\ValidateProcessor;
 
 use backend\jobs\TelegramNotifyJob;
 use Throwable;
-use yii\helpers\ArrayHelper;
 use Yii;
+use yii\helpers\ArrayHelper;
 
 class BaseProcessor implements DeviceInterface
 {
@@ -109,11 +109,13 @@ class BaseProcessor implements DeviceInterface
     {
         try {
             $form = Yii::createObject($this->validateForm, [$message->topic, $message->payload, $this]);
+
             if ($form->validate()) {
                 return;
             }
 
             $error = '';
+
             foreach ($form->getErrors('payload') as $value) {
                 $error .= $value . "\n";
             }
