@@ -19,6 +19,12 @@ return [
         'cache' => [
             'class' => 'yii\redis\Cache',
         ],
+        'cacheBackend' => [
+            'class' => 'yii\redis\Cache',
+        ],
+        'cacheFrontend' => [
+            'class' => 'yii\redis\Cache',
+        ],
         'queue' => [
             'as log' => LogBehavior::class,
             'class' => Queue::class,

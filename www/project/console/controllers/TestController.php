@@ -5,6 +5,9 @@ namespace console\controllers;
 use backend\jobs\EmailNotifyJob;
 use backend\jobs\FailJob;
 use backend\jobs\TelegramNotifyJob;
+use common\components\EventManager;
+use common\components\ParamsEvent;
+use common\events\Event;
 use DateTime;
 use Yii;
 use yii\base\Security;
@@ -88,5 +91,20 @@ class TestController extends Controller
         $secure = new Security();
         echo 'password: ' . $pass . PHP_EOL;
         echo $secure->generatePasswordHash($pass) . PHP_EOL;
+    }
+
+    public function actionEvent($error = 'test')
+    {
+        // развернута система событий для консольных приложений. пока только тесты
+        $eventManager = new EventManager();
+        $events = include_once(Yii::getAlias('@common') . '/config/events.php');
+        $eventManager->registerHandlers($events);
+
+        $event = new ParamsEvent([
+            'sender' => $this,
+            'params' => ['error' => $error],
+        ]);
+        Yii::$app->trigger(Event::EVENT_SEND_ALARM_NOTIFICATION, $event);
+        var_dump($event->getResult());
     }
 }

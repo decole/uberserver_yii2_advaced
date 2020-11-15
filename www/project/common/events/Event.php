@@ -4,5 +4,5 @@ namespace common\events;
 
 class Event
 {
-    public const EVENT_SEND_NOTIFY = 'send.notify';
+    public const EVENT_SEND_ALARM_NOTIFICATION = 'send.alarm.notify';
 }

@@ -22,6 +22,12 @@ return [
           ],
     ],
     'components' => [
+        'cacheBackend' => [
+            'class' => 'yii\redis\Cache',
+        ],
+        'cacheFrontend' => [
+            'class' => 'yii\redis\Cache',
+        ],
         'log' => [
             'targets' => [
                 [
@@ -30,6 +36,9 @@ return [
                     'maxLogFiles' => 10,
                 ],
             ],
+        ],
+        'eventManager' => [
+            'class' => 'common\components\EventManager',
         ],
     ],
     'params' => $params,

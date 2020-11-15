@@ -2,7 +2,7 @@
 return [
     'adminEmail' => 'decole@rambler.ru',
     'supportEmail' => 'decole2014@yandex.ru',
-    'senderEmail' => 'noreply@uberserver.ru',
+    'senderEmail' => 'decole2014@yandex.ru',
     'senderName' => 'Uberserver.ru mailer',
     'user.passwordResetTokenExpire' => 3600,
 
