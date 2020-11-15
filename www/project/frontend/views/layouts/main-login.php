@@ -4,6 +4,10 @@ use hail812\adminlte3\assets\AdminLteAsset;
 use hail812\adminlte3\assets\PluginAsset;
 use yii\web\View;
 
+if (class_exists('yii\debug\Module')) {
+    $this->off(\yii\web\View::EVENT_END_BODY, [\yii\debug\Module::getInstance(), 'renderToolbar']);
+}
+
 /* @var $this View */
 /* @var $content string */
 

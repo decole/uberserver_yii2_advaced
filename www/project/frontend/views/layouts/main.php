@@ -8,6 +8,10 @@ use hail812\adminlte3\assets\FontAwesomeAsset;
 use yii\helpers\Html;
 use yii\web\View;
 
+if (class_exists('yii\debug\Module')) {
+    $this->off(\yii\web\View::EVENT_END_BODY, [\yii\debug\Module::getInstance(), 'renderToolbar']);
+}
+
 FontAwesomeAsset::register($this);
 AdminLteAsset::register($this);
 $this->registerCssFile('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700');
