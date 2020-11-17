@@ -25,10 +25,8 @@ RUN buildDeps=" \
         libxslt1-dev \
         libssl-dev \
         libmagick++-dev \
-        librabbitmq-dev \
         libonig-dev \
         libpq-dev \
-        libmemcached-dev \
         libssh2-1-dev \
         libzip-dev \
     " \
