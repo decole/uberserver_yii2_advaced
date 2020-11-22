@@ -32,13 +32,9 @@ use yii\helpers\Url;
             <?php
             echo Menu::widget([
                 'items' => [
-                    ['label' => 'Стандартное', 'header' => true],
+                    ['label' => 'Основное', 'header' => true],
 
                     ['label' => 'Home', 'url' => ['/site/index']],
-                    ['label' => 'Contact', 'url' => ['/site/contact']],
-
-                    ['label' => 'Портированное', 'header' => true],
-
                     ['label' => 'Настройки', 'url' => ['#'], 'icon' => 'cogs'],
                     ['label' => 'Автополив', 'url' => ['#'], 'icon' => 'tint'],
                     ['label' => 'Пожарная система', 'url' => ['/site/fire-secure'], 'iconStyle' => 'fab fa-free-code-camp'],
