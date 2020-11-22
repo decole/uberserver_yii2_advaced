@@ -41,7 +41,7 @@ app:
 	$(compose) exec php bash
 
 migrate:
-	$(yii) migrate --interactive = 0
+	$(yii) migrate --interactive=0
 
 migrate-create:
 ifeq ("$(ARGS)", "")
