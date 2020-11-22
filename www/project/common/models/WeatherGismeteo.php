@@ -14,11 +14,11 @@ use yii\db\ActiveRecord;
  * @property int $created_at
  * @property int $updated_at
  */
-class Weather extends ActiveRecord
+class WeatherGismeteo extends ActiveRecord
 {
     public static function tableName()
     {
-        return 'weather';
+        return 'weather_gismeteo';
     }
 
     public function behaviors()
@@ -27,7 +27,7 @@ class Weather extends ActiveRecord
             [
                 'class' => TimestampBehavior::class,
                 'createdAtAttribute' => 'created_at',
-                'updatedAtAttribute' => 'updated_at',
+                'updatedAtAttribute' => false,
                 'value' => time(),
             ],
         ];
@@ -36,9 +36,9 @@ class Weather extends ActiveRecord
     public function rules()
     {
         return [
-            [['temperature'], 'number'],
-            [['created_at', 'updated_at'], 'integer'],
-            [['spec'], 'string', 'max' => 255],
+            [['temperature_comfort', 'temperature_air'], 'number'],
+            [['wind_scale', 'created_at'], 'integer'],
+            [['pressure', 'humidity', 'wind_speed', 'description'], 'string', 'max' => 255],
         ];
     }
 
@@ -46,10 +46,14 @@ class Weather extends ActiveRecord
     {
         return [
             'id' => 'ID',
-            'temperature' => 'Temperature',
-            'spec' => 'Spec',
+            'temperature_comfort' => 'Temperature Comfort',
+            'temperature_air' => 'Temperature Air',
+            'pressure' => 'Pressure',
+            'humidity' => 'Humidity',
+            'wind_speed' => 'Wind Speed',
+            'wind_scale' => 'Wind Scale',
+            'description' => 'Description',
             'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
         ];
     }
 }
