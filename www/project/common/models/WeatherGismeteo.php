@@ -9,10 +9,14 @@ use yii\db\ActiveRecord;
  * This is the model class for table "weather".
  *
  * @property int $id
- * @property float|null $temperature
- * @property string|null $spec
+ * @property float|null $temperature_comfort
+ * @property float|null $temperature_air
+ * @property string|null $pressure
+ * @property string|null $humidity
+ * @property string|null $wind_speed
+ * @property int|null $wind_scale
+ * @property string|null $description
  * @property int $created_at
- * @property int $updated_at
  */
 class WeatherGismeteo extends ActiveRecord
 {
