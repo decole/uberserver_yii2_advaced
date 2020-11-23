@@ -34,7 +34,7 @@ use yii\helpers\Url;
                 'items' => [
                     ['label' => 'Основное', 'header' => true],
 
-                    ['label' => 'Home', 'url' => ['/site/index']],
+                    ['label' => 'Главная', 'url' => ['/site/index']],
                     ['label' => 'Настройки', 'url' => ['#'], 'icon' => 'cogs'],
                     ['label' => 'Автополив', 'url' => ['#'], 'icon' => 'tint'],
                     ['label' => 'Пожарная система', 'url' => ['/site/fire-secure'], 'iconStyle' => 'fab fa-free-code-camp'],

@@ -3,6 +3,7 @@
 namespace common\models;
 
 use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "weather".
@@ -13,7 +14,7 @@ use yii\behaviors\TimestampBehavior;
  * @property int $created_at
  * @property int $updated_at
  */
-class Weather extends \yii\db\ActiveRecord
+class Weather extends ActiveRecord
 {
     public static function tableName()
     {
