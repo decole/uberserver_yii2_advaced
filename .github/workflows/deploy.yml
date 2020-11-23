@@ -25,5 +25,11 @@ jobs:
         password: ${{ secrets.PASSWORD }}
         port: ${{ secrets.PORT }}
         script: |
-          date
-          ls -la
+          cd uberserver_yii2_advaced
+          git pull
+          make pull
+          make down
+          make up
+          make migrate
+          make composer-install
+          make restart
