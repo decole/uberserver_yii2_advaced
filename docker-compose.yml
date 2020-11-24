@@ -10,10 +10,12 @@ services:
       - ~/.composer-docker/cache:/root/.composer/cache:delegated
       - ./images/nginx:/etc/nginx/conf.d
       - ./www:/var/www
-      - ./.dev/logs:/var/log/nginx
+#      - ./.dev/logs:/var/log/nginx
     depends_on:
       - php
       - mysql
+    logging:
+      driver: "none"
 
   php:
     image: 13123123/uberserver:latest
@@ -23,6 +25,8 @@ services:
     depends_on:
       - mysql
       - redis
+    logging:
+      driver: "none"
 
   supervisor:
     image: 13123123/uberserver:latest
@@ -35,6 +39,8 @@ services:
       - php
       - mysql
       - redis
+    logging:
+      driver: "none"
 
   mysql:
     image: mysql:5.7.32
@@ -49,6 +55,8 @@ services:
       - MYSQL_DATABASE=yii2advanced
       - MYSQL_USER=yii2advanced
       - MYSQL_PASSWORD=secret
+    logging:
+      driver: "none"
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:5.0.2
@@ -62,6 +70,8 @@ services:
       - MYSQL_ROOT_PASSWORD=verysecret
     depends_on:
       - mysql
+    logging:
+      driver: "none"
 
   redis:
     image: redis:5.0.9-alpine
@@ -70,10 +80,7 @@ services:
     volumes:
       - ~/.composer-docker/cache:/root/.composer/cache:delegated
     logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
+      driver: "none"
 
   redis-admin:
     image: erikdubbelboer/phpredisadmin:v1.13.1
@@ -86,7 +93,4 @@ services:
     environment:
       - REDIS_1_HOST=redis
     logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
+      driver: "none"
