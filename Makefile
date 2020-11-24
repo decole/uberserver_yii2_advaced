@@ -11,12 +11,6 @@ yii = $(app) php yii
 pull:
 	$(compose) pull
 
-prod-up:
-	$(compose) -f docker-compose-production.yml up -d --remove-orphans
-
-prod-stop:
-	$(compose) -f docker-compose-production.yml stop
-
 up:
 	$(compose) up -d --remove-orphans
 
