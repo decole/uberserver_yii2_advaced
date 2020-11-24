@@ -32,4 +32,5 @@ jobs:
           make up
           make migrate
           make composer-install
-          make restart
+          make down
+          prod-up
