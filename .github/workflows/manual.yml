@@ -1,0 +1,27 @@
+# This is a basic workflow that is manually triggered
+
+name: BackUp BD
+
+# Controls when the action will run. Workflow runs when manually triggered using the UI
+# or API.
+on:
+  schedule:
+  - cron: "05 04 */14 * *"
+
+jobs:
+
+  build:
+    name: Backup
+    runs-on: ubuntu-latest
+    steps:
+    - name: executing remote ssh commands using password
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
+        port: ${{ secrets.PORT }}
+        script: |
+          cd uberserver_yii2_advaced
+          make mysql
+          mysql mysqldump -u root -pverysecret yii2advanced > /var/backups/backup_`date +%Y-%m-%d`.sql
