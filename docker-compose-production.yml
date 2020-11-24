@@ -10,10 +10,11 @@ services:
       - ~/.composer-docker/cache:/root/.composer/cache:delegated
       - ./images/nginx:/etc/nginx/conf.d
       - ./www:/var/www
-      - ./.dev/logs:/var/log/nginx
     depends_on:
       - php
       - mysql
+    logging:
+      driver: "none"
 
   php:
     image: 13123123/uberserver:latest
@@ -23,18 +24,22 @@ services:
     depends_on:
       - mysql
       - redis
+    logging:
+      driver: "none"
 
   supervisor:
     image: 13123123/uberserver:latest
     volumes:
+      - ~/.composer-docker/cache:/root/.composer/cache:delegated
       - ./images/worker/supervisor/config:/etc/supervisor/conf.d
-#      - ./.dev/logs:/var/log/supervisor
       - ./www:/var/www
     command: /usr/bin/supervisord
     depends_on:
       - php
       - mysql
       - redis
+    logging:
+      driver: "none"
 
   mysql:
     image: mysql:5.7.32
@@ -49,19 +54,8 @@ services:
       - MYSQL_DATABASE=yii2advanced
       - MYSQL_USER=yii2advanced
       - MYSQL_PASSWORD=secret
-
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin:5.0.2
-    links:
-      - mysql:db
-    ports:
-      - 8000:80
-    volumes:
-      - ~/.composer-docker/cache:/root/.composer/cache:delegated
-    environment:
-      - MYSQL_ROOT_PASSWORD=verysecret
-    depends_on:
-      - mysql
+    logging:
+      driver: "none"
 
   redis:
     image: redis:5.0.9-alpine
@@ -70,23 +64,33 @@ services:
     volumes:
       - ~/.composer-docker/cache:/root/.composer/cache:delegated
     logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
+      driver: "none"
 
-  redis-admin:
-    image: erikdubbelboer/phpredisadmin:v1.13.1
-    depends_on:
-      - redis
-    ports:
-      - "8083:80"
-    volumes:
-      - ~/.composer-docker/cache:/root/.composer/cache:delegated
-    environment:
-      - REDIS_1_HOST=redis
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
+#  phpmyadmin:
+#    image: phpmyadmin/phpmyadmin:5.0.2
+#    links:
+#      - mysql:db
+#    ports:
+#      - 8000:80
+#    volumes:
+#      - ~/.composer-docker/cache:/root/.composer/cache:delegated
+#    environment:
+#      - MYSQL_ROOT_PASSWORD=verysecret
+#    depends_on:
+#      - mysql
+
+#  redis-admin:
+#    image: erikdubbelboer/phpredisadmin:v1.13.1
+#    depends_on:
+#      - redis
+#    ports:
+#      - "8083:80"
+#    volumes:
+#      - ~/.composer-docker/cache:/root/.composer/cache:delegated
+#    environment:
+#      - REDIS_1_HOST=redis
+#    logging:
+#      driver: "json-file"
+#      options:
+#        max-size: "10m"
+#        max-file: "3"
