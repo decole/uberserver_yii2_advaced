@@ -118,5 +118,12 @@ RUN rm -rf /var/lib/apt/lists/* \
 # Workdir for php
 WORKDIR /var/www/project
 
+# Configs, etc
+COPY images/php/php.ini /usr/local/etc/php/conf.d/custom.ini
+RUN mkdir /var/log/php7
+
+
+RUN mkfifo /tmp/stdout && chmod 777 /tmp/stdout
+
 # Run container
 CMD ["php-fpm"]
