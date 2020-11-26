@@ -1,0 +1,74 @@
+#*/*
+Dockerfile
+build.sh
+docker-compose.yml
+www/project/vendor
+*/runtime/*
+!*/runtime/.gitignore
+*/config/*-local.php
+*/web/index.php
+*/web/index-test.php
+*/web/assets/*
+!*/web/assets/css
+!*/web/assets/fonts
+!*/web/assets/images
+!*/web/assets/icons
+!*/web/assets/js
+!*/web/assets/vue
+!*/web/assets/svg
+!*/web/assets/vendor
+!*/web/assets/.gitignore
+*/web/lang_replace
+frontend/web/content/*
+
+#"-" dir
+-
+
+# sublime project files
+*.sublime*
+
+# yii console command
+yii
+
+# phpstorm project files
+.idea
+*.settings
+
+# netbeans project files
+nbproject
+
+# zend studio for eclipse project files
+.buildpath
+.project
+.settings
+
+# windows thumbnail cache
+Thumbs.db
+
+# composer itself is not needed
+composer.phar
+
+# codeception
+codecept.phar
+
+# Mac DS_Store Files
+#.DS_Store
+
+# phpunit itself is not needed
+phpunit.phar
+# local phpunit config
+/phpunit.xml
+
+tests/_output/*
+
+# other
+*.mp4
+*.swf
+*.avi
+*.zip
+*.rar
+
+.dev/*
+.github/*
+
+Makefile
