@@ -53,8 +53,8 @@ migrate-down:
 mysql:
 	$(compose) exec mysql bash
 
-#mysql-dump:
-#	$(compose) exec -T mysql mysqldump --login-path=dunp yii2advanced > /var/backups/backupfile8.sql
+mysql-dump:
+	$(compose) exec -T mysql sh /var/backups/backup.sh
 
 app-init:
 	$(app) php init --env=Development --overwrite=All
