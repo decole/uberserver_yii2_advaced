@@ -83,7 +83,14 @@ class ApiController extends Controller
         }
 
         if ($topics) {
-            return $topics; // TODO доработать метод
+            $request = [];
+            $list = explode(',', $topics);
+
+            foreach ($list as $topic) {
+                $request[$topic] = Yii::$app->cache->get($topic);
+            }
+
+            return $request; // TODO доработать метод
         }
 
         return ['not allowed'];
