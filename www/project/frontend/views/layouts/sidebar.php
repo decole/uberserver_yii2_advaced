@@ -41,13 +41,13 @@ use yii\helpers\Url;
                     ['label' => 'Охранная система', 'url' => ['/site/secure'], 'icon' => 'user-lock'],
                     ['label' => 'Все данные', 'url' => ['/site/all-data'], 'icon' => 'folder-open'],
                     ['label' => 'Пристройка', 'url' => ['/site/margulis'], 'icon' => 'border-style'],
-                    ['label' => 'Теплица', 'url' => ['#'], 'icon' => 'store-alt'],
+                    ['label' => 'Теплица', 'url' => ['/site/greenhouse'], 'icon' => 'store-alt'],
 
                     ['label' => 'Yii2 PROVIDED', 'header' => true],
 
                     ['label' => 'Login', 'url' => ['site/login'], 'icon' => 'sign-in-alt', 'visible' => Yii::$app->user->isGuest],
-                    ['label' => 'Gii',  'icon' => 'file-code', 'url' => ['/gii'], 'target' => '_blank'],
-                    ['label' => 'Debug', 'icon' => 'bug', 'url' => ['/debug'], 'target' => '_blank'],
+//                    ['label' => 'Gii',  'icon' => 'file-code', 'url' => ['/gii'], 'target' => '_blank'],
+//                    ['label' => 'Debug', 'icon' => 'bug', 'url' => ['/debug'], 'target' => '_blank'],
                 ],
             ]);
             ?>

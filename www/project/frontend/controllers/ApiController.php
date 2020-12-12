@@ -2,9 +2,13 @@
 
 namespace frontend\controllers;
 
+use common\models\HistoryModuleData;
 use common\models\ModuleSecureSystem;
+use common\models\Weather;
 use common\services\MqttService;
 use common\services\SecureService;
+use DateTime;
+use DateTimeZone;
 use Yii;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
@@ -16,6 +20,13 @@ use yii\web\Response;
  */
 class ApiController extends Controller
 {
+    public function __construct($id, $controller, $config = [])
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+
+        parent::__construct($id, $controller, $config);
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -42,7 +53,6 @@ class ApiController extends Controller
                 'class' => VerbFilter::class,
                 'actions' => [
                     'mqtt-control' => ['post'],
-//                    'secure-command' => ['post'],
                 ],
             ],
         ];
@@ -57,10 +67,6 @@ class ApiController extends Controller
             'error' => [
                 'class' => 'yii\web\ErrorAction',
             ],
-            'captcha' => [
-                'class' => 'yii\captcha\CaptchaAction',
-                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
-            ],
         ];
     }
 
@@ -69,7 +75,6 @@ class ApiController extends Controller
      */
     public function actionMqtt()
     {
-        Yii::$app->response->format = Response::FORMAT_JSON;
         $topic  = Yii::$app->request->get('topic');
         $topics = Yii::$app->request->get('topics');
 
@@ -86,7 +91,6 @@ class ApiController extends Controller
 
     public function actionMqttControl()
     {
-        Yii::$app->response->format = Response::FORMAT_JSON;
         $topic = Yii::$app->request->post('topic');
         $payload = Yii::$app->request->post('payload');
         $service = MqttService::getInstance();
@@ -97,7 +101,6 @@ class ApiController extends Controller
 
     public function actionSecureState()
     {
-        Yii::$app->response->format = Response::FORMAT_JSON;
         $topic  = Yii::$app->request->get('topic');
         $trigger = $this->getTrigger($topic);
 
@@ -109,7 +112,6 @@ class ApiController extends Controller
 
     public function actionSecureCommand()
     {
-        Yii::$app->response->format = Response::FORMAT_JSON;
         $topic  = Yii::$app->request->post('topic');
         $payload  = Yii::$app->request->post('trigger');
 
@@ -129,5 +131,102 @@ class ApiController extends Controller
     public function getTrigger($topic)
     {
         return (int)ModuleSecureSystem::findOne(['topic' => $topic])->trigger;
+    }
+
+    public function actionChart($date, $topic): array
+    {
+        // YYYY-MM-DD HH:MI:SS
+        $dateStart = $this->dateConvert(date('Y-m-d 00:00:00'));
+        $dateEnd = $this->dateConvert(date('Y-m-d 23:59:59'));
+
+        if ($date !== 'current') {
+            $dateStart = $this->dateConvert($date . ' 00:00:00');
+            $dateEnd = $this->dateConvert($date . ' 23:59:59');
+        }
+
+        $mqttData = HistoryModuleData::find()
+            ->where(['between', 'created_at', $dateStart, $dateEnd])
+            ->andWhere(['topic' => $topic])
+            ->orderBy(['created_at'=>'ASC'])
+            ->asArray()
+            ->all();
+
+        $weatherData = Weather::find()
+            ->where(['between', 'created_at', $dateStart, $dateEnd])
+            ->orderBy(['created_at'=>'ASC'])
+            ->asArray()
+            ->all();
+
+        $chart = [];
+        $min = '';
+
+        foreach ($mqttData as $mqtt) {
+            $timeMqtt = $mqtt['created_at'];
+
+            foreach ($weatherData as $key => $acuweather) {
+                $timeAcuweather = $acuweather['created_at'];
+
+                if($timeMqtt > $timeAcuweather ) {
+                    $min = $acuweather['temperature'];
+                }
+
+                if($timeMqtt < $timeAcuweather) {
+                    if(empty($min)) {
+                        $min =  $acuweather['temperature'];
+                    }
+
+                    $chart[$mqtt['created_at']] = [
+                        'mqtt' => (float)$mqtt['payload'],
+                        'acuweather' => (float)$acuweather['temperature'],
+                    ];
+
+                    break;
+                }
+            }
+        }
+
+        $titles = [];
+        $template = [];
+        $mqttValues = [];
+        $weatherValues = [];
+
+        foreach ($chart as $timestamp => $valueChart) {
+            $mqttValues[] = $valueChart['mqtt'];
+            $weatherValues[] = $valueChart['acuweather'];
+            $titles[] = $this->timestampConvert($timestamp);
+        }
+
+        $template['labels'] = array_values($titles);
+        $template['datasets'] = [
+            [
+                'data' => array_values($mqttValues),
+                'label' => 'Mqtt sensor',
+                'fill' => false,
+                'borderColor' => 'rgb(75, 192, 192)',
+                'lineTension' => 0.5,
+            ],
+            [
+                'data' => array_values($weatherValues),
+                'label' => 'AcuWeather',
+                'fill' => false,
+                'borderColor' => 'rgb(114, 151, 151)',
+                'lineTension' => 0.5,
+            ],
+        ];
+
+        return $template;
+    }
+
+    private function dateConvert($string)
+    {
+        return (new DateTime($string, new DateTimeZone('Europe/Volgograd')))
+            ->getTimestamp();
+    }
+
+    private function timestampConvert($timestamp)
+    {
+        $date = new DateTime("@".$timestamp);
+        $date->setTimezone(new DateTimeZone('Europe/Volgograd'));
+        return $date->format('H:i:s');
     }
 }

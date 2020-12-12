@@ -1,5 +1,6 @@
 <?php
 
+use hail812\adminlte3\assets\AdminLteAsset;
 use yii\web\JqueryAsset;
 
 /* @var $this yii\web\View */
@@ -7,10 +8,7 @@ $this->title = 'Система пожарной безопасности';
 $this->params['breadcrumbs'][] = $this->title;
 
 // добавление логики работы UI для сенсоров
-$this->registerJsFile(
-    '@web/js/fire_secure.js?0.1',
-    ['depends' => [JqueryAsset::class]]
-);
+$this->registerJsFile('@web/js/fire_secure.js?0.1', ['depends' => [JqueryAsset::class, AdminLteAsset::class]]);
 ?>
 <section class="content">
     <div class="container-fluid">

@@ -113,7 +113,14 @@ class SiteController extends Controller
 
     public function actionGreenhouse()
     {
-        return 'lol';
+        $sensors = ModuleSensor::find()
+            ->where(['topic' => 'greenhouse/temperature'])
+            ->asArray()
+            ->all();
+
+        return $this->render('greenhouse', [
+            'sensors' => $sensors,
+        ]);
     }
 
     public function actionTestIcons()
