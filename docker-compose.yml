@@ -22,6 +22,7 @@ services:
     volumes:
       - ~/.composer-docker/cache:/root/.composer/cache:delegated
       - ./www:/var/www
+      - ./.dev/.data/backup:/var/www/project/backend/runtime/backup
     depends_on:
       - mysql
       - redis
@@ -49,7 +50,6 @@ services:
     volumes:
       - ~/.composer-docker/cache:/root/.composer/cache:delegated
       - ./.dev/db:/var/lib/mysql
-      - ./.dev/backups:/var/backups
     environment:
       - MYSQL_ROOT_PASSWORD=verysecret
       - MYSQL_DATABASE=yii2advanced

@@ -23,7 +23,8 @@
         "longman/telegram-bot": "^0.63.1",
         "yiisoft/yii2-redis": "~2.0.0",
         "bower-asset/font-awesome": "^5.15",
-        "codeception/aspect-mock": "3.1.0"
+        "codeception/aspect-mock": "3.1.0",
+        "ext-zip": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

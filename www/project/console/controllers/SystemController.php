@@ -29,6 +29,7 @@ class SystemController extends Controller
 
         exit();
     }
+
 /*
     public function actionMig()
     {
@@ -63,7 +64,7 @@ class SystemController extends Controller
 
         $this->info('Done !');
     }
-*/
+*//*
     public function actionMig1()
     {
         $limit = 1000;
@@ -88,7 +89,7 @@ class SystemController extends Controller
 
         $this->info('end process');
     }
-
+*/
     private function chankFacker($limit, $offset)
     {
         $rows = (new Query())

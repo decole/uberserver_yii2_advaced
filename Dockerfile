@@ -2,6 +2,13 @@ FROM php:7.4-fpm
 
 MAINTAINER decole <decole@rambler.ru>
 
+# mysqldump
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    default-mysql-client \
+    && rm -rf /var/lib/apt
+#RUN apt-get update && apt-get install -y --no-install-recommends mysql-client && rm -rf /var/lib/apt
+
 # Tools
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \

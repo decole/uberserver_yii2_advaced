@@ -54,7 +54,7 @@ mysql:
 	$(compose) exec mysql bash
 
 mysql-dump:
-	$(compose) exec -T mysql sh /var/backups/backup.sh
+	$(yii) backup/index
 
 app-init:
 	$(app) php init --env=Development --overwrite=All
