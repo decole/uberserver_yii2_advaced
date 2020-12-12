@@ -29,7 +29,7 @@ class SystemController extends Controller
 
         exit();
     }
-
+/*
     public function actionMig()
     {
         $this->info('start process');
@@ -56,7 +56,6 @@ class SystemController extends Controller
                     'created_at' => $date,
                     'updated_at' => $date,
                 ])->execute();
-//                $this->info($item['temperature'] . ' done ' . $date . ' ' . $item['created_at']);
             }
 
             $i++;
@@ -64,7 +63,7 @@ class SystemController extends Controller
 
         $this->info('Done !');
     }
-
+*/
     public function actionMig1()
     {
         $limit = 1000;
