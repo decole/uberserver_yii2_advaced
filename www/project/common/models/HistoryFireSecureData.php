@@ -15,18 +15,11 @@ use yii\db\ActiveRecord;
  */
 class HistoryFireSecureData extends ActiveRecord
 {
+    const FIELD_DATA_LIMIT = 1000;
+
     public static function tableName()
     {
         return 'history_fire_secure_data';
-    }
-
-    public function rules()
-    {
-        return [
-            [['topic', 'payload'], 'required'],
-            [['created_at'], 'integer'],
-            [['topic', 'payload'], 'string', 'max' => 255],
-        ];
     }
 
     public function behaviors()
@@ -38,6 +31,15 @@ class HistoryFireSecureData extends ActiveRecord
                 'updatedAtAttribute' => false,
                 'value' => time(),
             ],
+        ];
+    }
+
+    public function rules()
+    {
+        return [
+            [['topic', 'payload'], 'required'],
+            [['created_at'], 'integer'],
+            [['topic', 'payload'], 'string', 'max' => 255],
         ];
     }
 

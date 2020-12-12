@@ -1,6 +1,8 @@
 <?php
 namespace frontend\controllers;
 
+use common\models\HistoryFireSecureData;
+use common\models\HistorySecureData;
 use common\models\LoginForm;
 use common\models\ModuleRelay;
 use common\models\ModuleSensor;
@@ -187,12 +189,42 @@ class SiteController extends Controller
 
     public function actionSecure()
     {
-        return $this->render('secure');
+        $query = HistorySecureData::find();
+        $provider = new ActiveDataProvider([
+            'query' => $query,
+            'pagination' => [
+                'pageSize' => 12,
+            ],
+            'sort' => [
+                'defaultOrder' => [
+                    'created_at' => SORT_DESC,
+                ]
+            ],
+        ]);
+
+        return $this->render('secure', [
+            'dataProvider' => $provider,
+        ]);
     }
 
     public function actionFireSecure()
     {
-        return $this->render('fire-secure');
+        $query = HistoryFireSecureData::find();
+        $provider = new ActiveDataProvider([
+            'query' => $query,
+            'pagination' => [
+                'pageSize' => 12,
+            ],
+            'sort' => [
+                'defaultOrder' => [
+                    'created_at' => SORT_DESC,
+                ]
+            ],
+        ]);
+
+        return $this->render('fire-secure', [
+            'dataProvider' => $provider,
+        ]);
     }
 
     /**
