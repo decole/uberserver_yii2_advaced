@@ -12,12 +12,13 @@ use yii\db\Query;
 
 class SystemController extends Controller
 {
-    public function actionIndex() {
+    public function actionIndex(): void
+    {
         echo 'System Controller';
         exit();
     }
 
-    public function actionDiagnostic()
+    public function actionDiagnostic(): void
     {
         Yii::$app->queue->push(new TelegramNotifyJob([
             'message' => 'Старт диагностики системы. По завершению диагностики - придет другое сообщение',
@@ -90,7 +91,7 @@ class SystemController extends Controller
         $this->info('end process');
     }
 */
-    private function chankFacker($limit, $offset)
+    private function chankFacker(int $limit, int $offset): void
     {
         $rows = (new Query())
             ->select(['topic', 'payload', 'created_at'])
@@ -100,7 +101,6 @@ class SystemController extends Controller
             ->all();
 
         $chanks = array_chunk($rows, 20);
-        $i = 1;
 
         foreach ($chanks as $items) {
             foreach ($items as $item) {
@@ -112,21 +112,20 @@ class SystemController extends Controller
                     'created_at' => $date,
                 ])->execute();
             }
-
-            $i++;
         }
 
         $this->info('Done !');
     }
 
-    private function info($message)
+    private function info(string $message): void
     {
         echo var_export($message, true) . PHP_EOL;
     }
 
-    private function dateConvert($string)
+    private function dateConvert(string $string): int
     {
         $d = new DateTime($string, new DateTimeZone('Europe/Volgograd'));
-        return $d->getTimestamp();
+
+        return (int)$d->getTimestamp();
     }
 }
