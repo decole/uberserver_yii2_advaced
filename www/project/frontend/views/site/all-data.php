@@ -10,8 +10,8 @@ $this->title = 'Все данные';
 $this->params['breadcrumbs'][] = $this->title;
 
 // добавление логики работы UI для сенсоров
-$this->registerJsFile('@web/js/sensor.v2.js', ['depends' => [JqueryAsset::class, AdminLteAsset::class]]);
-$this->registerJsFile('@web/js/relay.js?13', ['depends' => [JqueryAsset::class, AdminLteAsset::class]]);
+$this->registerJsFile('@web/js/sensor.js', ['depends' => [JqueryAsset::class, AdminLteAsset::class]]);
+$this->registerJsFile('@web/js/relay.js', ['depends' => [JqueryAsset::class, AdminLteAsset::class]]);
 ?>
 <section class="content">
     <div class="container-fluid">
