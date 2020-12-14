@@ -45,8 +45,8 @@ services:
 
   mysql:
     image: mysql:5.7.32
-    ports:
-      - "3306:3306"
+#    ports:
+#      - "3306:3306"
     volumes:
       - ~/.composer-docker/cache:/root/.composer/cache:delegated
       - ./.dev/db:/var/lib/mysql
@@ -75,8 +75,8 @@ services:
 
   redis:
     image: redis:5.0.9-alpine
-    ports:
-      - "6379:6379"
+#    ports:
+#      - "6379:6379"
     volumes:
       - ~/.composer-docker/cache:/root/.composer/cache:delegated
     logging:
@@ -87,7 +87,7 @@ services:
     depends_on:
       - redis
     ports:
-      - "8083:80"
+      - "8183:80"
     volumes:
       - ~/.composer-docker/cache:/root/.composer/cache:delegated
     environment:
