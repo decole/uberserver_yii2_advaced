@@ -4,6 +4,7 @@ namespace console\controllers;
 
 use backend\jobs\EmailNotifyJob;
 use backend\jobs\FailJob;
+use backend\jobs\SchedulerJob;
 use backend\jobs\TelegramNotifyJob;
 use common\components\EventManager;
 use common\components\ParamsEvent;
@@ -107,5 +108,18 @@ class TestController extends Controller
         ]);
         Yii::$app->trigger(Event::EVENT_SEND_ALARM_NOTIFICATION, $event);
         var_dump($event->getResult());
+    }
+
+    public function actionInit(): void
+    {
+        Yii::$app->queue->push(new SchedulerJob());
+    }
+
+    public function actionStatus(): void
+    {
+        $queue = Yii::$app->db->createCommand('SELECT * FROM queue')
+            ->queryAll();
+
+        var_dump($queue);
     }
 }

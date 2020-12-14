@@ -97,26 +97,28 @@ class ScheduleController extends Controller
     public function actionRun()
     {
         $schedule = Schedule::find()->all();
-        if(!$schedule) {
+        if (!$schedule) {
             $this->warning('No schedule models retrieved.');
             return Controller::EXIT_CODE_NORMAL;
         }
 
         $successCount = 0;
-        foreach($schedule as $single) {
-            if($this->_runCommand($single)) {
+
+        foreach ($schedule as $single) {
+            if ($this->runCommand($single)) {
                 $successCount++;
             }
         }
+
         if( $successCount > 0 ) {
             $this->log("Successfully ran $successCount commands.");
         } else {
             $this->log("No commands executed.");
         }
-        return Controller::EXIT_CODE_NORMAL;
+
     }
 
-    protected function _runCommand($single) {
+    protected function runCommand($single) {
         if( !$single->next_run || $single->next_run == null ) {
             $this->log('Next run date for command not found. Skipping.');
             return false;
