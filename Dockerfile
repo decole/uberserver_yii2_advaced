@@ -2,6 +2,13 @@ FROM php:7.4-fpm
 
 MAINTAINER decole <decole@rambler.ru>
 
+# mysqldump
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    default-mysql-client \
+    && rm -rf /var/lib/apt
+#RUN apt-get update && apt-get install -y --no-install-recommends mysql-client && rm -rf /var/lib/apt
+
 # Tools
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
@@ -117,6 +124,13 @@ RUN rm -rf /var/lib/apt/lists/* \
 
 # Workdir for php
 WORKDIR /var/www/project
+
+# Configs, etc
+COPY images/php/php.ini /usr/local/etc/php/conf.d/custom.ini
+RUN mkdir /var/log/php7
+
+
+RUN mkfifo /tmp/stdout && chmod 777 /tmp/stdout
 
 # Run container
 CMD ["php-fpm"]

@@ -2,6 +2,7 @@
 
 use frontend\components\relay\RelayWidget;
 use frontend\components\sensor\SensorWidget;
+use hail812\adminlte3\assets\AdminLteAsset;
 use yii\web\JqueryAsset;
 
 /* @var $this yii\web\View */
@@ -9,8 +10,8 @@ $this->title = 'Все данные';
 $this->params['breadcrumbs'][] = $this->title;
 
 // добавление логики работы UI для сенсоров
-$this->registerJsFile('@web/js/sensor.js', ['depends' => [JqueryAsset::class]]);
-$this->registerJsFile('@web/js/relay.js?13', ['depends' => [JqueryAsset::class]]);
+$this->registerJsFile('@web/js/sensor.js', ['depends' => [JqueryAsset::class, AdminLteAsset::class]]);
+$this->registerJsFile('@web/js/relay.js', ['depends' => [JqueryAsset::class, AdminLteAsset::class]]);
 ?>
 <section class="content">
     <div class="container-fluid">

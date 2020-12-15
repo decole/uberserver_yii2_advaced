@@ -6,7 +6,11 @@ use common\services\TelegramService;
 use yii\console\Controller;
 use yii\helpers\Console;
 
-class TelegramController extends Controller {
+class TelegramController extends Controller
+{
+    /**
+     * @var mixed
+     */
     public $message;
 
     public function options($actionID)
@@ -19,17 +23,19 @@ class TelegramController extends Controller {
         return ['m' => 'message'];
     }
 
-    public function actionBot()
+    public function actionBot(): void
     {
         $bot = TelegramService::getInstance();
+
         while (true) {
             $bot->getUpdates();
             sleep(7);
         }
+
         exit();
     }
 
-    public function actionSend()
+    public function actionSend(): void
     {
         $service = TelegramService::getInstance();
 

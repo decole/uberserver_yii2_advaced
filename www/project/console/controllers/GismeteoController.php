@@ -7,9 +7,9 @@ use yii\console\Controller;
 
 class GismeteoController extends Controller
 {
-    public function actionIndex() {
+    public function actionIndex(): void
+    {
         // https://www.gismeteo.ru/api/#kind
-        $this->alert('weather now');
         $client = new \GuzzleHttp\Client([
             'headers' => [
                 'X-Gismeteo-Token' => '5e21a0d4859496.93956314'
@@ -67,20 +67,5 @@ class GismeteoController extends Controller
         $model->wind_scale = $wind_scale;
         $model->description = $description;
         $model->save(false);
-    }
-
-    public function alert($string)
-    {
-        $this->line($string, 'warning');
-    }
-
-    public function info($string, $verbosity = null)
-    {
-        $this->line($string, 'info', $verbosity);
-    }
-
-    public function line($string, $style = null, $verbosity = null)
-    {
-        echo $string . PHP_EOL;
     }
 }

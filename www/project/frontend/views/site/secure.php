@@ -78,32 +78,33 @@ $this->registerJsFile(
                                         <i class="fas fa-minus"></i></button>
                                 </div>
                             </div>
-
-                            <table class="table">
-                                <thead>
-                                <tr>
-                                    <th>Дата</th>
-                                    <th>Событие</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>2020-10-04 16:15:11</td>
-                                    <td>home/security/margulis/1 - отмена взведения</td>
-                                </tr>
-                                <tr>
-                                    <td>2020-10-04 16:15:09</td>
-                                    <td>home/security/margulis/2 - отмена взведения</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                            <!-- /.card-body -->
-                            <div class="card-footer clearfix">
-                                <nav>
-                                    paginator
-                                </nav>
-
+                            <div class="card-body">
+                                <?php
+                                echo yii\grid\GridView::widget([
+                                    'dataProvider' => $dataProvider,
+                                    'showHeader' => false,
+                                    'layout'=>'{items}{pager}',
+//                                    'layout'=>'{sorter}\n{pager}\n{summary}\n{items}',
+                                    'columns' => [
+                                        ['class' => 'yii\grid\SerialColumn'],
+                                        'topic',
+                                        'payload',
+                                        [
+                                            'attribute' => 'created_at',
+                                            'format' =>  ['date', 'dd.MM.YYYY HH:mm:ss '],
+                                            'options' => ['width' => '200']
+                                        ],
+                                    ],
+                                    'tableOptions' => [
+                                        'class' => 'table table-bordered'
+                                    ],
+                                    'pager' => [
+                                        'class' => 'frontend\components\widgets\LinkPager',
+                                    ],
+                                ]);
+                                ?>
                             </div>
+                            <!-- /.card-body -->
                         </div>
                         <!-- /.card -->
                     </div>

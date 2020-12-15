@@ -18,13 +18,17 @@ $(document).ready(function() {
     function swiftStateRefrash() {
         let $this = $(".relay-control[data-swift-topic]");
         if($this.length > 0) {
+            let relays = [];
+
             $this.map(function (key, value) {
-                let topic = $(value).data('swift-topic');
-                let topic_check = $(value).data('swift-topic-check');
-                $.get("/api/mqtt?topic="+topic_check, function (data) {
-                    let payload = data['payload'];
-                    $(value).find('button').map(function (keybtn, valuebtn) {
-                        if ($(valuebtn).data('swift-check') == payload) {
+                relays.push($(value).data('swift-topic-check'));
+            });
+
+            $.get("/api/mqtt?topics="+relays, function (data) {
+                $.each(data, function( index, value ) {
+                    let sensor = $("div[data-swift-topic-check='"+index+"']");
+                    $(sensor).find('button').map(function (keybtn, valuebtn) {
+                        if ($(valuebtn).data('swift-check') == value) {
                             $(valuebtn).addClass('active');
                         }
                         else {

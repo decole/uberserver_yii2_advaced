@@ -4,6 +4,7 @@ namespace console\controllers;
 
 use backend\jobs\EmailNotifyJob;
 use backend\jobs\FailJob;
+use backend\jobs\SchedulerJob;
 use backend\jobs\TelegramNotifyJob;
 use common\components\EventManager;
 use common\components\ParamsEvent;
@@ -16,11 +17,12 @@ use yii\console\Controller;
 /**
  * Commands for testing functional
  */
-ini_set('output_buffering','on');
+ini_set('output_buffering', 'on');
 
 class TestController extends Controller
 {
-    public function actionIndex() {
+    public function actionIndex(): void
+    {
         /*
         Yii::$app->mailer->compose()
             ->setFrom(Yii::$app->params['supportEmail'])
@@ -31,39 +33,39 @@ class TestController extends Controller
             ->send();
         */
 
-/*
+        /*
         $state = 0;
         $topics = ModuleFireSystem::find()->asArray()->all();
 
         foreach ($topics as $topic) {
             $state += (int)Yii::$app->cache->get($topic['topic']);
         }
-*/
+        */
 
 
-//        $model = MqttSecure::where('topic', $topic)->first();
-//        $model->trigger = $state;
-//        if ( $model->save() ) {
-//            (new DeviceService)->refresh();
-//            $model::logChangeTrigger($model->topic, $model->trigger);
-//        }
+        //        $model = MqttSecure::where('topic', $topic)->first();
+        //        $model->trigger = $state;
+        //        if ( $model->save() ) {
+        //            (new DeviceService)->refresh();
+        //            $model::logChangeTrigger($model->topic, $model->trigger);
+        //        }
 
-//        $topic = 'home/security/margulis/1';
-//        $model = ModuleSecureSystem::find()->where(['topic' => $topic])->limit(1)->one();
-//        $model->trigger = (int)(bool)!$model->trigger;
-//        $model->save();
-//
-//        var_dump($model->trigger);
-//        exit();
+        //        $topic = 'home/security/margulis/1';
+        //        $model = ModuleSecureSystem::find()->where(['topic' => $topic])->limit(1)->one();
+        //        $model->trigger = (int)(bool)!$model->trigger;
+        //        $model->save();
+        //
+        //        var_dump($model->trigger);
+        //        exit();
     }
 
-    public function actionTime()
+    public function actionTime(): void
     {
         $date = new DateTime();
         echo $date->format('Y-m-d H:i:s.u') . PHP_EOL;
     }
 
-    public function actionEmail()
+    public function actionEmail(): void
     {
         echo 'add job to send email' . PHP_EOL;
         Yii::$app->queue->push(new EmailNotifyJob([
@@ -71,7 +73,7 @@ class TestController extends Controller
         ]));
     }
 
-    public function actionTelegram()
+    public function actionTelegram(): void
     {
         echo 'add job to send telegram message' . PHP_EOL;
         Yii::$app->queue->push(new TelegramNotifyJob([
@@ -79,21 +81,21 @@ class TestController extends Controller
         ]));
     }
 
-    public function actionAddFailJob()
+    public function actionAddFailJob(): void
     {
         Yii::$app->queue->push(new FailJob([
             'type' => 'test message from site uberserver.ru',
         ]));
     }
 
-    public function actionGenpas($pass = 'qwerty123')
+    public function actionGenpas(string $pass = 'qwerty123'): void
     {
         $secure = new Security();
         echo 'password: ' . $pass . PHP_EOL;
         echo $secure->generatePasswordHash($pass) . PHP_EOL;
     }
 
-    public function actionEvent($error = 'test')
+    public function actionEvent(string $error = 'test'): void
     {
         // развернута система событий для консольных приложений. пока только тесты
         $eventManager = new EventManager();
@@ -106,5 +108,18 @@ class TestController extends Controller
         ]);
         Yii::$app->trigger(Event::EVENT_SEND_ALARM_NOTIFICATION, $event);
         var_dump($event->getResult());
+    }
+
+    public function actionInit(): void
+    {
+        Yii::$app->queue->push(new SchedulerJob());
+    }
+
+    public function actionStatus(): void
+    {
+        $queue = Yii::$app->db->createCommand('SELECT * FROM queue')
+            ->queryAll();
+
+        var_dump($queue);
     }
 }

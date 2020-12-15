@@ -1,5 +1,6 @@
 <?php
 
+use hail812\adminlte3\assets\AdminLteAsset;
 use yii\web\JqueryAsset;
 
 /* @var $this yii\web\View */
@@ -7,10 +8,7 @@ $this->title = 'Система пожарной безопасности';
 $this->params['breadcrumbs'][] = $this->title;
 
 // добавление логики работы UI для сенсоров
-$this->registerJsFile(
-    '@web/js/fire_secure.js?0.1',
-    ['depends' => [JqueryAsset::class]]
-);
+$this->registerJsFile('@web/js/fire_secure.js?0.1', ['depends' => [JqueryAsset::class, AdminLteAsset::class]]);
 ?>
 <section class="content">
     <div class="container-fluid">
@@ -49,16 +47,6 @@ $this->registerJsFile(
                                             </div>
                                         </td>
                                     </tr>
-
-
-
-
-
-
-
-
-
-
                                     </tbody>
                                 </table>
                             </div>
@@ -76,52 +64,33 @@ $this->registerJsFile(
                                         <i class="fas fa-minus"></i></button>
                                 </div>
                             </div>
-
-                            <table class="table">
-                                <thead>
-                                <tr>
-                                    <th>Дата</th>
-                                    <th>Событие</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>2020-09-10 21:53:11</td>
-                                    <td>home/firesensor/fire_state - зафиксирован статус - пожар</td>
-                                </tr>
-                                <tr>
-                                    <td>2020-09-10 21:53:06</td>
-                                    <td>home/firesensor/fire_state - зафиксирован статус - пожар</td>
-                                </tr>
-                                <tr>
-                                    <td>2020-09-10 21:53:01</td>
-                                    <td>home/firesensor/fire_state - зафиксирован статус - пожар</td>
-                                </tr>
-                                <tr>
-                                    <td>2020-09-10 21:52:56</td>
-                                    <td>home/firesensor/fire_state - зафиксирован статус - пожар</td>
-                                </tr>
-                                <tr>
-                                    <td>2020-09-10 21:52:51</td>
-                                    <td>home/firesensor/fire_state - зафиксирован статус - пожар</td>
-                                </tr>
-                                <tr>
-                                    <td>2020-09-10 21:52:46</td>
-                                    <td>home/firesensor/fire_state - зафиксирован статус - пожар</td>
-                                </tr>
-                                <tr>
-                                    <td>2020-09-10 21:52:41</td>
-                                    <td>home/firesensor/fire_state - зафиксирован статус - пожар</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                            <!-- /.card-body -->
-                            <div class="card-footer clearfix">
-                                <nav>
-                                    paginator
-                                </nav>
-
+                            <div class="card-body">
+                                <?php
+                                echo yii\grid\GridView::widget([
+                                    'dataProvider' => $dataProvider,
+                                    'showHeader' => false,
+                                    'layout'=>'{items}{pager}',
+//                                    'layout'=>'{sorter}\n{pager}\n{summary}\n{items}',
+                                    'columns' => [
+                                        ['class' => 'yii\grid\SerialColumn'],
+                                        'topic',
+                                        'payload',
+                                        [
+                                            'attribute' => 'created_at',
+                                            'format' =>  ['date', 'dd.MM.YYYY HH:mm:ss '],
+                                            'options' => ['width' => '200']
+                                        ],
+                                    ],
+                                    'tableOptions' => [
+                                        'class' => 'table table-bordered'
+                                    ],
+                                    'pager' => [
+                                        'class' => 'frontend\components\widgets\LinkPager',
+                                    ],
+                                ]);
+                                ?>
                             </div>
+                            <!-- /.card-body -->
                         </div>
                         <!-- /.card -->
                     </div>

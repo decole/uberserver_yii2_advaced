@@ -56,7 +56,7 @@ use yii\helpers\Html;
     <ul class="navbar-nav ml-auto">
         <!-- Notifications Dropdown Menu -->
         <li class="nav-item dropdown">
-            <?=NotifyWidget::widget(['params' => ['messages']])?>
+            <?=NotifyWidget::widget(['params' => ['messages', 'requests', 'reports']])?>
         </li>
 
         <li class="nav-item">

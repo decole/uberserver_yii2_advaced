@@ -3,16 +3,17 @@
 use yii\mutex\MysqlMutex;
 use yii\queue\db\Queue;
 use yii\queue\LogBehavior;
+use yii\queue\serializers\JsonSerializer;
 
 return [
     'timeZone' => 'Europe/Volgograd',
     'bootstrap' => [
         'queue',
-        'log'
+        'log',
     ],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
-        '@npm'   => '@vendor/npm-asset',
+        '@npm' => '@vendor/npm-asset',
     ],
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'components' => [
@@ -28,6 +29,7 @@ return [
             'as log' => LogBehavior::class,
             'class' => Queue::class,
             'db' => 'db',
+            'serializer' => JsonSerializer::class,
 
             'tableName' => 'queue',
             'channel' => 'default',

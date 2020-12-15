@@ -53,6 +53,9 @@ migrate-down:
 mysql:
 	$(compose) exec mysql bash
 
+mysql-dump:
+	$(yii) backup/index
+
 app-init:
 	$(app) php init --env=Development --overwrite=All
 

@@ -61,8 +61,10 @@ class Schedule extends ActiveRecord
         ];
     }
 
-    public function begin() {
+    public function begin(): bool
+    {
         $this->next_run = null;
+
         return $this->save();
     }
 
@@ -96,20 +98,17 @@ class Schedule extends ActiveRecord
         $taskModel = self::find()->where(['command' => $task])->limit(1)->one();
         $taskModel->next_run = $date;
         $taskModel->save();
-
     }
 
     /**
      * changing time of this period time
-     *
-     * @param $minutes
-     * @return string
      */
-    private function setTimer($minutes): string
+    private function setTimer(int $minutes): string
     {
         $dateTime = new DateTime();
         $now = $dateTime->getTimestamp();
-        $dateTime->setTimestamp($now + $minutes*60);
+        $dateTime->setTimestamp($now + $minutes * 60);
+
         return $dateTime->format('Y-m-d H:i:s');
     }
 }
