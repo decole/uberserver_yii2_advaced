@@ -129,7 +129,6 @@ WORKDIR /var/www/project
 COPY images/php/php.ini /usr/local/etc/php/conf.d/custom.ini
 RUN mkdir /var/log/php7
 
-
 RUN mkfifo /tmp/stdout && chmod 777 /tmp/stdout
 
 # Run container

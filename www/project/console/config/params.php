@@ -1,4 +1,5 @@
 <?php
 return [
-    'adminEmail' => 'admin@example.com',
+    'cloud_user' => 'asdasdasdasd',
+    'cloud_password' => 'ddasdasdasdasdasdas',
 ];

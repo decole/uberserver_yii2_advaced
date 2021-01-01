@@ -25,7 +25,8 @@
         "bower-asset/font-awesome": "^5.15",
         "codeception/aspect-mock": "3.1.0",
         "ext-zip": "*",
-      "ext-json": "*"
+      "ext-json": "*",
+      "ext-curl": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

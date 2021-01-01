@@ -2,6 +2,8 @@
 
 namespace console\controllers;
 
+ini_set('memory_limit', '512M');
+
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use Yii;
@@ -54,6 +56,11 @@ class BackupController extends Controller
         }
 
         $this->stdout("\n  Backup created.\n\n", Console::FG_GREEN);
+        sleep(10);
+
+        $this->send();
+
+        $this->stdout("\n  Backup send in Owncloud server.\n\n", Console::FG_GREEN);
     }
 
     private function dumpDatabase(string $database_handle, string $path): void
@@ -88,5 +95,69 @@ class BackupController extends Controller
 
             $zip->close();
         }
+    }
+
+    private function send(): void
+    {
+        $this->stdout("\n  Start sending.\n\n", Console::FG_GREEN);
+        $path = Yii::getAlias($this->path);
+        $list = [];
+        $folders = $this->getSource($path);
+
+        foreach ($folders as $folder) {
+            $files = $this->getSource($path. '/' . $folder);
+
+            foreach ($files as $file) {
+                $list[$folder] = $path. '/' . $folder . '/' . $file;
+            }
+        }
+
+        foreach ($list as $folder => $filePath) {
+            $this->put($filePath, str_replace('/', '_', $filePath));
+            unlink($filePath);
+            rmdir($path = Yii::getAlias($this->path) . '/' . $folder);
+        }
+    }
+
+    /**
+     * @return string[]
+     */
+    private function getSource(string $path): array
+    {
+        return array_diff(scandir($path), ['..', '.']);
+    }
+
+    private function put(string $filePath, string $name): void
+    {
+        $username = Yii::$app->params['cloud_user'];
+        $password = Yii::$app->params['cloud_password'];
+        $filename = $filePath;
+        $url = 'https://cl4y.ru/owncloud/remote.php/dav/files/decole/backup/uberserver/' . $name . '.sql';
+
+        // Manually create the body
+        $requestBody = '';
+        $separator = '-----'.md5(microtime()).'-----';
+        $file = fopen($filename, 'r');
+        $size = filesize($filename);
+        $filecontent = fread($file, $size);
+        $requestBody .= "--$separator\r\n"
+            . "Content-Disposition: form-data; name=\"$filename\"; filename=\"$filename\"\r\n"
+            . "Content-Length: ".strlen($filecontent)."\r\n"
+            . "Content-Type: image/png\r\n"
+            . "Content-Transfer-Encoding: binary\r\n"
+            . "\r\n"
+            . "$filecontent\r\n";
+
+        $requestBody .= "--$separator--";
+
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
+        curl_setopt($ch, CURLOPT_USERPWD, $username . ":" . $password);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $requestBody);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: multipart/form-data; boundary="'.$separator.'"']);
+
+        $response = curl_exec($ch);
     }
 }
