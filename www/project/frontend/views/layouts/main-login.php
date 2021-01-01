@@ -2,6 +2,7 @@
 
 use hail812\adminlte3\assets\AdminLteAsset;
 use hail812\adminlte3\assets\PluginAsset;
+use yii\helpers\Html;
 use yii\web\View;
 
 if (class_exists('yii\debug\Module')) {
@@ -22,7 +23,11 @@ $this->beginPage() ?>
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 3 | Log in</title>
+    <title><?= Html::encode($this->title) ?></title>
+    <link rel="icon" href="/favicon.png" sizes="32x32" />
+    <link rel="icon" href="/favicon.png" sizes="192x192" />
+    <link rel="apple-touch-icon-precomposed" href="/favicon.png" />
+    <meta name="msapplication-TileImage" content="/favicon.png" /
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php $this->registerCsrfMetaTags() ?>
@@ -32,7 +37,7 @@ $this->beginPage() ?>
 <?php  $this->beginBody() ?>
 <div class="login-box">
     <div class="login-logo">
-        <a href="<?=Yii::$app->homeUrl?>"><b>Admin</b>LTE</a>
+        <a href="<?=Yii::$app->homeUrl?>"><b>Uber</b>server</a>
     </div>
     <!-- /.login-logo -->
 

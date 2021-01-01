@@ -2,11 +2,13 @@
 
 use yii\bootstrap4\ActiveForm;
 use yii\helpers\Html;
+
+$this->title = 'Login - Uberserver';
 ?>
 <div class="card">
     <div class="card-body login-card-body">
         <p class="login-box-msg">Sign in to start your session</p>
-
+        <?= Yii::$app->session->getFlash('success');?>
         <?php $form = ActiveForm::begin(['id' => 'login-form']) ?>
 
         <?= $form->field($model,'username', [
@@ -41,11 +43,8 @@ use yii\helpers\Html;
         <?php ActiveForm::end(); ?>
 
         <p class="mb-1">
-            <a href="forgot-password.html">I forgot my password</a>
+            <?= Html::a('Забыл пароль', ['site/request-password-reset']) ?>
         </p>
-<!--        <p class="mb-0">-->
-<!--            <a href="register.html" class="text-center">Register a new membership</a>-->
-<!--        </p>-->
     </div>
     <!-- /.login-card-body -->
 </div>

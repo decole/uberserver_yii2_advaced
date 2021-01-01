@@ -12,7 +12,6 @@ use common\models\Schedule;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\ResetPasswordForm;
-use frontend\models\SignupForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
 use yii\base\Exception;
@@ -24,6 +23,7 @@ use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
+use yii\web\Response;
 
 class SiteController extends Controller
 {
@@ -35,7 +35,10 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::class,
-                'only' => ['logout', 'signup'],
+                'only' => [
+                    'logout',
+                    'signup',
+                ],
                 'rules' => [
                     [
                         'actions' => ['signup'],
@@ -43,7 +46,10 @@ class SiteController extends Controller
                         'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['logout', 'index'],
+                        'actions' => [
+                            'logout',
+                            'index',
+                        ],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -74,17 +80,27 @@ class SiteController extends Controller
         ];
     }
 
-    public function actionIndex(): string
+    /**
+     * @return string|Response
+     */
+    public function actionIndex()
     {
         if (Yii::$app->user->isGuest) {
-            return $this->redirect('site/login');
+            return $this->actionLogin();
         }
 
         return $this->render('index');
     }
 
-    public function actionNotify(): string
+    /**
+     * @return string|Response
+     */
+    public function actionNotify()
     {
+        if (Yii::$app->user->isGuest) {
+            return $this->actionLogin();
+        }
+
         $refresh = false;
 
         if (Yii::$app->request->post()['clear'] === 'all') {
@@ -114,8 +130,15 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionGreenhouse(): string
+    /**
+     * @return string|Response
+     */
+    public function actionGreenhouse()
     {
+        if (Yii::$app->user->isGuest) {
+            return $this->actionLogin();
+        }
+
         $sensors = ModuleSensor::find()
             ->where(['topic' => 'greenhouse/temperature'])
             ->asArray()
@@ -131,36 +154,22 @@ class SiteController extends Controller
         return $this->render('icons');
     }
 
-    public function actionLogin(): string
-    {
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
-
-        $model = new LoginForm();
-
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
-        }
-
-        $model->password = '';
-        // для авторизации исполбзуется свой шаблон main-login
-        $this->layout = 'main-login';
-
-        return $this->render('login', [
-            'model' => $model,
-        ]);
-    }
-
     public function actionLogout(): string
     {
         Yii::$app->user->logout();
 
-        return $this->goHome();
+        return $this->actionLogin();
     }
 
-    public function actionAllData(): string
+    /**
+     * @return string|Response
+     */
+    public function actionAllData()
     {
+        if (Yii::$app->user->isGuest) {
+            return $this->actionLogin();
+        }
+
         $sensors = ModuleSensor::find()->asArray()->all();
         $relays = ModuleRelay::find()->asArray()->all();
 
@@ -170,8 +179,15 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionMargulis(): string
+    /**
+     * @return string|Response
+     */
+    public function actionMargulis()
     {
+        if (Yii::$app->user->isGuest) {
+            return $this->actionLogin();
+        }
+
         $sensors = ModuleSensor::find()
             ->where(['topic' => 'margulis/temperature'])
             ->orWhere(['topic' => 'margulis/humidity'])
@@ -189,8 +205,15 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionSecure(): string
+    /**
+     * @return string|Response
+     */
+    public function actionSecure()
     {
+        if (Yii::$app->user->isGuest) {
+            return $this->actionLogin();
+        }
+
         $query = HistorySecureData::find();
         $provider = new ActiveDataProvider([
             'query' => $query,
@@ -209,8 +232,15 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionFireSecure(): string
+    /**
+     * @return string|Response
+     */
+    public function actionFireSecure()
     {
+        if (Yii::$app->user->isGuest) {
+            return $this->actionLogin();
+        }
+
         $query = HistoryFireSecureData::find();
         $provider = new ActiveDataProvider([
             'query' => $query,
@@ -229,8 +259,15 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionWatering(): string
+    /**
+     * @return string|Response
+     */
+    public function actionWatering()
     {
+        if (Yii::$app->user->isGuest) {
+            return $this->actionLogin();
+        }
+
         $watering = ModuleRelay::find()->where(['type' => 7])->asArray()->all();
         $waterTopics = ArrayHelper::getColumn($watering, 'topic');
 
@@ -293,12 +330,40 @@ class SiteController extends Controller
     }
 
     /**
+     * @return string|Response
+     */
+    public function actionLogin()
+    {
+        if (!Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
+        $model = new LoginForm();
+
+        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            return $this->goBack();
+        }
+
+        $model->password = '';
+        // для авторизации исполбзуется свой шаблон main-login
+        $this->layout = 'main-login';
+
+        return $this->render('login', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
      * Signs user up.
      *
      * @return mixed
      */
     public function actionSignup()
     {
+        return $this->actionLogin();
+
+        /*
+        $this->layout = 'main-login';
         $model = new SignupForm();
 
         if ($model->load(Yii::$app->request->post()) && $model->signup()) {
@@ -313,6 +378,7 @@ class SiteController extends Controller
         return $this->render('signup', [
             'model' => $model,
         ]);
+        */
     }
 
     /**
@@ -322,6 +388,7 @@ class SiteController extends Controller
      */
     public function actionRequestPasswordReset()
     {
+        $this->layout = 'main-login';
         $model = new PasswordResetRequestForm();
 
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
@@ -351,6 +418,8 @@ class SiteController extends Controller
      */
     public function actionResetPassword(string $token)
     {
+        $this->layout = 'main-login';
+
         try {
             $model = new ResetPasswordForm($token);
         } catch (InvalidArgumentException $e) {
@@ -373,7 +442,7 @@ class SiteController extends Controller
      *
      * @throws BadRequestHttpException
      */
-    public function actionVerifyEmail(string $token): yii\web\Response
+    public function actionVerifyEmail(string $token): Response
     {
         try {
             $model = new VerifyEmailForm($token);
