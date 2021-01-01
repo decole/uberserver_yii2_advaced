@@ -2,29 +2,31 @@
 
 namespace common\modules\yandexSkill\dialogs;
 
+use common\modules\yandexSkill\services\DialogService;
+use Yii;
+
 class StatusDialog implements AliceInterface
 {
     /**
-     * @var string
+     * @return string[]
      */
-    public $text;
-
-    public function __construct()
-    {
-        $this->text = 'Команда не распознана';
-    }
-
-    public function listVerb()
+    public function listVerb(): array
     {
         return ['статус', 'статуса', 'статусу'];
     }
 
-    public function process($message)
+    public function process($message = null): string
     {
-        return 'Общий статус - пока неизвестен. Не разработан алгоритм диагностики.';
+        $service = Yii::createObject(DialogService::class);
+
+        $text = $service->statusSensors();
+        $text .= '. ' . $service->statusSecureSystem();
+        $text .= '. ' . $service->statusFireSecureSystem();
+
+        return $text;
     }
 
-    public function verb($message)
+    public function verb($message): void
     {
     }
 }

@@ -57,6 +57,7 @@ class MainController extends Controller
     public function __construct($id, $module, $config = [])
     {
         $this->enableCsrfValidation = false;
+
         parent::__construct($id, $module, $config);
 
         $this->message_id = null;

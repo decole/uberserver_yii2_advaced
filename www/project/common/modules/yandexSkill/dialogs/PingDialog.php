@@ -4,21 +4,17 @@ namespace common\modules\yandexSkill\dialogs;
 
 class PingDialog implements AliceInterface
 {
-    public function __construct()
-    {
-    }
-
-    public function listVerb()
+    public function listVerb(): array
     {
         return ['ping'];
     }
 
-     public function process($message)
+    public function process($message): string
     {
         return 'pong';
     }
 
-     public function verb($message)
+    public function verb($message): void
     {
     }
 }

@@ -15,34 +15,34 @@ use common\modules\yandexSkill\dialogs\WeatherDialog;
 class AliceSkillService
 {
     /**
-     * @var string | null
+     * @var mixed
      */
     public $text;
 
     /**
-     * @var array | null
+     * @var mixed[]|mixed
      */
     public $message;
 
     /**
-     * @var array
+     * @var string[]
      */
-    private $listing;
+    private array $listing;
 
     public function __construct(?array $request_json)
     {
         $this->text = 'Привет';
         $this->message = $request_json;
         $this->listing = [
-            'ping'     => new PingDialog(),
-            'hello'    => new HelloDialog(),
-            'lamp'     => new LampDialog(),
-            'weather'  => new WeatherDialog(),
+            'ping' => new PingDialog(),
+            'hello' => new HelloDialog(),
+            'lamp' => new LampDialog(),
+            'weather' => new WeatherDialog(),
             'watering' => new WateringDialog(),
-            'secure'   => new SecureDialog(),
+            'secure' => new SecureDialog(),
             'diagnose' => new DiagnosticDialog(),
-            'status'   => new StatusDialog(),
-            'fire'     => new FireSecureDialog(),
+            'status' => new StatusDialog(),
+            'fire' => new FireSecureDialog(),
         ];
     }
 
@@ -51,20 +51,20 @@ class AliceSkillService
         if (is_array($this->message)) {
             foreach ($this->message as $value)
             {
-                if(self::sorter($value)) {
+                if($this->sorter($value)) {
                     break;
                 }
             }
         }
         else {
-            self::sorter($this->message);
+            $this->sorter($this->message);
         }
     }
 
     private function sorter($verb): bool
     {
         foreach ($this->listing as $value) {
-            if (in_array( $verb, $value->listVerb() )) {
+            if (in_array($verb, $value->listVerb())) {
                 $this->text = $value->process($this->message);
 
                 return true;

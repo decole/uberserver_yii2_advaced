@@ -2,65 +2,70 @@
 
 namespace common\modules\yandexSkill\dialogs;
 
+use common\modules\yandexSkill\services\DialogService;
 use common\services\SecureService;
 
 class SecureDialog implements AliceInterface
 {
-    /**
-     * @var string
-     */
-    public $text;
+    public string $text;
 
     public function __construct()
     {
         $this->text = 'Команда не распознана';
     }
 
-    public function listVerb()
+    public function listVerb(): array
     {
         return ['охрана', 'охранная', 'охранную', 'охрану', 'безопасности', 'безопасность'];
     }
 
-    public function process($message)
+    public function process($message): string
     {
         if (is_array($message)) {
             foreach ($message as $value) {
-                self::verb($value);
+                $this->verb($value);
             }
-        }
-        else {
-            if(!empty($message)) {
-                self::verb($message);
+        } else {
+            if (!empty($message)) {
+                $this->verb($message);
             }
         }
 
         return $this->text;
     }
 
-    public function verb($message)
+    public function verb($message): void
     {
-        (in_array( $message, ['включить', 'включи', 'включай'] ))    ? self::turnOn() : null;
-        (in_array( $message, ['выключить', 'выключи', 'выключай'] )) ? self::turnOff() : null;
+        in_array($message, ['включить', 'включи', 'включай']) ? $this->turnOn() : null;
+        in_array($message, ['выключить', 'выключи', 'выключай']) ? $this->turnOff() : null;
+        in_array($message, ['статус', 'состояние']) ? $this->status() : null;
     }
 
-    private function turnOn()
+    private function turnOn(): void
     {
-        self::changeStateTrigger('home/security/margulis/1', true);
-        self::changeStateTrigger('home/security/margulis/2', true);
+        $this->changeStateTrigger('home/security/margulis/1', true);
+        $this->changeStateTrigger('home/security/margulis/2', true);
         $this->text = 'Система безопасности включена';
     }
 
-    private function turnOff()
+    private function turnOff(): void
     {
-        self::changeStateTrigger('home/security/margulis/1', false);
-        self::changeStateTrigger('home/security/margulis/2', false);
+        $this->changeStateTrigger('home/security/margulis/1', false);
+        $this->changeStateTrigger('home/security/margulis/2', false);
         $this->text = 'Система безопасности выключена';
     }
 
-    private function changeStateTrigger($topic, bool $state)
+    private function changeStateTrigger(string $topic, bool $state): void
     {
         $service = SecureService::getInstance();
-        $payload = ((bool)$state) ? 'on' : 'off';
+        $payload = (bool)$state ? 'on' : 'off';
         $service->triggerChange($topic, $payload);
+    }
+
+    public function status(): void
+    {
+        $service = new DialogService();
+
+        $this->text = $service->statusSecureSystem();
     }
 }

@@ -4,23 +4,16 @@ namespace common\modules\yandexSkill\dialogs;
 
 interface AliceInterface
 {
-    /**
-     * @return mixed
-     */
-    public function listVerb();
+    public function listVerb(): array;
 
     /**
      * Главный метод вывода данных по диалогу
-     * @param $message
-     * @return mixed
      */
-    public function process($message);
+    public function process($message): string;
 
     /**
      * Слова тригеры и их процессы
      * @param $message
-     * @return void
      */
-    public function verb($message);
-
+    public function verb($message): void;
 }

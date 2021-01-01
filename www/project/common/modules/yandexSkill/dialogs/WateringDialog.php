@@ -2,58 +2,57 @@
 
 namespace common\modules\yandexSkill\dialogs;
 
-use common\services\MqttService;
+use common\services\WateringServise;
 
 class WateringDialog implements AliceInterface
 {
-    /**
-     * @var string
-     */
-    public $text;
+    public string $text;
+
+    private WateringServise $service;
 
     public function __construct()
     {
+        $this->service = new WateringServise();
         $this->text = 'Команда не распознана';
     }
 
-    public function listVerb()
+    public function listVerb(): array
     {
         return ['шланг', 'шланга', 'вода', 'воды', 'воду'];
     }
 
-    public function process($message)
+    public function process($message): string
     {
         if (is_array($message)) {
             foreach ($message as $value) {
-                self::verb($value);
+                $this->verb($value);
             }
-        }
-        else {
-            if(!empty($message)) {
-                self::verb($message);
+        } else {
+            if (!empty($message)) {
+                $this->verb($message);
             }
         }
 
         return $this->text;
     }
 
-    public function verb($message)
+    public function verb($message): void
     {
-        (in_array( $message, ['включить', 'включи', 'включай'] ))    ? self::turnOn() : null;
-        (in_array( $message, ['выключить', 'выключи', 'выключай'] )) ? self::turnOff() : null;
+        in_array($message, ['включить', 'включи', 'включай']) ? $this->turnOn() : null;
+        in_array($message, ['выключить', 'выключи', 'выключай']) ? $this->turnOff() : null;
     }
 
-    private function turnOn()
+    private function turnOn(): void
     {
-        $service = MqttService::getInstance();
-        $service->post('water/major', '1');
+        $topic = $this->service->topicMajor;
+        $this->service->turnOn($topic);
         $this->text = 'Шланг включен';
     }
 
-    private function turnOff()
+    private function turnOff(): void
     {
-        $service = MqttService::getInstance();
-        $service->post('water/major', '0');
+        $topic = $this->service->topicMajor;
+        $this->service->turnOff($topic);
         $this->text = 'Шланг выключен';
     }
 }

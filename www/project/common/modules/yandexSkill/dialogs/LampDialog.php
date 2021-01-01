@@ -16,12 +16,12 @@ class LampDialog implements AliceInterface
         $this->text = 'Команда не распознана';
     }
 
-    public function listVerb()
+    public function listVerb(): array
     {
         return ['свет', 'лампа', 'лампу'];
     }
 
-    public function process($message)
+    public function process($message): string
     {
         if (is_array($message)) {
             foreach ($message as $value) {
@@ -37,7 +37,7 @@ class LampDialog implements AliceInterface
         return $this->text;
     }
 
-    public function verb($message)
+    public function verb($message): void
     {
         (in_array( $message, ['включить', 'включи', 'включай'] ))    ? self::turnOn() : null;
         (in_array( $message, ['выключить', 'выключи', 'выключай'] )) ? self::turnOff() : null;

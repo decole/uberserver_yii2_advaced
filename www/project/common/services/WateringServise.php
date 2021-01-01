@@ -12,6 +12,11 @@ class WateringServise
 {
     use instance;
 
+    public string $topicMajor = 'water/major';
+    public string $topicOne = 'water/1';
+    public string $topicTwo = 'water/2';
+    public string $topicThree = 'water/3';
+
     public function waterLeakage(): bool
     {
         $leakage = ModuleLeakage::findAll(['active' => 1]);

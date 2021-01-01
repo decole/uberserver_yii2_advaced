@@ -9,11 +9,13 @@ use yii\console\Controller;
 class WateringController extends Controller
 {
     public $defaultAction = 'info';
+
     protected WateringServise $service;
-    protected string $topicMajor = 'water/major';
-    protected string $topicOne = 'water/1';
-    protected string $topicTwo = 'water/2';
-    protected string $topicThree = 'water/3';
+
+    protected string $topicMajor;
+    protected string $topicOne;
+    protected string $topicTwo;
+    protected string $topicThree;
 
     /**
      * WateringController constructor.
@@ -25,6 +27,10 @@ class WateringController extends Controller
         parent::__construct($id, $module, $config);
 
         $this->service = new WateringServise();
+        $this->topicMajor = $this->service->topicMajor;
+        $this->topicOne = $this->service->topicOne;
+        $this->topicTwo = $this->service->topicTwo;
+        $this->topicThree = $this->service->topicThree;
     }
 
     public function actionMajorOn(): void

@@ -3,6 +3,7 @@
 namespace common\services;
 
 use common\models\ModuleSecureSystem;
+use common\modules\yandexSkill\services\DialogService;
 use common\traits\instance;
 use Throwable;
 
@@ -10,17 +11,14 @@ final class SecureService
 {
     use instance;
 
-    /**
-     * @var MqttService
-     */
-    private $service;
+    private MqttService $service;
 
     public function __construct()
     {
         $this->service = MqttService::getInstance();
     }
 
-    public function triggerChange(string $topic, string $payload)
+    public function triggerChange(string $topic, string $payload): bool
     {
         $model = ModuleSecureSystem::findOne(['topic' => $topic]);
 
@@ -39,5 +37,12 @@ final class SecureService
             var_dump($e->getMessage());
             exit();
         }
+    }
+
+    public function status(): string
+    {
+        $service = new DialogService();
+
+        return $service->statusSecureSystem();
     }
 }

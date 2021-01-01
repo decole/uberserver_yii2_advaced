@@ -4,22 +4,17 @@ namespace common\modules\yandexSkill\dialogs;
 
 class HelloDialog implements AliceInterface
 {
-    public function __construct()
-    {
-    }
-
-    public function listVerb()
+    public function listVerb(): array
     {
         return ['hello', 'привет'];
     }
 
-    public function process($message)
+    public function process($message): string
     {
         return 'Привет, это частный навык Умного дома';
     }
 
-    public function verb($message)
+    public function verb($message): void
     {
-        // TODO: Implement verb() method.
     }
 }

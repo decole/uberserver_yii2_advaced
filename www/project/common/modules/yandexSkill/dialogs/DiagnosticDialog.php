@@ -4,16 +4,12 @@ namespace common\modules\yandexSkill\dialogs;
 
 class DiagnosticDialog implements AliceInterface
 {
-    public function __construct()
-    {
-    }
-
-    public function listVerb()
+    public function listVerb(): array
     {
         return ['диагностика', 'диагностики', 'диагностику'];
     }
 
-    public function process($message)
+    public function process($message): string
     {
         // TODO сделать самодиагностику
         //      применить систему тасок. пока не реализовано
@@ -26,7 +22,7 @@ class DiagnosticDialog implements AliceInterface
         return 'Самодиагностика запланирована в менеджере задач. Конечные данные придут в телеграм чат.';
     }
 
-    public function verb($message)
+    public function verb($message): void
     {
     }
 }

@@ -2,35 +2,23 @@
 
 namespace common\modules\yandexSkill\dialogs;
 
-use common\models\ModuleFireSystem;
-use Yii;
+use common\modules\yandexSkill\services\DialogService;
 
 class FireSecureDialog implements AliceInterface
 {
-    public function __construct()
-    {
-    }
-
-    public function listVerb()
+    public function listVerb(): array
     {
         return ['пожарная', 'пожарную', 'пожарной'];
     }
 
-    public function process($message)
+    public function process($message): string
     {
-        $state = 0;
-        $topics = ModuleFireSystem::find()->asArray()->all();
+        $service = new DialogService();
 
-        foreach ($topics as $topic) {
-            $state += (int)Yii::$app->cache->get($topic['topic']);
-        }
-
-        $status = ((int)$state === 0) ? 'норма' : 'пожар';
-
-        return 'Система пожарной безопасности в статусе - ' . $status;
+        return $service->statusFireSecureSystem();
     }
 
-    public function verb($message)
+    public function verb($message): void
     {
     }
 }
