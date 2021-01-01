@@ -1,7 +1,7 @@
 <?php
 
+use common\components\queue\Queue;
 use yii\mutex\MysqlMutex;
-use yii\queue\db\Queue;
 use yii\queue\LogBehavior;
 use yii\queue\serializers\JsonSerializer;
 
@@ -30,7 +30,6 @@ return [
             'class' => Queue::class,
             'db' => 'db',
             'serializer' => JsonSerializer::class,
-
             'tableName' => 'queue',
             'channel' => 'default',
             'mutex' => MysqlMutex::class,

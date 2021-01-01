@@ -71,11 +71,13 @@ class Schedule extends ActiveRecord
     public function end() {
         $lastRunDate = new DateTime('NOW');
         $this->last_run = $lastRunDate->format('Y-m-d H:i:s');
+
         if($this->interval !== null && $this->interval !== '') {
             $interval = DateInterval::createFromDateString( $this->interval );
             $nextRunDate = $lastRunDate->add( $interval );
-            $this->next_run = $nextRunDate->format('Y-m-d H:i:s');
+            $this->next_run = $nextRunDate->format('Y-m-d H:i:00');
         }
+
         return $this->save();
     }
 

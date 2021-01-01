@@ -9,6 +9,7 @@ use backend\jobs\TelegramNotifyJob;
 use common\components\EventManager;
 use common\components\ParamsEvent;
 use common\events\Event;
+use common\services\WateringServise;
 use DateTime;
 use Yii;
 use yii\base\Security;
@@ -122,4 +123,14 @@ class TestController extends Controller
 
         var_dump($queue);
     }
+
+    public function actionT(): void
+    {
+//        $service = ScheduleService::getInstance();
+//        $service->run();
+        $service = new WateringServise();
+        $service->waterLeakage();
+    }
+
+
 }

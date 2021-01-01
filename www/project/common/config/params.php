@@ -1,5 +1,7 @@
 <?php
 return [
+    'application_name' => 'uberserver',
+
     'adminEmail' => 'decole@rambler.ru',
     'supportEmail' => 'decole2014@yandex.ru',
     'senderEmail' => 'decole2014@yandex.ru',

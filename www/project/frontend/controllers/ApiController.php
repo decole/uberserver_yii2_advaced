@@ -9,6 +9,7 @@ use common\services\MqttService;
 use common\services\SecureService;
 use DateTime;
 use DateTimeZone;
+use Throwable;
 use Yii;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
@@ -90,7 +91,7 @@ class ApiController extends Controller
                 $request[$topic] = Yii::$app->cache->get($topic);
             }
 
-            return $request; // TODO доработать метод
+            return $request;
         }
 
         return ['not allowed'];
@@ -102,6 +103,21 @@ class ApiController extends Controller
         $payload = Yii::$app->request->post('payload');
         $service = MqttService::getInstance();
         $service->post($topic, $payload);
+
+
+        $transaction = Yii::$app->db->beginTransaction();
+
+        try {
+            $history = new HistoryModuleData();
+            $history->topic = $topic;
+            $history->payload = $payload;
+            $history->save(false);
+            $transaction->commit();
+        } catch (Throwable $e) {
+            $transaction->rollBack();
+
+            throw $e;
+        }
 
         return ['succes' => true];
     }

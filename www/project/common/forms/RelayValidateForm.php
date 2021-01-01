@@ -22,24 +22,26 @@ class RelayValidateForm extends BaseValidateForm
 
         if ($model['notifying']) {
             // сверка проверочного топика
-            if ((string)$this->topic == (string)$model['check_topic'] &&
-                (string)$this->payload != (string)$model['check_command_on'] &&
-                (string)$this->payload != (string)$model['check_command_off']
+            if ((string)$this->topic == (string)$model['check_topic']
+                && (string)$this->payload != (string)$model['check_command_on']
+                && (string)$this->payload != (string)$model['check_command_off']
             ) {
                 $this->addError('payload', 'реле ' . $model['name'] .
-                    ' имеет неизвестное проверочное состояние');
+                ' имеет неизвестное проверочное состояние');
             }
 
             if ((string)$this->topic == (string)$model['check_topic']) {
                 if ($model['command_on'] == $this->payload && $model['command_off'] == $this->payload) {
                     $this->addError('payload', 'реле ' . $model['name'] .
-                        ' передана неизвестная команда');
+                    ' передана неизвестная команда');
                 }
+            }
 
+            if ((string)$this->topic == (string)$model['topic']) {
                 if ($model['command_on'] == $this->payload || $model['command_off'] == $this->payload) {
                     $relay = ModuleRelay::findOne($model['id']);
                     $relay->last_command = $this->payload;
-                    $relay->save();
+                    $relay->save(false);
                 }
             }
         }

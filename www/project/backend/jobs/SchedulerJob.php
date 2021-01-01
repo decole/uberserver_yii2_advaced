@@ -3,14 +3,16 @@
 namespace backend\jobs;
 
 use common\services\ScheduleService;
-use Yii;
 
 class SchedulerJob extends BaseJob
 {
+    /**
+     * @var mixed
+     */
+    public $delay;
+
     public function run(): void
     {
-        Yii::$app->queue->delay(60)->push(new SchedulerJob());
-
         $service = ScheduleService::getInstance();
         $service->run();
     }
