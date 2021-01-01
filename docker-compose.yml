@@ -44,7 +44,7 @@ services:
       driver: "none"
 
   mysql:
-    image: mysql:5.7.32
+    image: mysql:5.7.31
 #    ports:
 #      - "3306:3306"
     volumes:
