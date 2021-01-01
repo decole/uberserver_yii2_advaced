@@ -27,8 +27,8 @@ use yii\helpers\ArrayHelper;
  * @property int $created_at
  * @property int $updated_at
  *
- * @property Location $location0
- * @property ModuleType $type0
+ * @property Location $locations
+ * @property ModuleType $types
  */
 class ModuleLeakage extends ActiveRecord
 {

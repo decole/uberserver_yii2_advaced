@@ -1,4 +1,10 @@
 <?php
+
+use common\components\queue\Queue;
+use yii\mutex\MysqlMutex;
+use yii\queue\LogBehavior;
+use yii\queue\serializers\JsonSerializer;
+
 $params = array_merge(
     require __DIR__ . '/../../common/config/params.php',
     require __DIR__ . '/../../common/config/params-local.php',
@@ -22,11 +28,28 @@ return [
           ],
     ],
     'components' => [
-        'cacheBackend' => [
+        'cache' => [
             'class' => 'yii\redis\Cache',
+            'redis' => [
+                'hostname' => 'redis',
+                'port' => 6379,
+                'database' => 0,
+            ],
         ],
-        'cacheFrontend' => [
-            'class' => 'yii\redis\Cache',
+        'redis' => [
+            'class' => 'yii\redis\Connection',
+            'hostname' => 'redis',
+            'port' => 6379,
+            'database' => 0,
+        ],
+        'queue' => [
+            'as log' => LogBehavior::class,
+            'class' => Queue::class,
+            'db' => 'db',
+            'serializer' => JsonSerializer::class,
+            'tableName' => 'queue',
+            'channel' => 'default',
+            'mutex' => MysqlMutex::class,
         ],
         'log' => [
             'targets' => [

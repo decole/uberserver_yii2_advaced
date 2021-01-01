@@ -1,10 +1,10 @@
 <?php
 namespace common\services;
 
+use GuzzleHttp\Client;
 use Longman\TelegramBot\Exception\TelegramException;
 use Longman\TelegramBot\Request;
 use Longman\TelegramBot\Telegram;
-use GuzzleHttp\Client;
 use Yii;
 use yii\base\Controller;
 
@@ -145,34 +145,29 @@ class TelegramService extends Controller
      * Send by specific user
      *
      * @param $text
-     * @param string $user
      * @return bool|mixed
      * @throws TelegramException
      */
-    public function sendByUser($text, $user = 'decole')
+    public function sendByUser(string $text, string $user = 'decole')
     {
-        if(empty($this->users[$user])) {
+        if (empty($this->users[$user])) {
             return false;
         }
 
         return $this->send($text, $this->users[$user]);
-
     }
 
     /**
      * Sending by Decole
      *
      * @param $text
-     * @param string $user
      * @return bool
      * @throws TelegramException
      */
-    public function sendDecole($text, $user = 'decole')
+    public function sendDecole(string $text, string $user = 'decole')
     {
         return $this->sendByUser($text, $user);
-
     }
-
 
     /**
      * Update new messages
