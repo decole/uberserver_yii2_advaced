@@ -2,6 +2,9 @@
 
 namespace common\modules\yandexSkill\dialogs;
 
+use backend\jobs\DiagnosticSystemJob;
+use Yii;
+
 class DiagnosticDialog implements AliceInterface
 {
     public function listVerb(): array
@@ -11,14 +14,8 @@ class DiagnosticDialog implements AliceInterface
 
     public function process($message): string
     {
-        // TODO сделать самодиагностику
-        //      применить систему тасок. пока не реализовано
-//        /** @var Schedule $model */
-//        $model = Schedule::find(12);
-//        $lastRunDate = new DateTime('NOW');
-//        $model->next_run = $lastRunDate->format('Y-m-d H:i:00');
-//        $model->interval = null;
-//        $model->save();
+        Yii::$app->queue->push(new DiagnosticSystemJob());
+
         return 'Самодиагностика запланирована в менеджере задач. Конечные данные придут в телеграм чат.';
     }
 

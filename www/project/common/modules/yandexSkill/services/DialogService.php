@@ -3,6 +3,7 @@
 namespace common\modules\yandexSkill\services;
 
 use common\models\ModuleFireSystem;
+use common\models\ModuleRelay;
 use common\models\ModuleSecureSystem;
 use common\models\ModuleSensor;
 use Yii;
@@ -74,5 +75,49 @@ class DialogService
         $status = (int)$state === 0 ? 'норма' : 'пожар';
 
         return 'Система пожарной безопасности в статусе - ' . $status;
+    }
+
+    public function statusFull():string
+    {
+        $message = 'Сенсоры работают';
+        $sensorBug = [];
+        $relayBug = [];
+
+        $sensors = ModuleSensor::find()
+            ->where(['active' => 1])
+            ->asArray()
+            ->all();
+
+        foreach ($sensors as $sensor) {
+            if (Yii::$app->cache->get($sensor['topic']) === false) {
+                $sensorBug[] = $sensor['name'];
+            }
+        }
+
+        if (!empty($sensorBug)) {
+            $message .= ', кроме: ' . implode(', ', $sensorBug);
+        }
+
+        $relays = ModuleRelay::find()
+            ->where(['active' => 1])
+            ->asArray()
+            ->all();
+
+        foreach ($relays as $relay) {
+            if (Yii::$app->cache->get($relay['check_topic']) === false) {
+                $relayBug[] = $relay['name'];
+            }
+        }
+
+        $message .= '. Реле работают';
+
+        if (!empty($relayBug)) {
+            $message .= ', кроме: ' . implode(', ', $relayBug);
+        }
+
+        $message .= '. ' . $this->statusSecureSystem();
+        $message .= '. ' . $this->statusFireSecureSystem();
+
+        return $message;
     }
 }

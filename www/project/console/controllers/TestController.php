@@ -9,7 +9,9 @@ use backend\jobs\TelegramNotifyJob;
 use common\components\EventManager;
 use common\components\ParamsEvent;
 use common\events\Event;
-use common\services\WateringServise;
+use common\models\ModuleRelay;
+use common\models\ModuleSensor;
+use common\modules\yandexSkill\services\DialogService;
 use DateTime;
 use Yii;
 use yii\base\Security;
@@ -128,9 +130,46 @@ class TestController extends Controller
     {
 //        $service = ScheduleService::getInstance();
 //        $service->run();
-        $service = new WateringServise();
-        $service->waterLeakage();
+        $message = 'Сенсоры работают';
+        $sensorBug = [];
+        $relayBug = [];
+
+        $sensors = ModuleSensor::find()
+            ->where(['active' => 1])
+            ->asArray()
+            ->all();
+
+        foreach ($sensors as $sensor) {
+            if (Yii::$app->cache->get($sensor['topic']) === false) {
+                $sensorBug[] = $sensor['name'];
+            }
+        }
+
+        if (!empty($sensorBug)) {
+            $message .= ', кроме: ' . implode(', ', $sensorBug);
+        }
+
+        $relays = ModuleRelay::find()
+            ->where(['active' => 1])
+            ->asArray()
+            ->all();
+
+        foreach ($relays as $relay) {
+            if (Yii::$app->cache->get($relay['check_topic']) === false) {
+                $relayBug[] = $relay['name'];
+            }
+        }
+
+        $message .= '. Реле работают';
+
+        if (!empty($relayBug)) {
+            $message .= ', кроме: ' . implode(', ', $relayBug);
+        }
+
+        $service = new DialogService();
+        $message .= '. ' . $service->statusSecureSystem();
+        $message .= '. ' . $service->statusFireSecureSystem();
+
+        echo $message . PHP_EOL;
     }
-
-
 }

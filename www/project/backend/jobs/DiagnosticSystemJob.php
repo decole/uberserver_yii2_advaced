@@ -2,28 +2,21 @@
 
 namespace backend\jobs;
 
-use common\services\TelegramService;
+use common\modules\yandexSkill\services\DialogService;
 use Yii;
 
 class DiagnosticSystemJob extends BaseJob
 {
-    /**
-     * full - полная диагностика
-     *
-     * @var string
-     */
-    public $type;
-
-    public function run()
+    public function run(): void
     {
-        sleep(80);
-        /** @var TelegramService $service */
+        $service = new DialogService();
+
         Yii::$app->queue->push(new TelegramNotifyJob([
-            'message' => 'Диагностика завершена. Все системы в норме.',
+            'message' => $service->statusFull(),
         ]));
     }
 
-    public function getName()
+    public function getName(): string
     {
         return 'DiagnosticSystemJob';
     }
