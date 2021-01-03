@@ -17,8 +17,8 @@ $this->registerJsFile('@web/js/relay.js', ['depends' => [JqueryAsset::class, Adm
     <div class="container-fluid">
         <div class="row col-lg-6 col-md-12 col-xs-12">
 <?php
-/** @var array $sensors */
-/** @var array $relays */
+/** @var mixed[] $sensors */
+/** @var mixed[] $relays */
 foreach ($sensors as $sensor) {
     try {
         echo SensorWidget::widget(['sensor' => $sensor]);

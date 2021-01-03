@@ -7,7 +7,6 @@ use yii\db\Migration;
  */
 class m201122_185330_table_weather_gismeteo extends Migration
 {
-
     public function safeUp()
     {
         $tableOptions = null;

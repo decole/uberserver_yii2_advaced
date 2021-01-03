@@ -1,11 +1,13 @@
 <?php
+
 namespace backend\controllers;
 
-use Yii;
-use yii\web\Controller;
-use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
 use common\models\LoginForm;
+use Yii;
+use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
+use yii\web\Controller;
+use yii\web\Response;
 
 /**
  * Site controller
@@ -26,7 +28,7 @@ class SiteController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'index', 'faker'],
+                        'actions' => ['logout', 'index'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -53,30 +55,13 @@ class SiteController extends Controller
         ];
     }
 
-    /**
-     * Displays homepage.
-     *
-     * @return string
-     */
-    public function actionIndex()
+    public function actionIndex(): string
     {
         return $this->render('index');
     }
 
     /**
-     * Displays homepage.
-     *
-     * @return string
-     */
-    public function actionFaker()
-    {
-        return $this->render('index');
-    }
-
-    /**
-     * Login action.
-     *
-     * @return string
+     * @return string|Response
      */
     public function actionLogin()
     {
@@ -85,24 +70,21 @@ class SiteController extends Controller
         }
 
         $model = new LoginForm();
+
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
-        } else {
-            $model->password = '';
-            // для авторизации исполбзуется свой шаблон main-login
-            $this->layout = 'main-login';
-            return $this->render('login', [
-                'model' => $model,
-            ]);
         }
+
+        $model->password = '';
+        // для авторизации исполбзуется свой шаблон main-login
+        $this->layout = 'main-login';
+
+        return $this->render('login', [
+            'model' => $model,
+        ]);
     }
 
-    /**
-     * Logout action.
-     *
-     * @return string
-     */
-    public function actionLogout()
+    public function actionLogout(): Response
     {
         Yii::$app->user->logout();
 

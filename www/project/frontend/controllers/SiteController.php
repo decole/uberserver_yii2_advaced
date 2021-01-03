@@ -89,7 +89,29 @@ class SiteController extends Controller
             return $this->actionLogin();
         }
 
-        return $this->render('index');
+        $sensors = ModuleSensor::find()
+            ->where([
+                'topic' => [
+                    'home/hall/temperature',
+                    'home/kitchen/temperature',
+                    'home/restroom/temperature',
+                    'margulis/temperature',
+                    'underflor/temperature',
+                    'greenhouse/temperature',
+                ],
+            ])
+            ->asArray()
+            ->all();
+
+        $relays = ModuleRelay::find()
+            ->where(['topic' => 'margulis/lamp01'])
+            ->asArray()
+            ->all();
+
+        return $this->render('index', [
+            'sensors' => $sensors,
+            'relays' => $relays,
+        ]);
     }
 
     /**

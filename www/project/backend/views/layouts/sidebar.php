@@ -40,6 +40,7 @@ use yii\helpers\Url;
                     ['label' => 'Пожарные датчики', 'url' => ['fire-system-crud/index'], 'iconStyle' => 'far'],
                     ['label' => 'Планировщик', 'url' => ['schedule/index'], 'iconStyle' => 'far'],
                     ['label' => 'Вес', 'url' => ['decole-weight-crud/index'], 'iconStyle' => 'far'],
+                    ['label' => 'Добавить на склад', 'url' => ['warehouse/index'], 'iconStyle' => 'far'],
 
                     ['label' => 'Yii2 PROVIDED', 'header' => true],
                     ['label' => 'Login', 'url' => ['site/login'], 'icon' => 'sign-in-alt', 'visible' => Yii::$app->user->isGuest],

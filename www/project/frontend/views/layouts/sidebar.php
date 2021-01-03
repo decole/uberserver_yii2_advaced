@@ -35,7 +35,6 @@ use yii\helpers\Url;
                     ['label' => 'Основное', 'header' => true],
 
                     ['label' => 'Главная', 'url' => ['/site/index']],
-                    ['label' => 'Настройки', 'url' => ['#'], 'icon' => 'cogs'],
                     ['label' => 'Автополив', 'url' => ['/site/watering'], 'icon' => 'tint'],
                     ['label' => 'Пожарная система', 'url' => ['/site/fire-secure'], 'iconStyle' => 'fab fa-free-code-camp'],
                     ['label' => 'Охранная система', 'url' => ['/site/secure'], 'icon' => 'user-lock'],
