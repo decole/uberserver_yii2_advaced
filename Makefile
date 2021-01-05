@@ -70,3 +70,6 @@ tasks:
 
 mqtt:
 	$(yii) mqtt/start
+
+scheduler:
+	$(yii) schedule/run
