@@ -48,7 +48,7 @@ class ThingForm extends Model
             [['name', 'sum'], 'required'],
             [['sum', 'box_id'], 'integer'],
             [['name', 'description'], 'string', 'max' => 255],
-            [['name'], 'uniqueValidate'],
+//            [['name'], 'uniqueValidate'],
             [['photo'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg'],
         ];
     }
