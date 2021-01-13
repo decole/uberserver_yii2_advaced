@@ -7,7 +7,7 @@ use yii\helpers\Url;
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="<?= Url::home()?>" class="brand-link">
-        <img src="<?=$assetDir?>/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+        <img src="/favicon.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
              style="opacity: .8">
         <span class="brand-text font-weight-light">UberServer</span>
     </a>
@@ -17,7 +17,7 @@ use yii\helpers\Url;
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="<?=$assetDir?>/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                <img src="https://www.gravatar.com/avatar/<?=md5(Yii::$app->user->identity->email)?>.jpg"  class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
                 <a href="#" class="d-block"><?=Yii::$app->user->identity->username;?></a>
@@ -41,6 +41,7 @@ use yii\helpers\Url;
                     ['label' => 'Планировщик', 'url' => ['schedule/index'], 'iconStyle' => 'far'],
                     ['label' => 'Вес', 'url' => ['decole-weight-crud/index'], 'iconStyle' => 'far'],
                     ['label' => 'Добавить на склад', 'url' => ['warehouse/index'], 'iconStyle' => 'far'],
+                    ['label' => 'Складские вещи', 'url' => ['warehouse-thing-crud/index'], 'iconStyle' => 'far'],
 
                     ['label' => 'Yii2 PROVIDED', 'header' => true],
                     ['label' => 'Login', 'url' => ['site/login'], 'icon' => 'sign-in-alt', 'visible' => Yii::$app->user->isGuest],

@@ -1,5 +1,7 @@
 <?php
 
+use backend\forms\BoxForm;
+use backend\forms\RackForm;
 use backend\models\WarehouseBox;
 use backend\models\WarehouseRack;
 use backend\models\WarehouseThing;
@@ -66,6 +68,24 @@ echo GridView::widget([
             ),
         ],
         'created_at:datetime',
+        [
+            'class' => 'yii\grid\ActionColumn',
+            'template' => '{update} {delete}',
+            'buttons' => [
+                'update' => function ($url, $model, $key) {
+                    return  Html::a('Изменить', ['warehouse-thing-crud/update', 'id' => $model->id], ['class' => 'btn btn-primary']);
+                },
+                'delete' => function ($url, $model, $key) {
+                    return  Html::a('Удалить', ['warehouse-thing-crud/delete', 'id' => $model->id], [
+                        'class' => 'btn btn-danger',
+                        'data' => [
+                            'confirm' => 'Удалить модуль?',
+                            'method' => 'post',
+                        ],
+                    ]);
+                },
+            ]
+        ],
     ],
 ])
 ?>
@@ -85,7 +105,8 @@ $itemsRack = WarehouseRack::find()
     ->indexBy('id')
     ->column();
 ?>
-<?php echo $formBox->field($modelBox, 'rack_id')->radioList($itemsRack, ['prompt' => 'Select Rack'])?>
+            <?php /** @var BoxForm $modelBox */
+echo $formBox->field($modelBox, 'rack_id')->radioList($itemsRack, ['prompt' => 'Select Rack'])?>
 <?php echo $formBox->field($modelBox, 'name') ?>
 <div class="form-group">
     <div class="col-lg-offset-1 col-lg-11">
@@ -102,7 +123,8 @@ $itemsRack = WarehouseRack::find()
                 ],
             ]);
             ?>
-<?php echo $formRack->field($modelRack, 'name') ?>
+            <?php /** @var RackForm $modelRack */
+echo $formRack->field($modelRack, 'name') ?>
 <div class="form-group">
     <div class="col-lg-offset-1 col-lg-11">
         <?php echo Html::submitButton('Сохранить стеллаж', ['class' => 'btn btn-primary']) ?>

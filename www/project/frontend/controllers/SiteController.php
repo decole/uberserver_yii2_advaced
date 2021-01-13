@@ -100,6 +100,7 @@ class SiteController extends Controller
                     'greenhouse/temperature',
                 ],
             ])
+            ->andWhere(['active' => 1])
             ->asArray()
             ->all();
 
