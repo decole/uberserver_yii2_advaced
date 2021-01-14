@@ -26,3 +26,9 @@ Uberserver.ru on Yii2
  - запуск тестов: `make tests`
  - запуск тасок (сейчас это устаревшее решение - используется для разработки): `make tasks`
  - запуск mqtt парсера датчиков (сейчас это устаревшее решение - используется для разработки): `make mqtt`
+ 
+ Возможные баги:
+ 
+ в складском учете не сохраняются картинки
+ - chmod -R g+rwX backend/web/uploads/
+ - chown -R www-data:www-data backend/web/uploads/
