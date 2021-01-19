@@ -32,7 +32,7 @@ composer-install:
 	$(app) composer install
 
 app:
-	$(compose) exec app bash
+	$(compose) exec php bash
 
 migrate:
 	$(yii) migrate --interactive=0
