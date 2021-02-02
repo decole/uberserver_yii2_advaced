@@ -25,6 +25,23 @@ return [
                 'database' => 0,
             ],
         ],
+        'request' => [
+            'csrfCookie' => [
+                'httpOnly' => true,
+                'secure' => true,
+            ],
+        ],
+        'cookies' => [
+            'class' => 'yii\web\Cookie',
+            'httpOnly' => true,
+            'secure' => true,
+        ],
+        'session' => [
+            'cookieParams' => [
+                'httpOnly' => true,
+                'secure' => true,
+            ],
+        ],
         'queue' => [
             'as log' => LogBehavior::class,
             'class' => Queue::class,
