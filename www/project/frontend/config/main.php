@@ -15,10 +15,6 @@ return [
         'request' => [
             'baseUrl' => '',
             'csrfParam' => '_csrf-frontend',
-            'csrfCookie' => [
-                'httpOnly' => true,
-                'secure' => true,
-            ],
         ],
         'user' => [
             'identityClass' => 'common\models\User',
@@ -28,15 +24,6 @@ return [
         'session' => [
             // this is the name of the session cookie used for login on the frontend
             'name' => 'advanced-frontend',
-            'cookieParams' => [
-                'httpOnly' => true,
-                'secure' => true,
-            ],
-        ],
-        'cookies' => [
-            'class' => 'yii\web\Cookie',
-            'httpOnly' => true,
-            'secure' => true,
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,

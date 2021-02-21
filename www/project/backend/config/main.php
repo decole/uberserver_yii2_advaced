@@ -16,10 +16,6 @@ return [
         'request' => [
             'baseUrl' => '/admin',
             'csrfParam' => '_csrf-backend',
-            'csrfCookie' => [
-                'httpOnly' => true,
-                'secure' => true,
-            ],
         ],
         'user' => [
             'identityClass' => 'common\models\User',
@@ -29,15 +25,6 @@ return [
         'session' => [
             // this is the name of the session cookie used for login on the backend
             'name' => 'uberserver-backend',
-            'cookieParams' => [
-                'httpOnly' => true,
-                'secure' => true,
-            ],
-        ],
-        'cookies' => [
-            'class' => 'yii\web\Cookie',
-            'httpOnly' => true,
-            'secure' => true,
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
